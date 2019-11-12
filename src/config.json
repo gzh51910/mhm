@@ -1,0 +1,10 @@
+{
+    "PORT": "4040",
+    "dbUrl": "mongodb://localhost:40404",
+    "dbName": "mhm",
+    "mysql_host": "localhost",
+    "mysql_port": "4040",
+    "mysql_user": "root",
+    "mysql_password": "",
+    "mysql_database": "mhm"
+}
