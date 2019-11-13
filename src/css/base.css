@@ -1,0 +1,64 @@
+@charset "utf-8";
+ul,li,ol{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+img{
+    display: block;
+}
+.clear_fix::after{
+    content: "";
+    display: block;
+    clear: both;
+}
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.mt_0{
+    margin-top: 0;
+}
+.mb_0{
+    margin-bottom: 0;
+}
+.ml_0{
+    margin-left: 0px;
+}
+.mr_0{
+    margin-right: 0;
+}
+.pt_0{
+    padding-top: 0
+}
+.pb{
+    padding-bottom: 0;
+}
+.pl_0{
+    padding-left: 0;
+}
+.pr_0{
+    padding-right: 0;
+}
+.color_333{
+    color: #333333;
+}
+.color_666{
+    color: #666666;
+}
+.color_999{
+    color: #999999;
+}
+.color_white{
+    color: white;
+}
+.color_black{
+    color: black;
+}
+h1,h2,h3,h4,h5,h6,div,ul,li,ol,article,aside,details,figcaption,figure,footer,header,hgroup,img,menu,nav,section,span,a,i,u,input,main,form,dl,dt,dd,img,hgroup,details,button,body,menu,p,section,select,table,tbody,td,textarea,th,tr,article{
+    margin: 0px;
+    padding: 0px;
+}
