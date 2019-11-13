@@ -7,6 +7,8 @@
     <a href class="iconfont icon-liebiao"></a>
     <a href class="iconfont icon-sousuo"></a>
   </header>
+
+  
   <section>
     <div class="block">
     <el-carousel trigger="click" height="150px">
@@ -15,33 +17,40 @@
       </el-carousel-item>
     </el-carousel>
   </div>
-  <nav id="home_nav">
+  <nav id="nav_home">
   <el-row :gutter="20">
   <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
   <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
   <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
   <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
 </el-row>
-<el-row :gutter="20">
+ <el-row :gutter="20">
   <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
   <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
   <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
   <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
 </el-row>
-</nav>
+ </nav>
   </section>
+
   </div>
 </template>
 <script>
 export default {};
 </script>
 <style lang="scss">
+body,html{
+  box-sizing: content-box;
+  width: 100%;
+  overflow: hidden;
+}
 .header {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 44px;
   background: #14b9c8;
+  position: absolute;
   //   text-align: center;
   img {
     margin-top: 8px;
@@ -83,16 +92,22 @@ export default {};
   .el-carousel__item:nth-child(2n+1) {
      background-color: #d3dce6;
   }
+  section{
+    position: absolute;
+    top: 44px;
+    width: 100%;
+  #nav_home{
+    text-align: center;
+    box-sizing: border-box;
+    padding: 2px;
    .el-row {
     margin-bottom: 20px;
+    display: flex;
+
     &:last-child {
       margin-bottom: 0;
     }
   }
-  #home_nav{
-    background:red;
-    display: flex;
-    
     .el-col {
     border-radius: 4px;
   }
@@ -107,12 +122,14 @@ export default {};
   }
   .grid-content {
     border-radius: 4px;
-    min-height: 36px;
+    min-height: 45px;
+    min-width: 40px;
   }
   .row-bg {
     padding: 10px 0;
     background-color: #f9fafc;
   }
   }
+}
   
 </style>
