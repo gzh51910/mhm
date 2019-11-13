@@ -31,6 +31,22 @@
   <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
 </el-row>
  </nav>
+ <article>
+   <h5><span>交♂易</span></h5>
+ <el-row :gutter="20">
+  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+</el-row>
+<el-divider></el-divider>
+ <el-row :gutter="20">
+  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+</el-row>
+ </article>
   </section>
 
   </div>
@@ -100,15 +116,15 @@ body,html{
     text-align: center;
     box-sizing: border-box;
     padding: 2px;
-   .el-row {
+  
+  }
+    .el-row {
     margin-bottom: 20px;
-    display: flex;
-
     &:last-child {
       margin-bottom: 0;
     }
   }
-    .el-col {
+  .el-col {
     border-radius: 4px;
   }
   .bg-purple-dark {
@@ -122,13 +138,11 @@ body,html{
   }
   .grid-content {
     border-radius: 4px;
-    min-height: 45px;
-    min-width: 40px;
+    min-height: 36px;
   }
   .row-bg {
     padding: 10px 0;
     background-color: #f9fafc;
-  }
   }
 }
   
