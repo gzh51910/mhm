@@ -3,102 +3,65 @@
     <section>
       <div class="block">
         <el-carousel trigger="click" height="150px">
-          <el-carousel-item v-for="item in 4" :key="item">
-            <h3 class="small">{{ item }}</h3>
+          <el-carousel-item v-for="item in slideshow" :key="item._id">
+            <h3 class="small">
+              <img :src="item.src" alt />
+            </h3>
           </el-carousel-item>
         </el-carousel>
       </div>
       <nav id="nav_home">
-        <el-row :gutter="20">
-          <el-col :span="6">
-            <div class="grid-content bg-purple"></div>
-          </el-col>
-          <el-col :span="6">
-            <div class="grid-content bg-purple"></div>
-          </el-col>
-          <el-col :span="6">
-            <div class="grid-content bg-purple"></div>
-          </el-col>
-          <el-col :span="6">
-            <div class="grid-content bg-purple"></div>
-          </el-col>
-        </el-row>
-        <el-row :gutter="20">
-          <el-col :span="6">
-            <div class="grid-content bg-purple"></div>
-          </el-col>
-          <el-col :span="6">
-            <div class="grid-content bg-purple"></div>
-          </el-col>
-          <el-col :span="6">
-            <div class="grid-content bg-purple"></div>
-          </el-col>
-          <el-col :span="6">
-            <div class="grid-content bg-purple"></div>
+        <el-row :gutter="20" class="el-row-one">
+          <el-col :span="6" v-for="item in fn_nav" :key="item.title" style="padding:0 5px">
+            <div class="grid-content bg-purple">
+              <img :src="item.src" alt />
+              <p class="fn_title">{{item.title}}</p>
+            </div>
           </el-col>
         </el-row>
       </nav>
       <article id="deal_on">
         <h5>
-          <span>交♂易♂</span>
+          <span>
+            <i class="iconfont icon-jiantou_you"></i>交易推介
+          </span>
         </h5>
         <el-row :gutter="20">
-          <el-col :span="6">
-            <div class="grid-content bg-purple"></div>
-          </el-col>
-          <el-col :span="6">
-            <div class="grid-content bg-purple"></div>
-          </el-col>
-          <el-col :span="6">
-            <div class="grid-content bg-purple"></div>
-          </el-col>
-          <el-col :span="6">
-            <div class="grid-content bg-purple"></div>
-          </el-col>
-        </el-row>
-        <el-divider></el-divider>
-        <el-row :gutter="20">
-          <el-col :span="6">
-            <div class="grid-content bg-purple"></div>
-          </el-col>
-          <el-col :span="6">
-            <div class="grid-content bg-purple"></div>
-          </el-col>
-          <el-col :span="6">
-            <div class="grid-content bg-purple"></div>
-          </el-col>
-          <el-col :span="6">
-            <div class="grid-content bg-purple"></div>
+          <el-col :span="6" v-for="item in Game_nav" :key="item.title" style="padding:0 5px">
+            <div class="grid-content bg-purple">
+              <img :src="item.src" alt />
+              <p class="Game_title">{{item.title}}</p>
+            </div>
           </el-col>
         </el-row>
       </article>
-      <article>
-        <a href="#">
+      <article class="notice">
+        <a href="#" v-for="item in notice" :key="item.title">
           <p>
-            <span>公告</span>买号么交易平台是国内首家免费游戏交易平台
-          </p>
-        </a>
-        <a href="#">
-          <p>
-            <span>公告</span>买号么交易平台是国内首家免费游戏交易平台
-          </p>
-        </a>
-        <a href="#">
-          <p>
-            <span>公告</span>买号么交易平台是国内首家免费游戏交易平台
+            <span>公告</span>
+            {{item.title}}
           </p>
         </a>
       </article>
       <article id="deal_end">
-        <h5>交♂易♂完♂成</h5>
-        <figure>
-          <img src />
+        <h5 class="deal_finish">
+          <i class="iconfont icon-jiantou_you"></i>交易完成
+        </h5>
+        <figure v-for="item in HomeList" :key="item.title">
+          <img :src="item.src" alt />
           <figcaption>
-            <h4>tiasdddddddsdasdqqqqqqqqqqqqqqqqqqqqqqqasdasddasssssssssssssssssssssssssssssssssssssssssstle</h4>
+            <h4>{{item.title}}</h4>
             <div>
-              <p>chengjia</p>
-              <p>asdasfaf</p>
-              <el-button type="primary" :size="mini">详情</el-button>
+              <span>
+                成交单价：
+                <i class="deal_price">{{item.price}}</i>
+              </span>
+              <span>
+                成交数量：
+                <i>{{item.quantity}}</i>
+              </span>
+              <p>{{item.timer}}</p>
+              <div class="details">详情</div>
             </div>
           </figcaption>
         </figure>
@@ -107,7 +70,80 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      slideshow: [],
+      fn_nav: [],
+      Game_nav: [],
+      notice: [],
+      HomeList: []
+    };
+  },
+  methods: {},
+  async created() {
+    //slideshow
+    let {
+      data: { data: slideshow }
+    } = await this.$axios.get("http://localhost:1910/goods", {
+      params: {
+        gather: "slideshow"
+      }
+    });
+    this.slideshow = slideshow.map(item => {
+      return item;
+    });
+    // console.log(this.slideshow);
+
+    //fn_nav
+    let {
+      data: { data }
+    } = await this.$axios.get("http://localhost:1910/goods", {
+      params: {
+        gather: "fn_nav"
+      }
+    });
+    this.fn_nav = data.map(item => {
+      return item;
+    });
+
+    //Game_nav
+    let {
+      data: { data: game_nav }
+    } = await this.$axios.get("http://localhost:1910/goods", {
+      params: {
+        gather: "Game_nav"
+      }
+    });
+    this.Game_nav = game_nav.map(item => {
+      return item;
+    });
+
+    //notice
+    let {
+      data: { data: notice }
+    } = await this.$axios.get("http://localhost:1910/goods", {
+      params: {
+        gather: "notice"
+      }
+    });
+    this.notice = notice.map(item => {
+      return item;
+    });
+
+    //HomeList
+    let {
+      data: { data: HomeList }
+    } = await this.$axios.get("http://localhost:1910/goods", {
+      params: {
+        gather: "HomeList"
+      }
+    });
+    this.HomeList = HomeList.map(item => {
+      return item;
+    });
+  }
+};
 </script>
 <style lang="scss">
 .box_body {
@@ -162,10 +198,17 @@ export default {};
 .el-carousel__item:nth-child(2n + 1) {
   background-color: #d3dce6;
 }
+.small{
+  img{
+    width: 100%;
+    height: 100%;
+  }
+}
 section {
   position: absolute;
   top: 44px;
   width: 100%;
+  // overflow: hidden;
   #deal_on,
   #nav_home {
     text-align: center;
@@ -173,6 +216,8 @@ section {
     padding: 2px;
     .el-row {
       margin-bottom: 20px;
+      padding: 0 10px;
+      justify-content: space-around;
       &:last-child {
         margin-bottom: 0;
       }
@@ -197,51 +242,184 @@ section {
       padding: 10px 0;
       background-color: #f9fafc;
     }
+    .el-row-one {
+      .el-col {
+        &:nth-of-type(1) .grid-content {
+          background: #8289d9;
+          color: white;
+        }
+        &:nth-of-type(2) .grid-content {
+          background: #5cace5;
+          color: white;
+        }
+        &:nth-of-type(3) .grid-content {
+          background: #26bfbf;
+          color: white;
+        }
+        &:nth-of-type(4) .grid-content {
+          background: #1dbf6e;
+          color: white;
+        }
+        &:nth-of-type(5) .grid-content,
+        &:nth-of-type(6) .grid-content,
+        &:nth-of-type(7) .grid-content,
+        &:nth-of-type(8) .grid-content {
+          background: #b4ebfa;
+          color: #14b9c8;
+        }
+      }
+    }
   }
-
+  #nav_home {
+    background: #fff;
+    .grid-content {
+      margin-top: 16px;
+      margin-bottom: 16px;
+      padding: 6px 0 5px 0;
+      img {
+        width: 25px;
+        height: 25px;
+      }
+      .fn_title {
+        margin-block-start: 0;
+        margin-block-end: 0;
+        font-size: 16px;
+      }
+    }
+  }
+  #deal_on {
+    background: #fff;
+    h5 {
+      background: #f2f2f2;
+      margin-block-start: 0;
+      margin-block-end: 0;
+      padding: 15px 12px;
+      color: #333;
+      text-align: left;
+      i {
+        margin-right: 5px;
+      }
+    }
+    .grid-content {
+      background: #fff;
+      margin: 14px 0;
+      img {
+        width: 56.25px;
+        height: 56.25px;
+      }
+      .Game_title {
+        width: 100%;
+        height: 19px;
+        margin-block-start: 0;
+        margin-block-end: 0;
+        font-size: 14px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        margin-right: 0px;
+        text-align: center;
+      }
+    }
+  }
   #deal_end {
     width: 100%;
     height: 50px;
-    background: cadetblue;
+    background: #f2f2f2;
+    .deal_finish {
+      margin-block-start: 0;
+      margin-block-end: 0;
+      padding: 15px 12px;
+      color: #333;
+      i {
+        margin-right: 5px;
+      }
+    }
     figure {
+      border-top: 1px solid #f2f2f2;
       padding: 0;
       margin: 0;
       width: 100%;
       height: 80px;
-      background: red;
       display: flex;
+      background: #fff;
+      padding: 10px 0;
       img {
         width: 20%;
         height: 75%;
-        background: yellow;
         display: inline-block;
       }
       figcaption {
         display: inline-block;
         width: 75%;
         height: 100%;
-        background: #14b9c8;
         position: relative;
-        h4{
-         width: 100%;
+        color: #8f8f94;
+        h4 {
+          width: 100%;
           margin: 0;
           padding: 0;
+          font-size: 14px;
+          color: #333;
         }
         div {
           width: 100%;
           position: relative;
-          button {
+          span,
+          p {
+            display: inline-block;
+            margin-top: 5px;
+            font-size: 12px;
+          }
+          span {
+            i {
+              font-style: normal;
+            }
+            .deal_price {
+              color: #dd524d;
+            }
+          }
+          span:nth-of-type(1) {
+            margin-right: 10px;
+          }
+          .details {
+            background: #14b9c8;
+            border: 0px;
+            width: 48px;
+            height: 25px;
             position: absolute;
             right: 2px;
             top: 0;
+            text-align: center;
+            color: white;
+            font-size: 14px;
+            line-height: 25px;
           }
-          p,h4{
-          width: 100%;
-          margin: 0;
-          padding: 0;
         }
+      }
+    }
+  }
+  .notice {
+    a {
+      text-decoration: none;
+      font-size: 14px;
+      color: #333;
+      p {
+        margin: 0;
+        margin-top: 2px;
+        background: #fff;
+        padding: 10px 6px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        span {
+          display: inline-block;
+          width: 40px;
+          height: 20px;
+          border-radius: 5px;
+          border: 1px solid #dd524d;
+          text-align: center;
+          color: #dd524d;
         }
-        
       }
     }
   }
