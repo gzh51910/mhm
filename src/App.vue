@@ -29,6 +29,7 @@ export default {
 <style lang="scss">
 #app {
   display: flex;
+  overflow: hidden;
   >.header {
     margin: 0;
     padding: 0;
@@ -37,6 +38,7 @@ export default {
     background: #14b9c8;
     position: absolute;
     z-index: 999;
+    top:0;
     //   text-align: center;
     >img {
       margin-top: 8px;
@@ -74,5 +76,6 @@ export default {
     position: absolute;
     height:100%;
   }
+
 }
 </style>

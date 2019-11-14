@@ -10,42 +10,47 @@ import Reg from '../pages/Reg.vue'
 import Client from '../pages/Client.vue'
 import Phone from '../pages/Phone.vue'
 import ELSWORD_list from '../pages/ELSWORD_list.vue'
+import Goods from '../pages/Goods.vue'
 
 let router = new VueRouter({
-    routes: [
-        {
-            name:'home',
-            path:'/home',
+    routes: [{
+            name: 'home',
+            path: '/home',
             component: Home
         },
         {
-            name:'login',
-            path:'/login',
+            name: 'login',
+            path: '/login',
             component: Login
         },
         {
-            name:'reg',
-            path:'/reg',
+            name: 'reg',
+            path: '/reg',
             component: Reg
         },
         {
-            name:'client',
-            path:'/client',
+            name: 'client',
+            path: '/client',
             component: Client
         },
         {
-            name:'ELSWORD_list',
-            path:'/ELSWORD_list',
+            name: 'ELSWORD_list',
+            path: '/ELSWORD_list',
             component: ELSWORD_list
         },
         {
-            name:'phone',
-            path:'/phone',
-            component:Phone
+            name: 'phone',
+            path: '/phone',
+            component: Phone
         },
         {
-            path:'/',
-            component:Home
+            name: "goods",
+            path: '/goods',
+            component: Goods
+        },
+        {
+            path: '/',
+            component: Home
         }
     ]
 });

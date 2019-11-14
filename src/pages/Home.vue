@@ -85,7 +85,7 @@ export default {
     //slideshow
     let {
       data: { data: slideshow }
-    } = await this.$axios.get("http://localhost:1910/goods", {
+    } = await this.$axios.get("http://10.3.136.52:1910/goods", {
       params: {
         gather: "slideshow"
       }
@@ -98,7 +98,7 @@ export default {
     //fn_nav
     let {
       data: { data }
-    } = await this.$axios.get("http://localhost:1910/goods", {
+    } = await this.$axios.get("http://10.3.136.52:1910/goods", {
       params: {
         gather: "fn_nav"
       }
@@ -110,7 +110,7 @@ export default {
     //Game_nav
     let {
       data: { data: game_nav }
-    } = await this.$axios.get("http://localhost:1910/goods", {
+    } = await this.$axios.get("http://10.3.136.52:1910/goods", {
       params: {
         gather: "Game_nav"
       }
@@ -122,7 +122,7 @@ export default {
     //notice
     let {
       data: { data: notice }
-    } = await this.$axios.get("http://localhost:1910/goods", {
+    } = await this.$axios.get("http://10.3.136.52:1910/goods", {
       params: {
         gather: "notice"
       }
@@ -134,7 +134,7 @@ export default {
     //HomeList
     let {
       data: { data: HomeList }
-    } = await this.$axios.get("http://localhost:1910/goods", {
+    } = await this.$axios.get("http://10.3.136.52:1910/goods", {
       params: {
         gather: "HomeList"
       }
@@ -214,6 +214,8 @@ section {
     text-align: center;
     box-sizing: border-box;
     padding: 2px;
+    width: 100%;
+    overflow: hidden;
     .el-row {
       margin-bottom: 20px;
       padding: 0 10px;
