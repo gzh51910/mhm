@@ -18,11 +18,93 @@
           </el-row>
         </figcaption>
       </figure>
+      <figure id="client_main">
+        <aside>
+          <img src alt />
+        </aside>
+        <figcaption>
+          <p>title</p>
+          <el-row>
+            <el-button class="client_label" type="primary">thumbs</el-button>
+            <el-button class="client_label" type="primary">thumbs</el-button>
+            <el-button class="client_label" type="primary">thumbs</el-button>
+          </el-row>
+        </figcaption>
+      </figure>
+      <figure id="client_main">
+        <aside>
+          <img src alt />
+        </aside>
+        <figcaption>
+          <p>title</p>
+          <el-row>
+            <el-button class="client_label" type="primary">thumbs</el-button>
+            <el-button class="client_label" type="primary">thumbs</el-button>
+            <el-button class="client_label" type="primary">thumbs</el-button>
+          </el-row>
+        </figcaption>
+      </figure>
+      <figure id="client_main">
+        <aside>
+          <img src alt />
+        </aside>
+        <figcaption>
+          <p>title</p>
+          <el-row>
+            <el-button class="client_label" type="primary">thumbs</el-button>
+            <el-button class="client_label" type="primary">thumbs</el-button>
+            <el-button class="client_label" type="primary">thumbs</el-button>
+          </el-row>
+        </figcaption>
+      </figure>
+      <figure id="client_main">
+        <aside>
+          <img src alt />
+        </aside>
+        <figcaption>
+          <p>title</p>
+          <el-row>
+            <el-button class="client_label" type="primary">thumbs</el-button>
+            <el-button class="client_label" type="primary">thumbs</el-button>
+            <el-button class="client_label" type="primary">thumbs</el-button>
+             <el-button class="client_label" type="primary">thumbs</el-button>
+              <el-button class="client_label" type="primary">thumbs</el-button>
+          </el-row>
+        </figcaption>
+      </figure>
+      <figure id="client_main">
+        <aside>
+          <img src alt />
+        </aside>
+        <figcaption>
+          <p>title</p>
+          <el-row>
+            <el-button class="client_label" type="primary">thumbs</el-button>
+            <el-button class="client_label" type="primary">thumbs</el-button>
+            <el-button class="client_label" type="primary">thumbs</el-button>
+          </el-row>
+        </figcaption>
+      </figure>
+      <figure id="client_main">
+        <aside>
+          <img src alt />
+        </aside>
+        <figcaption>
+          <p>title</p>
+          <el-row>
+            <el-button class="client_label" type="primary">thumbs</el-button>
+            <el-button class="client_label" type="primary">thumbs</el-button>
+            <el-button class="client_label" type="primary">thumbs</el-button>
+          </el-row>
+        </figcaption>
+      </figure>
     </el-main>
-    <el-footer>
+    <el-footer style="height:none;">
         <el-button>《上一页</el-button>
         <el-button>下一页》</el-button>
+        <p>共<span id="client_num">$client_num</span> 条 /<span id="client_pege">$client_pege</span> 页</p>
     </el-footer>
+    <aside id="client_footer_aside"><span>@maihaome.com</span></aside>
   </el-container>
 </template>
 <script>
@@ -55,6 +137,8 @@ export default {
     display: flex;
     height: 100px;
     align-items: center;
+    padding:10px 0;
+    border-bottom: 1px solid rgb(242, 242, 242);
     aside {
       width: 100px;
       height: 100%;
@@ -94,6 +178,7 @@ export default {
   .el-header{
       display: flex;
       align-items: center;
+      background: rgb(242, 242, 242);
       .el-input{
           width: 78%;
       }
@@ -104,6 +189,22 @@ export default {
           width: 20%;
       }
   }
+  .el-footer{
+    width: 100%;
+    height: none;
+    .el-button{
+      width: 40%;
+    }
+    p{
+      padding:0;
+      margin:0;
+    }
+  }
+  #client_footer_aside{
+    text-align: center;
+    padding: 40px;
+    background: rgb(242, 242, 242);
+  }
 
   .el-aside {
     background-color: #d3dce6;
@@ -113,10 +214,11 @@ export default {
   }
 
   .el-main {
-    background-color: #e9eef3;
+    background-color: rgb(255,255,255);
     color: #333;
     text-align: center;
     height: 100%;
+    padding: 10px;
     * {
       padding: 0;
       margin: 0;

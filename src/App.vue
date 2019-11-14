@@ -28,21 +28,24 @@ export default {
 
 <style lang="scss">
 #app {
-  .header {
+  display: flex;
+  >.header {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 44px;
     background: #14b9c8;
+    position: absolute;
+    z-index: 999;
     //   text-align: center;
-    img {
+    >img {
       margin-top: 8px;
       width: 75px;
       height: 29px;
       float: left;
       margin-left: 10px;
     }
-    h1 {
+    >h1 {
       margin: 0;
       padding: 0;
       height: 44px;
@@ -53,7 +56,7 @@ export default {
       line-height: 44px;
       margin-left: 44px;
     }
-    a {
+    >a {
       text-decoration: none;
       color: white;
       float: right;
@@ -63,6 +66,13 @@ export default {
         margin-right: 10px;
       }
     }
+  }
+  >main{
+    flex: 1;
+    overflow: auto;
+    width: 100%;
+    position: absolute;
+    height:100%;
   }
 }
 </style>
