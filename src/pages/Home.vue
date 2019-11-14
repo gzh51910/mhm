@@ -1,12 +1,5 @@
 <template>
   <div class="box_body">
-    <header class="header">
-      <img src="../img/mhmlogo.png" alt />
-      <h1>MHM游戏交易</h1>
-      <a href class="iconfont icon-liebiao"></a>
-      <a href class="iconfont icon-sousuo"></a>
-    </header>
-
     <section>
       <div class="block">
         <el-carousel trigger="click" height="150px">

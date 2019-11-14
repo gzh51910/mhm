@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-
+<header class="header">
+      <img src="./img/mhmlogo.png" alt />
+      <h1>MHM游戏交易</h1>
+      <a href class="iconfont icon-liebiao"></a>
+      <a href class="iconfont icon-sousuo"></a>
+    </header>
     <main>
       <router-view />
     </main>
