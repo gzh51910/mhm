@@ -149,10 +149,10 @@ export default {
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss"  scoped>
 .box_body {
   box-sizing: border-box;
-  overflow: hidden;
+  overflow: auto;
 }
 .header {
   margin: 0;
@@ -209,8 +209,7 @@ export default {
   }
 }
 section {
-  position: absolute;
-  top: 44px;
+  height: 100%;
   width: 100%;
   // overflow: hidden;
   #deal_on,

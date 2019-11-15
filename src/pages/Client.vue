@@ -5,7 +5,7 @@
       <el-button type="primary">搜索</el-button>
     </el-header>
     <el-main>
-      <figure id="client_main" v-for="item in Client" :key="item.title" @click="goto"> 
+      <figure id="client_main" v-for="item in Client" :key="item.title" @click="goto">
         <aside>
           <img :src="item.src" alt />
         </aside>
@@ -23,19 +23,19 @@
           </el-row>
         </figcaption>
       </figure>
+      <el-footer style="height:none;">
+        <el-button>《上一页</el-button>
+        <el-button>下一页》</el-button>
+        <p>
+          共
+          <span id="client_num">{{ClientNum}}</span> 条 /
+          <span id="client_pege">{{Math.ceil(ClientNum/20)}}</span> 页
+        </p>
+      </el-footer>
+      <aside id="client_footer_aside">
+        <span>@maihaome.com</span>
+      </aside>
     </el-main>
-    <el-footer style="height:none;">
-      <el-button>《上一页</el-button>
-      <el-button>下一页》</el-button>
-      <p>
-        共
-        <span id="client_num">{{ClientNum}}</span> 条 /
-        <span id="client_pege">{{Math.ceil(ClientNum/20)}}</span> 页
-      </p>
-    </el-footer>
-    <aside id="client_footer_aside">
-      <span>@maihaome.com</span>
-    </aside>
   </el-container>
 </template>
 <script>
@@ -49,8 +49,8 @@ export default {
     };
   },
   methods: {
-    goto(){
-      this.$router.push({name:'ELSWORD_list',params:{}})
+    goto() {
+      this.$router.push({ name: "ELSWORD_list", params: {} });
     }
   },
 
@@ -93,14 +93,17 @@ export default {
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 #client_body {
   height: none;
+  height: 100%;
+  overflow: auto;
   #client_main {
     display: flex;
     // height: 80px;
     align-items: center;
-    padding: 10px 0;
+    padding: 10px;
+    flex: 1;
     border-bottom: 1px solid rgb(242, 242, 242);
     aside {
       width: 80px;
@@ -163,6 +166,7 @@ export default {
     height: none;
     .el-button {
       width: 40%;
+      padding: 10px 0;
     }
     p {
       padding: 0;
@@ -182,12 +186,11 @@ export default {
     line-height: 200px;
   }
 
-  .el-main {
+  > .el-main {
     background-color: rgb(255, 255, 255);
     color: #333;
     text-align: center;
-    height: 100%;
-    padding: 10px;
+    padding: 0;
     * {
       padding: 0;
       margin: 0;

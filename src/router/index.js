@@ -12,6 +12,7 @@ import Phone from '../pages/Phone.vue'
 import ELSWORD_list from '../pages/ELSWORD_list.vue'
 import Goods from '../pages/Goods.vue'
 import Card from '../pages/Card.vue'
+import Balance from '../pages/Balance.vue'
 
 let router = new VueRouter({
     routes: [{
@@ -53,6 +54,11 @@ let router = new VueRouter({
             name: 'card',
             path: '/card',
             component: Card
+        },
+        {
+            name: 'balance',
+            path: '/balance',
+            component: Balance
         },
         {
             path: '/',
