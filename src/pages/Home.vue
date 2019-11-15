@@ -12,8 +12,8 @@
       </div>
       <nav id="nav_home">
         <el-row :gutter="20" class="el-row-one">
-          <el-col :span="6" v-for="item in fn_nav" :key="item.title" style="padding:0 5px">
-            <div class="grid-content bg-purple">
+          <el-col :span="6" v-for="item in fn_nav" :key="item.title" style="padding:0 5px" >
+            <div class="grid-content bg-purple" @click="goto()">
               <img :src="item.src" alt />
               <p class="fn_title">{{item.title}}</p>
             </div>
@@ -28,7 +28,7 @@
         </h5>
         <el-row :gutter="20">
           <el-col :span="6" v-for="item in Game_nav" :key="item.title" style="padding:0 5px">
-            <div class="grid-content bg-purple">
+            <div class="grid-content bg-purple" @click="goto()">
               <img :src="item.src" alt />
               <p class="Game_title">{{item.title}}</p>
             </div>
@@ -47,7 +47,7 @@
         <h5 class="deal_finish">
           <i class="iconfont icon-jiantou_you"></i>交易完成
         </h5>
-        <figure v-for="item in HomeList" :key="item.title">
+        <figure v-for="item in HomeList" :key="item.title" @click="goto('goods')">
           <img :src="item.src" alt />
           <figcaption>
             <h4>{{item.title}}</h4>
@@ -71,6 +71,7 @@
 </template>
 <script>
 import { mainUrl } from "../config.json";
+import { log } from 'util';
 export default {
   data() {
     return {
@@ -78,10 +79,16 @@ export default {
       fn_nav: [],
       Game_nav: [],
       notice: [],
-      HomeList: []
+      HomeList: [],
     };
   },
-  methods: {},
+  methods: {
+    goto(link){
+      link?link:link="client";
+      window.console,log(link);
+      this.$router.push({name:link,params:{}})
+    }
+  },
   async created() {
     //slideshow
     let {

@@ -106,6 +106,7 @@ export default {};
         width: 100%;
         height: 50%;
         background: red;
+        padding: 0;
     }
     p{
         width: 100%;
