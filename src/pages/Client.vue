@@ -1,133 +1,91 @@
 <template>
   <el-container id="client_body">
     <el-header>
-        <el-input v-model="input" placeholder="输入游戏名称关键词筛选"></el-input>
-        <el-button type="primary">搜索</el-button>
+      <el-input v-model="input" placeholder="输入游戏名称关键词筛选" class="search_input"></el-input>
+      <el-button type="primary">搜索</el-button>
     </el-header>
     <el-main>
-      <figure id="client_main">
+      <figure id="client_main" v-for="item in Client" :key="item.title">
         <aside>
-          <img src alt />
+          <img :src="item.src" alt />
         </aside>
         <figcaption>
-          <p>title</p>
+          <p>
+            <b>{{item.title}}</b>
+          </p>
           <el-row>
-            <el-button class="client_label" type="primary">thumbs</el-button>
-            <el-button class="client_label" type="primary">thumbs</el-button>
-            <el-button class="client_label" type="primary">thumbs</el-button>
-          </el-row>
-        </figcaption>
-      </figure>
-      <figure id="client_main">
-        <aside>
-          <img src alt />
-        </aside>
-        <figcaption>
-          <p>title</p>
-          <el-row>
-            <el-button class="client_label" type="primary">thumbs</el-button>
-            <el-button class="client_label" type="primary">thumbs</el-button>
-            <el-button class="client_label" type="primary">thumbs</el-button>
-          </el-row>
-        </figcaption>
-      </figure>
-      <figure id="client_main">
-        <aside>
-          <img src alt />
-        </aside>
-        <figcaption>
-          <p>title</p>
-          <el-row>
-            <el-button class="client_label" type="primary">thumbs</el-button>
-            <el-button class="client_label" type="primary">thumbs</el-button>
-            <el-button class="client_label" type="primary">thumbs</el-button>
-          </el-row>
-        </figcaption>
-      </figure>
-      <figure id="client_main">
-        <aside>
-          <img src alt />
-        </aside>
-        <figcaption>
-          <p>title</p>
-          <el-row>
-            <el-button class="client_label" type="primary">thumbs</el-button>
-            <el-button class="client_label" type="primary">thumbs</el-button>
-            <el-button class="client_label" type="primary">thumbs</el-button>
-          </el-row>
-        </figcaption>
-      </figure>
-      <figure id="client_main">
-        <aside>
-          <img src alt />
-        </aside>
-        <figcaption>
-          <p>title</p>
-          <el-row>
-            <el-button class="client_label" type="primary">thumbs</el-button>
-            <el-button class="client_label" type="primary">thumbs</el-button>
-            <el-button class="client_label" type="primary">thumbs</el-button>
-             <el-button class="client_label" type="primary">thumbs</el-button>
-              <el-button class="client_label" type="primary">thumbs</el-button>
-          </el-row>
-        </figcaption>
-      </figure>
-      <figure id="client_main">
-        <aside>
-          <img src alt />
-        </aside>
-        <figcaption>
-          <p>title</p>
-          <el-row>
-            <el-button class="client_label" type="primary">thumbs</el-button>
-            <el-button class="client_label" type="primary">thumbs</el-button>
-            <el-button class="client_label" type="primary">thumbs</el-button>
-          </el-row>
-        </figcaption>
-      </figure>
-      <figure id="client_main">
-        <aside>
-          <img src alt />
-        </aside>
-        <figcaption>
-          <p>title</p>
-          <el-row>
-            <el-button class="client_label" type="primary">thumbs</el-button>
-            <el-button class="client_label" type="primary">thumbs</el-button>
-            <el-button class="client_label" type="primary">thumbs</el-button>
+            <el-button
+              class="client_label"
+              type="primary"
+              v-for="item in item.thumbs"
+              :key="item"
+            >{{item}}</el-button>
           </el-row>
         </figcaption>
       </figure>
     </el-main>
     <el-footer style="height:none;">
-        <el-button>《上一页</el-button>
-        <el-button>下一页》</el-button>
-        <p>共<span id="client_num">$client_num</span> 条 /<span id="client_pege">$client_pege</span> 页</p>
+      <el-button>《上一页</el-button>
+      <el-button>下一页》</el-button>
+      <p>
+        共
+        <span id="client_num">{{ClientNum}}</span> 条 /
+        <span id="client_pege">{{Math.ceil(ClientNum/20)}}</span> 页
+      </p>
     </el-footer>
-    <aside id="client_footer_aside"><span>@maihaome.com</span></aside>
+    <aside id="client_footer_aside">
+      <span>@maihaome.com</span>
+    </aside>
   </el-container>
 </template>
 <script>
+import { mainUrl } from "../config.json";
 export default {
   data() {
     return {
-         input: '',
-      datalist: []
+      input: "",
+      Client: [],
+      ClientNum: []
     };
   },
   methods: {},
+
   async created() {
     let {
-      data: { data }
-    } = await this.$axios.get("http://10.3.136.52:1910/goods", {
+      data: { data: Client }
+    } = await this.$axios.get(mainUrl + "/goods", {
       params: {
-        gather: "Client"
+        gather: "Client",
+        page: 1,
+        size: 20
       }
     });
-    this.datalist = data.map(item => {
+    this.Client = Client.map(item => {
       return item;
     });
-    // console.log(this.datalist);
+    // console.log(this.Client);
+
+    //页数
+    let {
+      data: { data: ClientNum }
+    } = await this.$axios.get(mainUrl + "/goods/num", {
+      params: {
+        count: "Client"
+      }
+    });
+    this.ClientNum = ClientNum;
+
+    //注册
+    // let {
+    //   data: { data: user }
+    // } = await this.$axios.get("http://localhost:1910/goods", {
+    //   params: {
+    //     gather: "user",
+    //     condition:"username",
+    //     condition_value:"中山王力宏"
+    //   }
+    // });
+    // console.log(user);
   }
 };
 </script>
@@ -135,14 +93,13 @@ export default {
 #client_body {
   #client_main {
     display: flex;
-    height: 100px;
+    // height: 80px;
     align-items: center;
-    padding:10px 0;
+    padding: 10px 0;
     border-bottom: 1px solid rgb(242, 242, 242);
     aside {
-      width: 100px;
+      width: 80px;
       height: 100%;
-      background: red;
       border-radius: 10px;
       overflow: hidden;
       img {
@@ -150,57 +107,64 @@ export default {
       }
     }
     figcaption {
-      background: #58bc58;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       justify-items: center;
       width: 73%;
+      margin-bottom: 8px;
+      p {
+        margin-left: 3%;
+      }
       .el-row {
         width: 100%;
         display: flex;
         flex-wrap: wrap;
         .el-button {
+          background: #b4ebfa;
+          color: #14b9c8;
+          border: 0px;
           width: 30%;
+          height: 28px;
           padding: 7px 0;
-          margin: 5px 0 0 3%;
+          margin: 10px 0 0 3%;
         }
       }
     }
   }
   .el-header,
   .el-footer {
-    background-color: #b3c0d1;
+    background-color: white;
     color: #333;
     text-align: center;
     line-height: 60px;
   }
-  .el-header{
-      display: flex;
-      align-items: center;
-      background: rgb(242, 242, 242);
-      .el-input{
-          width: 78%;
-      }
-      .el-button{
-          padding:6px 12px;
-          margin-left: 2%;
-          height: 40px;
-          width: 20%;
-      }
+  .el-header {
+    display: flex;
+    align-items: center;
+    background: rgb(242, 242, 242);
+    .el-input {
+      width: 70%;
+    }
+    .el-button {
+      padding: 6px 12px;
+      margin-left: 2%;
+      height: 40px;
+      width: 28%;
+    }
   }
-  .el-footer{
+  .el-footer {
     width: 100%;
     height: none;
-    .el-button{
+    .el-button {
       width: 40%;
     }
-    p{
-      padding:0;
-      margin:0;
+    p {
+      padding: 0;
+      margin: 0;
     }
   }
-  #client_footer_aside{
+  #client_footer_aside {
     text-align: center;
     padding: 40px;
     background: rgb(242, 242, 242);
@@ -214,7 +178,7 @@ export default {
   }
 
   .el-main {
-    background-color: rgb(255,255,255);
+    background-color: rgb(255, 255, 255);
     color: #333;
     text-align: center;
     height: 100%;

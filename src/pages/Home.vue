@@ -70,6 +70,7 @@
   </div>
 </template>
 <script>
+import { mainUrl } from "../config.json";
 export default {
   data() {
     return {
@@ -85,7 +86,7 @@ export default {
     //slideshow
     let {
       data: { data: slideshow }
-    } = await this.$axios.get("http://10.3.136.52:1910/goods", {
+    } = await this.$axios.get(mainUrl + "/goods", {
       params: {
         gather: "slideshow"
       }
@@ -98,7 +99,7 @@ export default {
     //fn_nav
     let {
       data: { data }
-    } = await this.$axios.get("http://10.3.136.52:1910/goods", {
+    } = await this.$axios.get(mainUrl + "/goods", {
       params: {
         gather: "fn_nav"
       }
@@ -110,7 +111,7 @@ export default {
     //Game_nav
     let {
       data: { data: game_nav }
-    } = await this.$axios.get("http://10.3.136.52:1910/goods", {
+    } = await this.$axios.get(mainUrl + "/goods", {
       params: {
         gather: "Game_nav"
       }
@@ -122,7 +123,7 @@ export default {
     //notice
     let {
       data: { data: notice }
-    } = await this.$axios.get("http://10.3.136.52:1910/goods", {
+    } = await this.$axios.get(mainUrl + "/goods", {
       params: {
         gather: "notice"
       }
@@ -134,7 +135,7 @@ export default {
     //HomeList
     let {
       data: { data: HomeList }
-    } = await this.$axios.get("http://10.3.136.52:1910/goods", {
+    } = await this.$axios.get(mainUrl + "/goods", {
       params: {
         gather: "HomeList"
       }
@@ -198,8 +199,8 @@ export default {
 .el-carousel__item:nth-child(2n + 1) {
   background-color: #d3dce6;
 }
-.small{
-  img{
+.small {
+  img {
     width: 100%;
     height: 100%;
   }

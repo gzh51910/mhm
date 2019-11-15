@@ -6,5 +6,6 @@
     "mysql_port": "4040",
     "mysql_user": "root",
     "mysql_password": "",
-    "mysql_database": "mhm"
+    "mysql_database": "mhm",
+    "mainUrl":"http://10.3.136.52:1910"
 }
