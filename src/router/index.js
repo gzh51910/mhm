@@ -12,12 +12,18 @@ import Phone from '../pages/Phone.vue'
 import ELSWORD_list from '../pages/ELSWORD_list.vue'
 import Goods from '../pages/Goods.vue'
 import Card from '../pages/Card.vue'
+import Mine from '../pages/Mine.vue'
 
 let router = new VueRouter({
     routes: [{
             name: 'home',
             path: '/home',
             component: Home
+        },
+        {
+            name: 'mine',
+            path: '/mine',
+            component: Mine
         },
         {
             name: 'login',
