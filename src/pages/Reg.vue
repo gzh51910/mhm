@@ -1,11 +1,279 @@
 <template>
-    <div>注册</div>
+  <div class="reg">
+    <div class="reg_head">
+      <i slot="prefix" class="el-icon-arrow-left"></i>
+      <span>账号注册</span>
+      <i slot="prefix" class="el-icon-s-home"></i>
+    </div>
+    <el-form class="demo-input-suffix" ref="regForm" :model="regForm" :rules="rules">
+      <el-form-item prop="username">
+        <el-input placeholder="会员名称，只支持英文与数字" v-model="regForm.username">
+          <i slot="prefix" class="el-icon-s-custom"></i>
+        </el-input>
+      </el-form-item>
+      <el-form-item prop="password">
+        <el-input type="password" placeholder="登录密码" v-model="regForm.password">
+          <i slot="prefix" class="el-icon-lock"></i>
+        </el-input>
+      </el-form-item>
+      <el-form-item prop="email">
+        <el-input placeholder="电子邮箱" v-model="regForm.email">
+          <i slot="prefix" class="el-icon-message"></i>
+        </el-input>
+      </el-form-item>
+      <el-form-item prop="relusername">
+        <el-input placeholder="真实姓名" v-model="regForm.relusername">
+          <i slot="prefix" class="iconfont icon-yezi yezi"></i>
+        </el-input>
+      </el-form-item>
+    </el-form>
+    <div class="three">
+      <div class="QQ" @click="submitForm">
+        <i slot="prefx" class="el-icon-arrow-right"></i>
+        <span>立即注册成为会员</span>
+      </div>
+      <div class="xinlang" @click="loginFrom">
+        <i slot="prefx" class="el-icon-lock"></i>
+        <span>已有账号，现在登录</span>
+      </div>
+    </div>
+  </div>
 </template>
+
 <script>
 export default {
-    
-}
-</script>
-<style lang="scss">
+  data() {
+    var checkUsername = (rule, value, callback) => {
+      if (!/^[\w-]+$/i.test(value)) {
+        window.console.log(1);
 
+        callback(new Error("用户名必须为数字、字母、_、-"));
+      } else {
+        callback();
+      }
+    };
+    var checkEmail = (rule, value, callback) => {
+      if (!/^[1-9]\d{7,10}@qq\.com$/.test(value)) {
+        callback(new Error("请输入正确的邮箱格式"));
+      } else {
+        callback();
+      }
+    };
+    var checkRelusername = (rule, value, callback) => {
+      if (!/^[\u4e00-\u9fa5]{2,4}$/.test(value)) {
+        callback(new Error("姓名不对，建议出国"));
+      } else {
+        callback();
+      }
+    };
+    return {
+      regForm: {
+        username: "",
+        password: "",
+        email: "",
+        relname: ""
+      },
+      rules: {
+        username: [
+          {
+            required: true,
+            message: "请输入用户名",
+            trigger: "blur"
+          },
+          {
+            min: 2,
+            max: 60,
+            message: "长度在 2 到 60 个字符",
+            trigger: "blur"
+          },
+          { validator: checkUsername, trigger: "blur" }
+        ],
+        password: [
+          { required: true, message: "请输入密码", trigger: "blur" },
+          {
+            min: 6,
+            max: 40,
+            message: "长度在 6 到 40 个字符",
+            trigger: "blur"
+          }
+        ],
+        email: [
+          { required: true, message: "请输入邮箱地址", trigger: "blur" },
+          { validator: checkEmail, trigger: "blur" }
+        ],
+        relusername: [
+          { required: true, message: "请输入姓名", trigger: "blur" },
+          {
+            min: 2,
+            max: 4,
+            message: "请输入真实姓名",
+            trigger: "blur"
+          },
+          { validator: checkRelusername, trigger: "blur" }
+        ]
+      }
+    };
+  },
+  methods: {
+    // 注册按钮
+    submitForm() {
+      // validate方法   校验所有的表单  全过才行
+      this.$refs.regForm.validate(async valid => {
+        if (valid) {
+          let { username, password, email, relname } = this.regForm;
+          // 校验成功发起请求
+          let { data } = await this.$axios.post("http://10.3.136.52:1910/reg", {
+            username,
+            password,
+            email,
+            relname
+          });
+          // if (data.staus === 1) {
+          //   this.$router.replace("/login");
+          // }
+          window.console.log(data);
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
+    // 有账号跳转登录页面按钮
+    loginFrom() {
+      window.console.log("login");
+    }
+  }
+};
+</script>
+
+<style lang="scss">
+body,
+html {
+  background-color: #f2f2f2;
+}
+.reg {
+  overflow: hidden;
+
+  .reg_head {
+    background-color: #14b9c8;
+    color: #fff;
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    left: 0;
+    height: 44px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-bottom: 0;
+    backface-visibility: hidden;
+    .el-icon-arrow-left {
+      width: 30px;
+      height: 40px;
+      margin-top: 15px;
+    }
+    el-icon-s-home {
+      width: 30px;
+      height: 40px;
+      margin-top: 15px;
+    }
+    span {
+      display: inline-block;
+      width: 300px;
+      text-align: center;
+      font-size: 17px;
+      font-weight: 500;
+      line-height: 44px;
+    }
+  }
+  .demo-input-suffix {
+    margin-top: 80px;
+    .el-input {
+      background-color: #f2f2f2;
+      width: 315px;
+      display: inline-block;
+      height: 50px;
+      line-height: 50px;
+      margin: 10px 30px;
+      input {
+        background-color: #f2f2f2;
+        height: 50px;
+        border: 1px solid #a9a9a9;
+      }
+      input::-webkit-input-placeholder {
+        color: rgba(0, 0, 0, 0.397);
+      }
+      input::-moz-input-placeholder {
+        color: rgba(0, 0, 0, 0.466);
+      }
+      input::-ms-input-placeholder {
+        color: rgba(0, 0, 0, 0.459);
+      }
+      .el-icon-s-custom {
+        color: black;
+      }
+    }
+    .el-icon-lock {
+      color: black;
+    }
+    .el-icon-view {
+      color: black;
+    }
+    .el-icon-message {
+      color: black;
+    }
+    .yezi {
+      color: black;
+      font-size: 22px;
+    }
+  }
+  .three {
+    margin-left: 30px;
+    width: 315px;
+    .QQ {
+      background-color: #14b9c8;
+      width: 315px;
+      display: inline-block;
+      height: 50px;
+      line-height: 50px;
+      margin-top: 20px;
+      border-radius: 5px;
+      .el-icon-arrow-right {
+        background-color: #158c97;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        float: left;
+        line-height: 50px;
+      }
+      span {
+        text-align: center;
+        width: 250px;
+        float: left;
+      }
+    }
+    .xinlang {
+      background-color: #2980b9;
+      width: 315px;
+      display: inline-block;
+      height: 50px;
+      line-height: 50px;
+      margin-top: 20px;
+
+      border-radius: 5px;
+      .el-icon-lock {
+        background-color: #115e92;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        float: left;
+        line-height: 50px;
+      }
+      span {
+        text-align: center;
+        width: 250px;
+        float: left;
+      }
+    }
+  }
+}
 </style>

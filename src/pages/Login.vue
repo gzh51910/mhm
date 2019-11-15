@@ -1,11 +1,281 @@
 <template>
-    <div>登陆</div>
+  <div class="login">
+    <div class="login_head">
+      <i slot="prefix" class="el-icon-arrow-left"></i>
+      <span>账号登录</span>
+      <i slot="prefix" class="el-icon-s-home"></i>
+    </div>
+    <el-form class="demo-input-suffix" ref="loginFrom" :v-model="loginFrom" :rules="rules">
+      <el-form-item prop="username">
+        <el-input placeholder="用户名/Email/已认证手机" v-model="loginFrom.username">
+          <i slot="prefix" class="el-icon-s-custom"></i>
+        </el-input>
+      </el-form-item>
+      <el-form-item prop="password">
+        <el-input placeholder="请填写密码" v-model="loginFrom.password">
+          <i slot="prefix" class="el-icon-lock"></i>
+        </el-input>
+      </el-form-item>
+      <!-- <el-form-item>
+        <el-input placeholder="点击显示验证码">
+          <i slot="prefix" class="el-icon-view"></i>
+        </el-input>
+      </el-form-item>-->
+    </el-form>
+    <div class="login_login" @click="submitFrom">
+      <i slot="prefx" class="el-icon-arrow-right"></i>
+      <span>立即登录</span>
+    </div>
+    <p>
+      还没有买号么账号吗？
+      <span>忘记了密码？</span>
+    </p>
+
+    <div class="three">
+      <div class="QQ">
+        <i class="iconfont icon-icon qq"></i>
+        <span>用QQ登录账号登录</span>
+      </div>
+      <div class="xinlang">
+        <i class="iconfont icon-web_xinlangweibo lang"></i>
+        <span>用新浪微博账号登录</span>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 export default {
-    
-}
+  data() {
+    var checkUsername = (rule, value, callback) => {
+      if (!/^[\w-]+$/i.test(value)) {
+        callback(new Error("用户名必须为数字、字母、_、-"));
+      } else {
+        callback();
+      }
+    };
+    return {
+      loginFrom: {
+        userneme: "",
+        password: ""
+      },
+      rules: {
+        username: [
+          {
+            required: true,
+            message: "请输入用户名",
+            trigger: "blur"
+          },
+          {
+            min: 2,
+            max: 60,
+            message: "长度在 2 到 60 个字符",
+            trigger: "blur"
+          },
+          { validator: checkUsername, trigger: "blur" }
+        ],
+        password: [
+          { required: true, message: "请输入密码", trigger: "blur" },
+          {
+            min: 6,
+            max: 40,
+            message: "长度在 6 到 40 个字符",
+            trigger: "blur"
+          }
+        ]
+      }
+    };
+  },
+  methods: {
+    submitFrom() {
+      this.$refs.loginForm.validate(async valid => {
+        if (valid) {
+          // 校验成功发起ajax请求
+          console.log("success");
+
+          let { username, password } = this.loginForm;
+          let { data } = await this.$axios.get("http://localhost:1910/login", {
+            params: {
+              username,
+              password
+            }
+          });
+          console.log(data);
+          if (data.status === 0) {
+            // console.log('不行')
+            this.errorMsg = "用户名或密码错误";
+          } else {
+            // 获取token并保存到本地
+            let Authorization = data.data;
+            localStorage.setItem("Authorization", Authorization);
+            let { redirectUrl } = this.$route.query || "/mine";
+            this.$router.replace(redirectUrl);
+          }
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    }
+  }
+};
 </script>
 <style lang="scss">
+body,
+html {
+  background-color: #f2f2f2;
+  .login {
+    overflow: hidden;
+    .login_head {
+      background-color: #14b9c8;
+      color: #fff;
+      position: fixed;
+      z-index: 10;
+      right: 0;
+      left: 0;
+      height: 44px;
+      padding-right: 10px;
+      padding-left: 10px;
+      border-bottom: 0;
+      backface-visibility: hidden;
+      .el-icon-arrow-left {
+        width: 30px;
+        height: 40px;
+        margin-top: 15px;
+      }
+      el-icon-s-home {
+        width: 30px;
+        height: 40px;
+        margin-top: 15px;
+      }
+      span {
+        display: inline-block;
+        width: 300px;
+        text-align: center;
+        font-size: 17px;
+        font-weight: 500;
+        line-height: 44px;
+      }
+    }
+    .demo-input-suffix {
+      margin-top: 80px;
+      input {
+        background-color: #f2f2f2;
+        border: 1px solid #a9a9a9;
+        height: 50px;
+      }
+      .el-input {
+        background-color: #f2f2f2;
+        width: 315px;
+        display: inline-block;
+        height: 50px;
+        line-height: 50px;
+        margin: 0px 30px;
+        input::-webkit-input-placeholder {
+          color: rgba(0, 0, 0, 0.397);
+        }
+        input::-moz-input-placeholder {
+          color: rgba(0, 0, 0, 0.466);
+        }
+        input::-ms-input-placeholder {
+          color: rgba(0, 0, 0, 0.459);
+        }
+        .el-icon-s-custom {
+          color: black;
+        }
+      }
+      .el-icon-lock {
+        color: black;
+      }
+      .el-icon-view {
+        color: black;
+      }
+    }
+    .login_login {
+      background-color: #14b9c8b4;
+      width: 315px;
+      display: inline-block;
+      height: 50px;
+      line-height: 50px;
+      margin: 20px 30px;
+      border-radius: 5px;
+      .el-icon-arrow-right {
+        background-color: #14b9c865;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        float: left;
+        line-height: 50px;
+      }
+      span {
+        text-align: center;
+        width: 250px;
+        float: left;
+      }
+    }
+    p {
+      margin-left: 30px;
+      font-size: 13px;
+      font-weight: 400;
+      span {
+        float: right;
+        margin-right: 30px;
+      }
+    }
+    .three {
+      margin-left: 30px;
+      border-top: 1px solid rgb(110, 100, 100);
+      width: 315px;
+      .QQ {
+        background-color: #4099ff;
+        width: 315px;
+        display: inline-block;
+        height: 50px;
+        line-height: 50px;
+        margin-top: 20px;
 
+        border-radius: 5px;
+        .qq {
+          background-color: #0b70e281;
+          width: 50px;
+          height: 50px;
+          text-align: center;
+          float: left;
+          line-height: 50px;
+          color: white;
+          font-size: 20px;
+        }
+        span {
+          text-align: center;
+          width: 250px;
+          float: left;
+        }
+      }
+      .xinlang {
+        background-color: #cc230d;
+        width: 315px;
+        display: inline-block;
+        height: 50px;
+        line-height: 50px;
+        margin-top: 20px;
+
+        border-radius: 5px;
+        .lang {
+          background-color: #941b0b77;
+          width: 50px;
+          height: 50px;
+          text-align: center;
+          float: left;
+          line-height: 50px;
+          color: white;
+          font-size: 20px;
+        }
+        span {
+          text-align: center;
+          width: 250px;
+          float: left;
+        }
+      }
+    }
+  }
+}
 </style>
