@@ -25,6 +25,7 @@ export default {
   img{
     width: 80px;
   }
+  
   .btn{
     width: 70%;
     padding: 15px 0;
@@ -39,6 +40,8 @@ export default {
      padding: 15px 0;
      font-size: 18px;
     font-weight: 500;
+    margin-top: 14px; 
+    margin-left: 0px; 
   }
 }
 

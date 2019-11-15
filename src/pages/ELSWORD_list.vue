@@ -27,50 +27,67 @@
               </el-col>
             </div>
 
-          <el-collapse v-model="activeName" accordion>
-            
-            <el-collapse-item title=" 艾尔之光商品区服筛选" name="1" class="aaaa">
-              <div v-for="item in datalist" :key="item.id">
-                <el-col :span="12" style=" margin-top: 10px;width: 60%;">
-                  <!-- <span class="demonstration">click 激活</span> -->
-                  <el-dropdown trigger="click" split-button>
-                    <span class="el-dropdown-link" style=" background-color: #fafafa">{{item.name}}</span>
-                    <el-dropdown-menu slot="dropdown" style=" background-color: #fafafa">
-                      <el-dropdown-item v-for="(type,idx) in item.type" :key="idx">{{type}}</el-dropdown-item>
-                      <!-- <el-dropdown-item>担保交易</el-dropdown-item> -->
-                    </el-dropdown-menu>
-                  </el-dropdown>
-                </el-col>
-              </div>
-            </el-collapse-item>
-          </el-collapse>
-          <!-- 列表 -->
-          <el-row :gutter="20" style=" margin-top: 10px;display:flex" v-for="o in 2" :key="o">
-            <aside class="list_goods_goto" @click="goto(1)">
-            <el-col :span="6" style="width: 100px;height: 100px;">
-              <img
-                src="https://www.maihaome.com/file/upload/201910/08/20430977212759.jpg.thumb.jpg"
-                alt
-                style="width: 100px;height:100px"
-              />
-            </el-col>
-            <el-col :span="6" class="wz">
-              <h3>万家福IE汇入根本复稻城亚丁就是粗而划分与承诺的核查个人与</h3>
-              <p class="pwz">
-                艾尔之光 / 华中华北区 / 盖亚
-                <b>
-                  <img src="https://www.maihaome.com/newapp/img/ji.png" alt />
-                  <img src="https://www.maihaome.com/newapp/img/5.png" alt />
-                </b>
-              </p>
-              <p class="pwz1">
-                剩余库存 100
-                <b>48.00 / 件</b>
-              </p>
-            </el-col>
-            </aside>
-          </el-row>
+            <el-collapse v-model="activeName" accordion>
+              <el-collapse-item title=" 艾尔之光商品区服筛选" name="1" class="aaaa">
+                <div v-for="item in datalist" :key="item.id">
+                  <el-col :span="12" style=" margin-top: 10px;width: 60%;">
+                    <!-- <span class="demonstration">click 激活</span> -->
+                    <el-dropdown trigger="click" split-button>
+                      <span
+                        class="el-dropdown-link"
+                        style=" background-color: #fafafa"
+                      >{{item.name}}</span>
+                      <el-dropdown-menu slot="dropdown" style=" background-color: #fafafa">
+                        <el-dropdown-item v-for="(type,idx) in item.type" :key="idx">{{type}}</el-dropdown-item>
+                        <!-- <el-dropdown-item>担保交易</el-dropdown-item> -->
+                      </el-dropdown-menu>
+                    </el-dropdown>
+                  </el-col>
+                </div>
+              </el-collapse-item>
+            </el-collapse>
+            <!-- 列表 -->
+            <el-row
+              :gutter="20"
+              
+              style=" margin-top: 10px;display:flex;margin-top: 20px;"
+              v-for="item in ELSWORD_list"
+              :key="item.id"
+             
+            >
+              <el-col :span="6" style="width: 100px;height: 100px;">
+                <img :src="item.src" alt style="width: 100px;height:100px;margin:0px" />
+              </el-col>
+              <el-col :span="6" class="wz">
+                <h3>{{item.title}}</h3>
+                <p class="pwz">
+                  <!-- 艾尔之光 / 华中华北区 / 盖亚 -->
+                  {{item.region}}
+                  <b>
+                    <img :src="item.smSrc1" alt />
+                    <img :src="item.smSrc2" alt />
+                  </b>
+                </p>
+                <p class="pwz1">
+                  <!-- 剩余库存 100 -->
+                  {{item.inventory}}
+                  <b>{{item.price}}</b>
+                </p>
+              </el-col>
+            </el-row>
 
+            <!-- 分页 -->
+            <el-button-group class="fen">
+              <el-button type="primary" class="fen_btn">上一页</el-button>
+              <el-button type="primary" class="fen_btn">下一页</el-button>
+              <p>
+                首页
+                <span>{{Math.ceil(Yeshu_num/20)}}</span>条/
+                <span>{{Yeshu_num}}</span>页
+                尾页
+              </p>
+
+            </el-button-group>
           </el-tab-pane>
 
           <el-tab-pane label="交易完成" class="jiaoyi">
@@ -130,14 +147,14 @@
                   <h4>{{item.title}}</h4>
                   <p>
                     首充折扣：
-                    <span style="color:#f00">
+                    <span>
                       {{item.first}}
                       <i>起</i>
                     </span>
                   </p>
                   <p>
                     续充折扣：
-                    <span style="color:#f00">
+                    <span>
                       {{item.continue}}
                       <i>起</i>
                     </span>
@@ -153,30 +170,10 @@
             <div class="shouyou-bottom">
               <p class="btn">查看更多手游折扣</p>
             </div>
-            <div v-for="o in 3" :key="o" class="text item">{{'成交数量 ' + o }}</div>
-            <div class="card_bottom" @click="goto(1)">
-              <i class="el-icon-s-promotion"></i>
-              我也要购买这个商品
-            </div>
 
-        </el-tab-pane>
-        <el-tab-pane label="手游折扣" class="shouyou">
-          <!-- 搜索 -->
-          <el-row class="inp-box">
-            <el-input v-model="input" placeholder="请输入内容" class="inp"></el-input>
-            <el-button type="primary" class="btn">搜索</el-button>
-          </el-row>
-          <el-row class="bton">
-            <el-button>全部游戏</el-button>
-            <el-button>首充送号</el-button>
-          </el-row>
-          <el-card class="box-card">
-            <el-row :gutter="15">
-              <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1">
-                <img
-                  src="https://www.maihaome.com/file/upload/201909/09/13101629487156.png"
-                  style="width: 80px;"
-                />
+            <el-row :gutter="20" id="sub_nav">
+              <el-col :span="8">
+                <div class="grid-content bg-purple">二次元</div>
               </el-col>
               <el-col :span="8">
                 <div class="grid-content bg-purple">休闲</div>
@@ -248,93 +245,11 @@
                 <div class="grid-content bg-purple">日风</div>
               </el-col>
             </el-row>
-            <div class="card-bottom" @click="goto(1)">
-              <p class="bottom-wz">查看游戏与折扣商品详情</p>
-            </div>
-          </el-card>
-
-          <div class="shouyou-bottom">
-            <p class="btn">查看更多手游折扣</p>
-          </div>
-
-          <el-row :gutter="20" id="sub_nav">
-            <el-col :span="8">
-              <div class="grid-content bg-purple">二次元</div>
-            </el-col>
-             <el-col :span="8">
-              <div class="grid-content bg-purple">休闲</div>
-            </el-col>
-             <el-col :span="8">
-              <div class="grid-content bg-purple">模拟</div>
-            </el-col>
-             <el-col :span="8">
-              <div class="grid-content bg-purple">moba</div>
-            </el-col>
-             <el-col :span="8">
-              <div class="grid-content bg-purple">动作</div>
-            </el-col>
-             <el-col :span="8">
-              <div class="grid-content bg-purple">卡牌</div>
-            </el-col>
-             <el-col :span="8">
-              <div class="grid-content bg-purple">角色</div>
-            </el-col>
-             <el-col :span="8">
-              <div class="grid-content bg-purple">策略</div>
-            </el-col>
-             <el-col :span="8">
-              <div class="grid-content bg-purple">射击</div>
-            </el-col>
-             <el-col :span="8">
-              <div class="grid-content bg-purple">逃生</div>
-            </el-col>
-             <el-col :span="8">
-              <div class="grid-content bg-purple">回合</div>
-            </el-col>
-             <el-col :span="8">
-              <div class="grid-content bg-purple">体育</div>
-            </el-col>
-             <el-col :span="8">
-              <div class="grid-content bg-purple">吃鸡</div>
-            </el-col>
-            <el-col :span="8">
-              <div class="grid-content bg-purple">格斗</div>
-            </el-col>
-            <el-col :span="8">
-              <div class="grid-content bg-purple">养成</div>
-            </el-col>
-            <el-col :span="8">
-              <div class="grid-content bg-purple">女生</div>
-            </el-col>
-            <el-col :span="8">
-              <div class="grid-content bg-purple">男生</div>
-            </el-col>
-            <el-col :span="8">
-              <div class="grid-content bg-purple">西游</div>
-            </el-col>
-            <el-col :span="8">
-              <div class="grid-content bg-purple">三国</div>
-            </el-col>
-            <el-col :span="8">
-              <div class="grid-content bg-purple">魔幻</div>
-            </el-col>
-            <el-col :span="8">
-              <div class="grid-content bg-purple">仙侠</div>
-            </el-col>
-            <el-col :span="8">
-              <div class="grid-content bg-purple">历史</div>
-            </el-col>
-            <el-col :span="8">
-              <div class="grid-content bg-purple">武侠</div>
-            </el-col>
-            <el-col :span="8">
-              <div class="grid-content bg-purple">日风</div>
-            </el-col>
-          </el-row>
-          <footer class="shuoyuo_foot">@maihaome.com</footer>
-        </el-tab-pane>
-      </el-tabs>
-    </section>
+            <!-- <footer class="shuoyuo_foot">@maihaome.com</footer> -->
+          </el-tab-pane>
+           <footer class="shuoyuo_foot">@maihaome.com</footer>
+        </el-tabs>
+      </section>
     </main>
   </div>
 </template>
@@ -380,6 +295,7 @@ export default {
       return ""
     }
   },
+  methods: {},
   async created() {
     let {
       data: { data: ELSWORD_list }
@@ -417,31 +333,24 @@ export default {
       
     });
     // 手游折扣
-    /* let {
+    let {
       data:{data:ELSWORD_list_syzk}
     }=await this.$axios.get(mainUrl+"/goods",{
       params:{
         gather:"ELSWORD_list_syzk"
       }
-    }) */
-  },
-  methods: {
-    goto(id){
-        // this.$router.push({name:'goods',params:{id}})
-        this.$router.push({name:'goods',query:{id},params:{id}})
-    }
-    /* this.ELSWORD_list_syzk=ELSWORD_list_syzk.map(item=>{
+    });
+
+    this.ELSWORD_list_syzk=ELSWORD_list_syzk.map(item=>{
       return item;
-    }) */
+    })
    
   }
 };
 </script>
 <style lang="scss">
-
 #list_div{
-
-#list_body{
+#list_body {
   width: 100%;
   height: 92%;
   overflow: auto;
@@ -452,9 +361,7 @@ export default {
     
   }
 }
-.list_goods_goto{
-  display: flex;
-}
+
 .header1 {
   margin: 0;
   padding: 0;
@@ -666,12 +573,10 @@ export default {
         font-size: 12px;
         span{
           clear: #f00;
-          i{
-             color: #8f8f94;
-          font-style: normal;
-           }
         }
-        
+        i{
+          font-style: normal
+        }
       }
     }
   }
@@ -741,5 +646,5 @@ export default {
   // }
 }
 }
-    
+
 </style>
