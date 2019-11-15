@@ -5,7 +5,7 @@
       <el-button type="primary">搜索</el-button>
     </el-header>
     <el-main>
-      <figure id="client_main" v-for="item in Client" :key="item.title">
+      <figure id="client_main" v-for="item in Client" :key="item.title" @click="goto"> 
         <aside>
           <img :src="item.src" alt />
         </aside>
@@ -48,7 +48,11 @@ export default {
       ClientNum: []
     };
   },
-  methods: {},
+  methods: {
+    goto(){
+      this.$router.push({name:'ELSWORD_list',params:{}})
+    }
+  },
 
   async created() {
     let {
