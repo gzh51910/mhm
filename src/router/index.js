@@ -5,8 +5,8 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
 import Home from '../pages/Home.vue'
-/* import Login from '../pages/Login.vue'
-import Reg from '../pages/Reg.vue' */
+import Login from '../pages/Login.vue'
+import Reg from '../pages/Reg.vue'
 import Client from '../pages/Client.vue'
 import Phone from '../pages/Phone.vue'
 import ELSWORD_list from '../pages/ELSWORD_list.vue'
