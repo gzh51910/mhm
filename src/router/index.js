@@ -11,6 +11,8 @@ import Client from '../pages/Client.vue'
 import Phone from '../pages/Phone.vue'
 import ELSWORD_list from '../pages/ELSWORD_list.vue'
 import Goods from '../pages/Goods.vue'
+import centre from '../pages/centre'
+
 
 let router = new VueRouter({
     routes: [{
@@ -47,6 +49,11 @@ let router = new VueRouter({
             name: "goods",
             path: '/goods',
             component: Goods
+        },
+        {
+            name: 'centre',
+            path: '/centre',
+            component: centre
         },
         {
             path: '/',
