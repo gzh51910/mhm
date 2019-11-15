@@ -5,15 +5,14 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
 import Home from '../pages/Home.vue'
-/* import Login from '../pages/Login.vue'
-import Reg from '../pages/Reg.vue' */
+import Login from '../pages/Login.vue'
+import Reg from '../pages/Reg.vue' 
 import Client from '../pages/Client.vue'
 import Phone from '../pages/Phone.vue'
 import ELSWORD_list from '../pages/ELSWORD_list.vue'
 import Goods from '../pages/Goods.vue'
 import Card from '../pages/Card.vue'
 import centre from '../pages/centre'
-
 import Mine from '../pages/Mine.vue'
 import Balance from '../pages/Balance.vue'
 
@@ -41,7 +40,14 @@ let router = new VueRouter({
         {
             name: 'client',
             path: '/client',
-            component: Client
+            component: Client,
+            value:"Client"
+        },
+        {
+            name: 'phone',
+            path: '/phone',
+            component: Client,
+            value:"phone"
         },
         {
             name: 'ELSWORD_list',
