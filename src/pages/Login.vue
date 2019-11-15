@@ -1,11 +1,12 @@
 <template>
   <div class="login">
-    <div class="login_head">
-      <i slot="prefix" class="el-icon-arrow-left"></i>
-      <span>账号登录</span>
-      <i slot="prefix" class="el-icon-s-home"></i>
-    </div>
-    <el-form class="demo-input-suffix" ref="loginForm" v-model="loginForm" :rules="rules">
+    <el-form
+      class="demo-input-suffix"
+      ref="loginForm"
+      :model="loginForm"
+      v-model="loginForm"
+      :rules="rules"
+    >
       <el-form-item prop="username">
         <el-input placeholder="用户名/Email/已认证手机" v-model="loginForm.username">
           <i slot="prefix" class="el-icon-s-custom"></i>
@@ -22,11 +23,11 @@
         </el-input>
       </el-form-item>-->
     </el-form>
-    <div class="login_login" @click="submit">
+    <div class="login_login" @click="submitForm">
       <i slot="prefx" class="el-icon-arrow-right"></i>
       <span>立即登录</span>
     </div>
-    <p>
+    <p class="none_id">
       <a @click="ToReg">还没有买号么账号吗？</a>
       <span>忘记了密码？</span>
     </p>
@@ -51,59 +52,58 @@
 <script>
 export default {
   data() {
-    var checkUsername = (rule, value, callback) => {
-      if (!/^[\w-]+$/i.test(value)) {
-        window.console.log(1);
-        callback(new Error("用户名必须为数字、字母、_、-"));
-      } else {
-        callback();
-      }
-    };
     return {
+      errorMsg: "",
       loginForm: {
         username: "",
-        password: ""
+        password: "",
+        mdl: true
       },
       rules: {
         username: [
-          {
-            required: true,
-            message: "请输入用户名",
-            trigger: "blur"
-          },
+          { required: true, message: "请输入用户名", trigger: "blur" },
           {
             min: 2,
-            max: 60,
-            message: "长度在 2 到 60 个字符",
+            max: 12,
+            message: "长度在 3 到 12 个字符",
             trigger: "blur"
-          },
-          { validator: checkUsername, trigger: "blur" }
+          }
+        ],
+        password: [
+          { required: true, message: "请输入密码", trigger: "blur" },
+          { min: 6, max: 20, message: "长度在 6 到 20 个字符", trigger: "blur" }
         ]
       }
     };
   },
   methods: {
-    submit() {
+    submitForm() {
       this.$refs.loginForm.validate(async valid => {
         if (valid) {
-          // 校验成功发起ajax请求
+          //校验成功，发送ajax请求
           console.log("success");
+
           let { username, password } = this.loginForm;
 
-          let { data } = await this.$axios.get("http://localhost:1910/login", {
+          let result = await this.$axios.get("http://localhost:1910/login", {
             params: {
               username,
               password
             }
           });
+
+          let { data, headers } = result;
+          console.log(result);
+
           if (data.status === 0) {
-            // console.log('不行')
             this.errorMsg = "用户名或密码错误";
           } else {
-            // 获取token并保存到本地
-            let Authorization = data.data;
-            localStorage.setItem("Authorization", Authorization);
-            let { redirectUrl } = this.$route.query || "/mine";
+            let user = data.data;
+
+            user.Authorization = headers.authorization;
+            this.$store.commit("login", user);
+            // localStorage.setItem("Authorization", Authorization);
+            let redirectUrl = this.$route.query.redirectUrl || "/mine";
             this.$router.replace(redirectUrl);
           }
         } else {
@@ -118,7 +118,7 @@ export default {
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 a {
   text-decoration: none;
 }
@@ -192,6 +192,9 @@ html {
         color: black;
       }
     }
+    .none_id{
+      color: #666;
+    }
     .login_login {
       background-color: #14b9c8b4;
       width: 315px;
@@ -200,6 +203,7 @@ html {
       line-height: 50px;
       margin: 20px 30px;
       border-radius: 5px;
+      color: white;
       .el-icon-arrow-right {
         background-color: #14b9c865;
         width: 50px;
@@ -227,6 +231,10 @@ html {
       margin-left: 30px;
       border-top: 1px solid rgb(110, 100, 100);
       width: 315px;
+      a{
+        text-decoration: none;
+        color: white;
+      }
       .QQ {
         background-color: #4099ff;
         width: 315px;
@@ -234,7 +242,6 @@ html {
         height: 50px;
         line-height: 50px;
         margin-top: 20px;
-
         border-radius: 5px;
         .qq {
           background-color: #0b70e281;
@@ -259,7 +266,6 @@ html {
         height: 50px;
         line-height: 50px;
         margin-top: 20px;
-
         border-radius: 5px;
         .lang {
           background-color: #941b0b77;

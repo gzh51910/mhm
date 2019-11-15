@@ -14,6 +14,7 @@ import Goods from '../pages/Goods.vue'
 import Card from '../pages/Card.vue'
 import centre from '../pages/centre'
 
+import Mine from '../pages/Mine.vue'
 
 let router = new VueRouter({
     routes: [{
@@ -21,16 +22,21 @@ let router = new VueRouter({
             path: '/home',
             component: Home
         },
-        /*  {
-             name: 'login',
-             path: '/login',
-             component: Login
-         },
-         {
-             name: 'reg',
-             path: '/reg',
-             component: Reg
-         }, */
+        {
+            name: 'mine',
+            path: '/mine',
+            component: Mine
+        },
+        {
+            name: 'login',
+            path: '/login',
+            component: Login
+        },
+        {
+            name: 'reg',
+            path: '/reg',
+            component: Reg
+        },
         {
             name: 'client',
             path: '/client',

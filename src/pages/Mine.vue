@@ -1,5 +1,5 @@
 <template>
-    <div>手游专区</div>
+    <div>我的</div>
 </template>
 <script>
 export default {

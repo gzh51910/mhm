@@ -348,7 +348,8 @@ export default {
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
+
 #list_div{
 #list_body {
   width: 100%;

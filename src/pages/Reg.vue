@@ -1,10 +1,5 @@
 <template>
   <div class="reg">
-    <div class="reg_head">
-      <i slot="prefix" class="el-icon-arrow-left"></i>
-      <span>账号注册</span>
-      <i slot="prefix" class="el-icon-s-home"></i>
-    </div>
     <el-form class="demo-input-suffix" ref="regForm" :model="regForm" :rules="rules">
       <el-form-item prop="username">
         <el-input placeholder="会员名称，只支持英文与数字" v-model="regForm.username">
@@ -46,13 +41,20 @@ export default {
   data() {
     var checkUsername = (rule, value, callback) => {
       if (!/^[\w-]+$/i.test(value)) {
-        window.console.log(1);
-
         callback(new Error("用户名必须为数字、字母、_、-"));
       } else {
         callback();
       }
     };
+
+    var password = (rule, value, callback) => {
+      if (/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/.test(value)) {
+        callback(new Error("密码长度8~16位，数字、字母、字符至少包含两种"));
+      } else {
+        callback();
+      }
+    };
+
     var checkEmail = (rule, value, callback) => {
       if (!/^[1-9]\d{7,10}@qq\.com$/.test(value)) {
         callback(new Error("请输入正确的邮箱格式"));
@@ -60,13 +62,15 @@ export default {
         callback();
       }
     };
+
     var checkRelusername = (rule, value, callback) => {
       if (!/^[\u4e00-\u9fa5]{2,4}$/.test(value)) {
-        callback(new Error("姓名不对，建议出国"));
+        callback(new Error("输入姓名有误，请重新输入"));
       } else {
         callback();
       }
     };
+
     return {
       regForm: {
         username: "",
@@ -84,19 +88,34 @@ export default {
           {
             min: 2,
             max: 60,
-            message: "长度在 2 到 60 个字符",
+            message: "用户名长度在 2 到 60 个字符",
             trigger: "blur"
           },
           { validator: checkUsername, trigger: "blur" }
         ],
         password: [
-          { required: true, message: "请输入密码", trigger: "blur" },
           {
-            min: 6,
-            max: 40,
-            message: "长度在 6 到 40 个字符",
+            required: true,
+            message: "请输入登陆密码",
             trigger: "blur"
-          }
+          },
+          { validator: password, trigger: "blur" }
+        ],
+        email: [
+          {
+            required: true,
+            message: "请输入邮箱",
+            trigger: "blur"
+          },
+          { validator: checkEmail, trigger: "blur" }
+        ],
+        relname: [
+          {
+            required: true,
+            message: "请输入正确姓名",
+            trigger: "blur"
+          },
+          { validator: checkRelusername, trigger: "blur" }
         ]
       }
     };
@@ -122,8 +141,10 @@ export default {
           });
 
           if (jc.length > 0) {
-            alert("已注册");
-            this.$router.push({ name: "login" });
+            this.$message({
+              message: "该用户已注册",
+              type: "warning"
+            });
           } else {
             let { data: reg } = await this.$axios.post(
               "http://10.3.136.52:1910/reg",
@@ -134,10 +155,9 @@ export default {
                 relname
               }
             );
-            // if (data.staus === 1) {
-            //   this.$router.replace("/login");
-            // }
-            window.console.log(reg);
+            if (reg.status === 1) {
+              this.$router.replace("/mine");
+            }
           }
         } else {
           console.log("error submit!!");
@@ -153,43 +173,12 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 body,
 html {
   background-color: #f2f2f2;
   .reg {
     overflow: hidden;
-    .reg_head {
-      background-color: #14b9c8;
-      color: #fff;
-      position: fixed;
-      z-index: 10;
-      right: 0;
-      left: 0;
-      height: 44px;
-      padding-right: 10px;
-      padding-left: 10px;
-      border-bottom: 0;
-      backface-visibility: hidden;
-      .el-icon-arrow-left {
-        width: 30px;
-        height: 40px;
-        margin-top: 15px;
-      }
-      el-icon-s-home {
-        width: 30px;
-        height: 40px;
-        margin-top: 15px;
-      }
-      span {
-        display: inline-block;
-        width: 300px;
-        text-align: center;
-        font-size: 17px;
-        font-weight: 500;
-        line-height: 44px;
-      }
-    }
     .demo-input-suffix {
       margin-top: 80px;
       .el-input {
