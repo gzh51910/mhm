@@ -70,7 +70,15 @@
 </template>
 
 <script>
-export default {};
+export default {
+  async created(){
+    let {id} = this.$axios.get(mainUrl + "/goods",{
+      parem:{
+
+      }
+    })
+  }
+};
 </script>
 <style lang="scss"  scoped>
 #goods_main {
