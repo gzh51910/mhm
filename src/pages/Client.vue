@@ -24,8 +24,8 @@
         </figcaption>
       </figure>
       <el-footer style="height:none;">
-        <el-button>《上一页</el-button>
-        <el-button>下一页》</el-button>
+        <el-button v-model="page" @click="page_return">《上一页</el-button>
+        <el-button v-model="page" @click="next">下一页》</el-button>
         <p>
           共
           <span id="client_num">{{ClientNum}}</span> 条 /
@@ -43,6 +43,7 @@ import { mainUrl } from "../config.json";
 export default {
   data() {
     return {
+      page: 1,
       input: "",
       Client: [],
       ClientNum: []
@@ -51,45 +52,47 @@ export default {
   methods: {
     goto() {
       this.$router.push({ name: "ELSWORD_list", params: {} });
+    },
+    next() {
+      if (this.page < Math.ceil(this.ClientNum / 20)) {
+        this.page++;
+        this.renderer();
+      }
+    },
+    page_return() {
+      if (this.page > 1) {
+        this.page--;
+        this.renderer();
+      }
+    },
+    async renderer() {
+      let {
+        data: { data: Client }
+      } = await this.$axios.get(mainUrl + "/goods", {
+        params: {
+          gather: "Client",
+          page: this.page,
+          size: 20
+        }
+      });
+      this.Client = Client.map(item => {
+        return item;
+      });
+
+      //页数
+      let {
+        data: { data: ClientNum }
+      } = await this.$axios.get(mainUrl + "/goods/num", {
+        params: {
+          count: "Client"
+        }
+      });
+      this.ClientNum = ClientNum;
     }
   },
 
-  async created() {
-    let {
-      data: { data: Client }
-    } = await this.$axios.get(mainUrl + "/goods", {
-      params: {
-        gather: "Client",
-        page: 1,
-        size: 20
-      }
-    });
-    this.Client = Client.map(item => {
-      return item;
-    });
-    // console.log(this.Client);
-
-    //页数
-    let {
-      data: { data: ClientNum }
-    } = await this.$axios.get(mainUrl + "/goods/num", {
-      params: {
-        count: "Client"
-      }
-    });
-    this.ClientNum = ClientNum;
-
-    //注册
-    // let {
-    //   data: { data: user }
-    // } = await this.$axios.get("http://localhost:1910/goods", {
-    //   params: {
-    //     gather: "user",
-    //     condition:"username",
-    //     condition_value:"中山王力宏"
-    //   }
-    // });
-    // console.log(user);
+  created() {
+    this.renderer();
   }
 };
 </script>
