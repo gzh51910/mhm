@@ -72,7 +72,7 @@
 <script>
 export default {};
 </script>
-<style lang="scss" scoped>
+<style lang="scss"  scoped>
 #goods_main {
   width: 100%;
   height: 100%;

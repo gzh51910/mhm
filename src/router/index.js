@@ -15,6 +15,7 @@ import Card from '../pages/Card.vue'
 import centre from '../pages/centre'
 
 import Mine from '../pages/Mine.vue'
+import Balance from '../pages/Balance.vue'
 
 let router = new VueRouter({
     routes: [{
@@ -66,6 +67,10 @@ let router = new VueRouter({
             name: 'centre',
             path: '/centre',
             component: centre
+        }, {
+            name: 'balance',
+            path: '/balance',
+            component: Balance
         },
         {
             path: '/',

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <header class="header">
+    <header class="app_header">
       <img src="./img/mhmlogo.png" alt />
       <h1>MHM游戏交易</h1>
       <a href class="iconfont icon-liebiao"></a>
@@ -27,31 +27,34 @@ export default {
 </script>
 
 <style lang="scss">
-body,html{
+html,
+body {
+  width: 100%;
   height: 100%;
 }
 #app {
   display: flex;
   overflow: hidden;
   height: 100%;
-  >.header {
+  flex-direction: column;
+
+  > .app_header {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 44px;
     background: #14b9c8;
-    position: fixed;
     z-index: 999;
-    top:0;
+    position:none;
     //   text-align: center;
-    >img {
+    > img {
       margin-top: 8px;
       width: 75px;
       height: 29px;
       float: left;
       margin-left: 10px;
     }
-    >h1 {
+    > h1 {
       margin: 0;
       padding: 0;
       height: 44px;
@@ -62,7 +65,7 @@ body,html{
       line-height: 44px;
       margin-left: 44px;
     }
-    >a {
+    > a {
       text-decoration: none;
       color: white;
       float: right;
@@ -73,12 +76,10 @@ body,html{
       }
     }
   }
-  >main{
-    flex: 1;
-    overflow: auto;
+  > main {
+    overflow: hidden;
     width: 100%;
-    margin-top: 44px;
+    height: 100%;
   }
-
 }
 </style>
