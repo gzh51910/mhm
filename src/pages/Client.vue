@@ -95,6 +95,7 @@ export default {
 </script>
 <style lang="scss">
 #client_body {
+  height: none;
   #client_main {
     display: flex;
     // height: 80px;

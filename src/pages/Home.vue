@@ -1,6 +1,5 @@
 <template>
-  <div class="box_body">
-    <section>
+    <section class="box_body">
       <div class="block">
         <el-carousel trigger="click" height="150px">
           <el-carousel-item v-for="item in slideshow" :key="item._id">
@@ -67,11 +66,9 @@
         </figure>
       </article>
     </section>
-  </div>
 </template>
 <script>
 import { mainUrl } from "../config.json";
-import { log } from 'util';
 export default {
   data() {
     return {
@@ -85,7 +82,6 @@ export default {
   methods: {
     goto(link){
       link?link:link="client";
-      window.console,log(link);
       this.$router.push({name:link,params:{}})
     }
   },

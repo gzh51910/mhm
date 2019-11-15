@@ -27,16 +27,20 @@ export default {
 </script>
 
 <style lang="scss">
+body,html{
+  height: 100%;
+}
 #app {
   display: flex;
   overflow: hidden;
+  height: 100%;
   >.header {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 44px;
     background: #14b9c8;
-    position: absolute;
+    position: fixed;
     z-index: 999;
     top:0;
     //   text-align: center;
@@ -73,8 +77,7 @@ export default {
     flex: 1;
     overflow: auto;
     width: 100%;
-    position: absolute;
-    height:100%;
+    margin-top: 44px;
   }
 
 }
