@@ -1,10 +1,6 @@
 <template>
   <div id="app">
-<<<<<<< HEAD
     <header class="header">
-=======
-<header class="header">
->>>>>>> dycc
       <img src="./img/mhmlogo.png" alt />
       <h1>MHM游戏交易</h1>
       <a href class="iconfont icon-liebiao"></a>
