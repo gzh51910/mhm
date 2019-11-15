@@ -37,6 +37,7 @@
         <span>已有账号，现在登录</span>
       </div>
     </div>
+    <div class="reg_footer">@maihaome.com</div>
   </div>
 </template>
 
@@ -96,20 +97,6 @@ export default {
             message: "长度在 6 到 40 个字符",
             trigger: "blur"
           }
-        ],
-        email: [
-          { required: true, message: "请输入邮箱地址", trigger: "blur" },
-          { validator: checkEmail, trigger: "blur" }
-        ],
-        relusername: [
-          { required: true, message: "请输入姓名", trigger: "blur" },
-          {
-            min: 2,
-            max: 4,
-            message: "请输入真实姓名",
-            trigger: "blur"
-          },
-          { validator: checkRelusername, trigger: "blur" }
         ]
       }
     };
@@ -122,16 +109,36 @@ export default {
         if (valid) {
           let { username, password, email, relname } = this.regForm;
           // 校验成功发起请求
-          let { data } = await this.$axios.post("http://10.3.136.52:1910/reg", {
-            username,
-            password,
-            email,
-            relname
+
+          //检测是否已注册
+          let {
+            data: { data: jc }
+          } = await this.$axios.get("http://10.3.136.52:1910/goods", {
+            params: {
+              gather: "user",
+              condition: "username",
+              condition_value: username
+            }
           });
-          // if (data.staus === 1) {
-          //   this.$router.replace("/login");
-          // }
-          window.console.log(data);
+
+          if (jc.length > 0) {
+            alert("已注册");
+            this.$router.push({ name: "login" });
+          } else {
+            let { data: reg } = await this.$axios.post(
+              "http://10.3.136.52:1910/reg",
+              {
+                username,
+                password,
+                email,
+                relname
+              }
+            );
+            // if (data.staus === 1) {
+            //   this.$router.replace("/login");
+            // }
+            window.console.log(reg);
+          }
         } else {
           console.log("error submit!!");
           return false;
@@ -140,7 +147,7 @@ export default {
     },
     // 有账号跳转登录页面按钮
     loginFrom() {
-      window.console.log("login");
+      this.$router.push({ name: "login" });
     }
   }
 };
@@ -150,130 +157,141 @@ export default {
 body,
 html {
   background-color: #f2f2f2;
-}
-.reg {
-  overflow: hidden;
-
-  .reg_head {
-    background-color: #14b9c8;
-    color: #fff;
-    position: fixed;
-    z-index: 10;
-    right: 0;
-    left: 0;
-    height: 44px;
-    padding-right: 10px;
-    padding-left: 10px;
-    border-bottom: 0;
-    backface-visibility: hidden;
-    .el-icon-arrow-left {
-      width: 30px;
-      height: 40px;
-      margin-top: 15px;
+  .reg {
+    overflow: hidden;
+    .reg_head {
+      background-color: #14b9c8;
+      color: #fff;
+      position: fixed;
+      z-index: 10;
+      right: 0;
+      left: 0;
+      height: 44px;
+      padding-right: 10px;
+      padding-left: 10px;
+      border-bottom: 0;
+      backface-visibility: hidden;
+      .el-icon-arrow-left {
+        width: 30px;
+        height: 40px;
+        margin-top: 15px;
+      }
+      el-icon-s-home {
+        width: 30px;
+        height: 40px;
+        margin-top: 15px;
+      }
+      span {
+        display: inline-block;
+        width: 300px;
+        text-align: center;
+        font-size: 17px;
+        font-weight: 500;
+        line-height: 44px;
+      }
     }
-    el-icon-s-home {
-      width: 30px;
-      height: 40px;
-      margin-top: 15px;
-    }
-    span {
-      display: inline-block;
-      width: 300px;
-      text-align: center;
-      font-size: 17px;
-      font-weight: 500;
-      line-height: 44px;
-    }
-  }
-  .demo-input-suffix {
-    margin-top: 80px;
-    .el-input {
-      background-color: #f2f2f2;
-      width: 315px;
-      display: inline-block;
-      height: 50px;
-      line-height: 50px;
-      margin: 10px 30px;
-      input {
+    .demo-input-suffix {
+      margin-top: 80px;
+      .el-input {
         background-color: #f2f2f2;
+        width: 315px;
+        display: inline-block;
         height: 50px;
-        border: 1px solid #a9a9a9;
+        line-height: 50px;
+        margin: 0px 30px;
+        input {
+          background-color: #f2f2f2;
+          height: 50px;
+          border: 1px solid #a9a9a9;
+        }
+        input::-webkit-input-placeholder {
+          color: rgba(0, 0, 0, 0.397);
+        }
+        input::-moz-input-placeholder {
+          color: rgba(0, 0, 0, 0.466);
+        }
+        input::-ms-input-placeholder {
+          color: rgba(0, 0, 0, 0.459);
+        }
+        .el-icon-s-custom {
+          color: black;
+        }
       }
-      input::-webkit-input-placeholder {
-        color: rgba(0, 0, 0, 0.397);
-      }
-      input::-moz-input-placeholder {
-        color: rgba(0, 0, 0, 0.466);
-      }
-      input::-ms-input-placeholder {
-        color: rgba(0, 0, 0, 0.459);
-      }
-      .el-icon-s-custom {
+      .el-icon-lock {
         color: black;
       }
+      .el-icon-view {
+        color: black;
+      }
+      .el-icon-message {
+        color: black;
+      }
+      .yezi {
+        color: black;
+        font-size: 22px;
+      }
     }
-    .el-icon-lock {
-      color: black;
+    .three {
+      margin-left: 30px;
+      width: 315px;
+      .QQ {
+        background-color: #14b9c8;
+        width: 315px;
+        display: inline-block;
+        height: 50px;
+        line-height: 50px;
+        margin-top: 5px;
+        border-radius: 5px;
+        .el-icon-arrow-right {
+          background-color: #158c97;
+          width: 50px;
+          height: 50px;
+          text-align: center;
+          float: left;
+          line-height: 50px;
+        }
+        span {
+          text-align: center;
+          width: 250px;
+          float: left;
+        }
+      }
+      .xinlang {
+        background-color: #2980b9;
+        width: 315px;
+        display: inline-block;
+        height: 50px;
+        line-height: 50px;
+        margin-top: 20px;
+
+        border-radius: 5px;
+        .el-icon-lock {
+          background-color: #115e92;
+          width: 50px;
+          height: 50px;
+          text-align: center;
+          float: left;
+          line-height: 50px;
+        }
+        span {
+          text-align: center;
+          width: 250px;
+          float: left;
+        }
+      }
     }
-    .el-icon-view {
-      color: black;
-    }
-    .el-icon-message {
-      color: black;
-    }
-    .yezi {
-      color: black;
-      font-size: 22px;
+    .reg_footer {
+      font-size: 13px;
+      text-align: center;
+      margin-top: 70px;
+      color: rgba(0, 0, 0, 0.308);
     }
   }
-  .three {
-    margin-left: 30px;
-    width: 315px;
-    .QQ {
-      background-color: #14b9c8;
-      width: 315px;
-      display: inline-block;
-      height: 50px;
-      line-height: 50px;
-      margin-top: 20px;
-      border-radius: 5px;
-      .el-icon-arrow-right {
-        background-color: #158c97;
-        width: 50px;
-        height: 50px;
-        text-align: center;
-        float: left;
-        line-height: 50px;
-      }
-      span {
-        text-align: center;
-        width: 250px;
-        float: left;
-      }
-    }
-    .xinlang {
-      background-color: #2980b9;
-      width: 315px;
-      display: inline-block;
-      height: 50px;
-      line-height: 50px;
-      margin-top: 20px;
-
-      border-radius: 5px;
-      .el-icon-lock {
-        background-color: #115e92;
-        width: 50px;
-        height: 50px;
-        text-align: center;
-        float: left;
-        line-height: 50px;
-      }
-      span {
-        text-align: center;
-        width: 250px;
-        float: left;
-      }
-    }
+  .reg_footer {
+    font-size: 13px;
+    text-align: center;
+    margin-top: 70px;
+    color: rgba(0, 0, 0, 0.308);
   }
 }
 </style>

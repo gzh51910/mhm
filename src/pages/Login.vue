@@ -5,14 +5,14 @@
       <span>账号登录</span>
       <i slot="prefix" class="el-icon-s-home"></i>
     </div>
-    <el-form class="demo-input-suffix" ref="loginFrom" :v-model="loginFrom" :rules="rules">
+    <el-form class="demo-input-suffix" ref="loginForm" v-model="loginForm" :rules="rules">
       <el-form-item prop="username">
-        <el-input placeholder="用户名/Email/已认证手机" v-model="loginFrom.username">
+        <el-input placeholder="用户名/Email/已认证手机" v-model="loginForm.username">
           <i slot="prefix" class="el-icon-s-custom"></i>
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input placeholder="请填写密码" v-model="loginFrom.password">
+        <el-input type="password" placeholder="请填写密码" v-model="loginForm.password">
           <i slot="prefix" class="el-icon-lock"></i>
         </el-input>
       </el-form-item>
@@ -22,25 +22,30 @@
         </el-input>
       </el-form-item>-->
     </el-form>
-    <div class="login_login" @click="submitFrom">
+    <div class="login_login" @click="submit">
       <i slot="prefx" class="el-icon-arrow-right"></i>
       <span>立即登录</span>
     </div>
     <p>
-      还没有买号么账号吗？
+      <a @click="ToReg">还没有买号么账号吗？</a>
       <span>忘记了密码？</span>
     </p>
 
     <div class="three">
       <div class="QQ">
         <i class="iconfont icon-icon qq"></i>
-        <span>用QQ登录账号登录</span>
+        <span>
+          <a href="https://www.maihaome.com/api/oauth/qq/connect.php">用QQ登录账号登录</a>
+        </span>
       </div>
       <div class="xinlang">
         <i class="iconfont icon-web_xinlangweibo lang"></i>
-        <span>用新浪微博账号登录</span>
+        <span>
+          <a href="https://www.maihaome.com/api/oauth/sina/connect.php">用新浪微博账号登录</a>
+        </span>
       </div>
     </div>
+    <div class="reg_footer">@maihaome.com</div>
   </div>
 </template>
 <script>
@@ -48,14 +53,15 @@ export default {
   data() {
     var checkUsername = (rule, value, callback) => {
       if (!/^[\w-]+$/i.test(value)) {
+        window.console.log(1);
         callback(new Error("用户名必须为数字、字母、_、-"));
       } else {
         callback();
       }
     };
     return {
-      loginFrom: {
-        userneme: "",
+      loginForm: {
+        username: "",
         password: ""
       },
       rules: {
@@ -72,34 +78,24 @@ export default {
             trigger: "blur"
           },
           { validator: checkUsername, trigger: "blur" }
-        ],
-        password: [
-          { required: true, message: "请输入密码", trigger: "blur" },
-          {
-            min: 6,
-            max: 40,
-            message: "长度在 6 到 40 个字符",
-            trigger: "blur"
-          }
         ]
       }
     };
   },
   methods: {
-    submitFrom() {
+    submit() {
       this.$refs.loginForm.validate(async valid => {
         if (valid) {
           // 校验成功发起ajax请求
           console.log("success");
-
           let { username, password } = this.loginForm;
+
           let { data } = await this.$axios.get("http://localhost:1910/login", {
             params: {
               username,
               password
             }
           });
-          console.log(data);
           if (data.status === 0) {
             // console.log('不行')
             this.errorMsg = "用户名或密码错误";
@@ -115,11 +111,17 @@ export default {
           return false;
         }
       });
+    },
+    ToReg() {
+      this.$router.push({ name: "reg" });
     }
   }
 };
 </script>
 <style lang="scss">
+a {
+  text-decoration: none;
+}
 body,
 html {
   background-color: #f2f2f2;
