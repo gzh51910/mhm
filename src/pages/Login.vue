@@ -51,14 +51,14 @@
 <script>
 export default {
   data() {
-    var checkUsername = (rule, value, callback) => {
-      if (!/^[\w-]+$/i.test(value)) {
-        window.console.log(1);
-        callback(new Error("用户名必须为数字、字母、_、-"));
-      } else {
-        callback();
-      }
-    };
+    // var checkUsername = (rule, value, callback) => {
+    //   if (!/^[\w-]+$/i.test(value)) {
+    //     window.console.log(1);
+    //     callback(new Error("用户名必须为数字、字母、_、-"));
+    //   } else {
+    //     callback();
+    //   }
+    // };
     return {
       loginForm: {
         username: "",

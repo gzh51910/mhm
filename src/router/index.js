@@ -5,13 +5,14 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
 import Home from '../pages/Home.vue'
-import Login from '../pages/Login.vue'
-import Reg from '../pages/Reg.vue'
+// import Login from '../pages/Login.vue'
+// import Reg from '../pages/Reg.vue'
 import Client from '../pages/Client.vue'
 import Phone from '../pages/Phone.vue'
 import ELSWORD_list from '../pages/ELSWORD_list.vue'
 import Goods from '../pages/Goods.vue'
 import Card from '../pages/Card.vue'
+import LgReg from '../pages/LgReg.vue'
 
 let router = new VueRouter({
     routes: [{
@@ -19,16 +20,16 @@ let router = new VueRouter({
             path: '/home',
             component: Home
         },
-        {
-            name: 'login',
-            path: '/login',
-            component: Login
-        },
-        {
-            name: 'reg',
-            path: '/reg',
-            component: Reg
-        },
+        // {
+        //     name: 'login',
+        //     path: '/login',
+        //     component: Login
+        // },
+        // {
+        //     name: 'reg',
+        //     path: '/reg',
+        //     component: Reg
+        // },
         {
             name: 'client',
             path: '/client',
@@ -53,6 +54,11 @@ let router = new VueRouter({
             name: 'card',
             path: '/card',
             component: Card
+        },
+        {
+            name: 'LgReg',
+            path: '/LgReg',
+            component: LgReg
         },
         {
             path: '/',
