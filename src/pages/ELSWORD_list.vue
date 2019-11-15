@@ -46,6 +46,7 @@
           </el-collapse>
           <!-- 列表 -->
           <el-row :gutter="20" style=" margin-top: 10px;display:flex" v-for="o in 2" :key="o">
+            <aside class="list_goods_goto" @click="goto(1)">
             <el-col :span="6" style="width: 100px;height: 100px;">
               <img
                 src="https://www.maihaome.com/file/upload/201910/08/20430977212759.jpg.thumb.jpg"
@@ -67,6 +68,7 @@
                 <b>48.00 / 件</b>
               </p>
             </el-col>
+            </aside>
           </el-row>
 
           <!-- 分页 -->
@@ -95,7 +97,7 @@
               </el-row>
             </div>
             <div v-for="o in 3" :key="o" class="text item">{{'成交数量 ' + o }}</div>
-            <div class="card_bottom">
+            <div class="card_bottom" @click="goto(1)">
               <i class="el-icon-s-promotion"></i>
               我也要购买这个商品
             </div>
@@ -138,7 +140,7 @@
                 <p class="oa-contact-email mui-h5">游戏标签：休闲 卡牌 冒险</p>
               </el-col>
             </el-row>
-            <div class="card-bottom">
+            <div class="card-bottom" @click="goto(1)">
               <p class="bottom-wz">查看游戏与折扣商品详情</p>
             </div>
           </el-card>
@@ -253,10 +255,10 @@ export default {
   },
 
   methods: {
-    // goto(id){
-    //     // this.$router.push({name:'goods',params:{id}})
-    //     this.$router.push({name:'goods',query:{id},params:{id}})
-    // }
+    goto(id){
+        // this.$router.push({name:'goods',params:{id}})
+        this.$router.push({name:'goods',query:{id},params:{id}})
+    }
   }
 };
 </script>
@@ -276,7 +278,9 @@ export default {
 
 
 }
-
+.list_goods_goto{
+  display: flex;
+}
 .header1 {
   margin: 0;
   padding: 0;
