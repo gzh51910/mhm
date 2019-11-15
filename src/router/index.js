@@ -16,14 +16,14 @@ import centre from '../pages/centre'
 
 import Mine from '../pages/Mine.vue'
 import Balance from '../pages/Balance.vue'
+import LgReg from '../pages/LgReg.vue'
 
 let router = new VueRouter({
     routes: [{
             name: 'home',
             path: '/home',
             component: Home
-        },
-        {
+        }, {
             name: 'mine',
             path: '/mine',
             component: Mine
@@ -71,6 +71,10 @@ let router = new VueRouter({
             name: 'balance',
             path: '/balance',
             component: Balance
+        }, {
+            name: 'LgReg',
+            path: '/LgReg',
+            component: LgReg
         },
         {
             path: '/',

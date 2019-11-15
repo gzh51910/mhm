@@ -192,7 +192,7 @@ html {
         color: black;
       }
     }
-    .none_id{
+    .none_id {
       color: #666;
     }
     .login_login {
@@ -231,7 +231,7 @@ html {
       margin-left: 30px;
       border-top: 1px solid rgb(110, 100, 100);
       width: 315px;
-      a{
+      a {
         text-decoration: none;
         color: white;
       }
