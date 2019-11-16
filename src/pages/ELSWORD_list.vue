@@ -27,7 +27,7 @@
               </el-col>
             </div>
 
-            <el-collapse v-model="activeName" accordion>
+            <el-collapse v-model="activeName" accordion id="ff">
               <el-collapse-item title=" 艾尔之光商品区服筛选" name="1" class="aaaa">
                 <div v-for="item in datalist" :key="item.id">
                   <el-col :span="12" style=" margin-top: 10px;width: 60%;">
@@ -49,19 +49,17 @@
             <!-- 列表 -->
             <el-row
               :gutter="20"
-              
-              style=" margin-top: 10px;display:flex;margin-top: 20px;"
+              style=" margin-top: 10px;display:flex;margin-top: 20px; width:100%;"
               v-for="item in ELSWORD_list"
               :key="item.id"
-             
+              @click.native="Img(item._id)"
             >
               <el-col :span="6" style="width: 100px;height: 100px;">
-                <img :src="item.src" alt style="width: 100px;height:100px;margin:0px" />
+                <img :src="item.src" alt style="width: 100px;height:100px;margin:2px" />
               </el-col>
               <el-col :span="6" class="wz">
                 <h3>{{item.title}}</h3>
                 <p class="pwz">
-                  <!-- 艾尔之光 / 华中华北区 / 盖亚 -->
                   {{item.region}}
                   <b>
                     <img :src="item.smSrc1" alt />
@@ -69,7 +67,6 @@
                   </b>
                 </p>
                 <p class="pwz1">
-                  <!-- 剩余库存 100 -->
                   {{item.inventory}}
                   <b>{{item.price}}</b>
                 </p>
@@ -86,7 +83,6 @@
                 <span>{{Yeshu_num}}</span>页
                 尾页
               </p>
-
             </el-button-group>
           </el-tab-pane>
 
@@ -96,11 +92,7 @@
               <div slot="header" class="clearfix">
                 <el-row :gutter="10">
                   <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1">
-                    <img
-                      :src="item.src"
-                      alt
-                      style=" width:30px;hegiht:30px"
-                    />
+                    <img :src="item.src" alt style=" width:30px;hegiht:30px" />
                   </el-col>
                   <el-col :xs="4" :sm="6" :md="8" :lg="9" :xl="11" id="list_wz">
                     <p class="jiayiwz">{{item.title}}</p>
@@ -108,9 +100,18 @@
                   </el-col>
                 </el-row>
               </div>
-              <div class="text item">成交单价: <span style="color:#f00">￥{{item.pirce}}</span> </div>
-              <div class="text item">成交数量：<span>{{item.count}}</span> </div>
-              <div class="text item">商品总价：<span>{{item.all_price}}</span> </div>
+              <div class="text item">
+                成交单价:
+                <span style="color:#f00">￥{{item.pirce}}</span>
+              </div>
+              <div class="text item">
+                成交数量：
+                <span>{{item.count}}</span>
+              </div>
+              <div class="text item">
+                商品总价：
+                <span>{{item.all_price}}</span>
+              </div>
               <div class="card_bottom">
                 <i class="el-icon-s-promotion"></i>
                 我也要购买这个商品
@@ -130,10 +131,7 @@
             <el-card class="box-card" v-for="item in ELSWORD_list_syzk" :key="item.id">
               <el-row :gutter="15">
                 <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1">
-                  <img
-                    :src="item.src"
-                    style="width: 80px;"
-                  />
+                  <img :src="item.src" style="width: 80px;" />
                 </el-col>
                 <el-col
                   :xs="4"
@@ -247,7 +245,7 @@
             </el-row>
             <!-- <footer class="shuoyuo_foot">@maihaome.com</footer> -->
           </el-tab-pane>
-           <footer class="shuoyuo_foot">@maihaome.com</footer>
+          <footer class="shuoyuo_foot">@maihaome.com</footer>
         </el-tabs>
       </section>
     </main>
@@ -277,39 +275,41 @@ export default {
         }
       ],
       ELSWORD_list: [],
-      Yeshu_num:[],
-      ELSWORD_list_jywc:[],
-      ELSWORD_list_syzk:[]
-      
-
+      Yeshu_num: [],
+      ELSWORD_list_jywc: [],
+      ELSWORD_list_syzk: []
     };
   },
-  computed:{
-    input(){
-      return  ""
+  computed: {
+    input() {
+      return "";
     },
-    activeName(){
-      return ""
+    activeName() {
+      return "";
     },
-    imtem(){
-      return ""
+    imtem() {
+      return "";
     }
   },
-  methods: {},
+  methods: {
+    Img(id) {
+      this.$router.push({ name: "goods",query:{id} });
+    }
+  },
   async created() {
     let {
       data: { data: ELSWORD_list }
     } = await this.$axios.get(mainUrl + "/goods", {
       params: {
-        gather: "ELSWORD_list",
+        gather: "ELSWORD_list"
       }
     });
     console.log(ELSWORD_list);
-    
+
     this.ELSWORD_list = ELSWORD_list.map(item => {
       return item;
     });
-     // 页数
+    // 页数
     let {
       data: { data: Yeshu_num }
     } = await this.$axios.get(mainUrl + "/goods/num", {
@@ -319,332 +319,333 @@ export default {
     });
     this.Yeshu_num = Yeshu_num;
     // 交易完成
-     let {
-      data:{data:ELSWORD_list_jywc}
-    }=await this.$axios.get(mainUrl + "/goods",{
-        params:{
-          gather:"ELSWORD_list_jywc",
-        }    
+    let {
+      data: { data: ELSWORD_list_jywc }
+    } = await this.$axios.get(mainUrl + "/goods", {
+      params: {
+        gather: "ELSWORD_list_jywc"
+      }
     });
-     console.log(ELSWORD_list_jywc);
-    
-    this.ELSWORD_list_jywc = ELSWORD_list_jywc.map(item =>{
+    console.log(ELSWORD_list_jywc);
+
+    this.ELSWORD_list_jywc = ELSWORD_list_jywc.map(item => {
       return item;
-      
     });
     // 手游折扣
     let {
-      data:{data:ELSWORD_list_syzk}
-    }=await this.$axios.get(mainUrl+"/goods",{
-      params:{
-        gather:"ELSWORD_list_syzk"
+      data: { data: ELSWORD_list_syzk }
+    } = await this.$axios.get(mainUrl + "/goods", {
+      params: {
+        gather: "ELSWORD_list_syzk"
       }
     });
 
-    this.ELSWORD_list_syzk=ELSWORD_list_syzk.map(item=>{
+    this.ELSWORD_list_syzk = ELSWORD_list_syzk.map(item => {
       return item;
-    })
-   
+    });
   }
 };
 </script>
-<style lang="scss">
-#list_div{
-#list_body {
-  width: 100%;
-  height: 92%;
-  overflow: auto;
-  position: fixed;
-  top: 44px;
-  section {
-    position: none;
-    
+<style lang="scss" scoped>
+#list_div {
+  #list_body {
+    width: 100%;
+    height: 92%;
+    overflow: auto;
+    position: fixed;
+    top: 44px;
+    section {
+      position: none;
+    }
+    .el-collapse-item__header {
+      background-color: #f00;
+    }
   }
-}
 
-.header1 {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 44px;
-  background: #14b9c8;
-  z-index: 10;
-  //   text-align: center;
-  img {
-    margin-top: 8px;
-    width: 75px;
-    height: 29px;
-    float: left;
-  }
-  h1 {
+  .header1 {
     margin: 0;
     padding: 0;
-    height: 44px;
-    box-sizing: border-box;
-    float: left;
-    font-size: 18px;
-    color: white;
-    line-height: 44px;
-    margin-left: 44px;
-    text-align: center;
-    position: absolute;
-    top: 0;
-    left: 22%;
-    font-weight: 500;
-  }
-  .icon-liebiao {
-    text-decoration: none;
-    color: white;
-    float: right;
-    font-size: 32px;
-    line-height: 44px;
-  }
-  .el-icon-arrow-left {
-    text-decoration: none;
-    color: white;
-    float: letf;
-    font-size: 32px;
-    line-height: 44px;
-  }
-}
-.el-tabs--border-card {
-  box-shadow: none;
-
-  .el-collapse-item__header {
     width: 100%;
-    background: #14b9c8;
-  }
-  .el-collapse {
-    border-top: none;
-    border-bottom: none;
-  }
-  .wz {
-    // word-wrap: break-word;
-    height: 100px;
-    // overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    width: 90%;
-    margin-left: 10px;
-    margin-top: 10px;
-
-    h3 {
-      font-size: 14px;
-      margin: 0px;
-    }
-    p {
-      border-bottom: 1px solid #ccc;
-      margin: 0;
-      // height: 28px;
-      // line-height: 28px;
-    }
-    .pwz {
-      font-size: 12px;
-      color: #8f8f94;
-      line-height: 24px;
-
-      b {
-        float: right;
-      }
-    }
-    .pwz1 {
-      background-color: #fafafa;
-      font-size: 12px;
-      color: #8f8f94;
-      b {
-        float: right;
-        color: #f00;
-        font-weight: 700;
-      }
-    }
-  }
-  .fen {
-    position: relative;
-    left: 25%;
-    margin-top: 10%;
-    .fen_btn{
-      padding: 12px 20px;
-      border-radius: 7px;
-      margin-right: 20px;
-      margin-bottom: 10px;
-      
-    }
-  }
-}
-#list_main {
-  position: relative;
-  top: 0;
-}
-#list_main .el-tabs--border-card {
-  box-shadow: none;
-  -webkit-box-shadow: none;
-  border: none;
-}
-#list_main .el-tabs--border-card > .el-tabs__content {
-  padding: 10px;
-  padding-top: 45px;
-}
-
-// 交易
-.box-card {
-  border: none;
-  width: 100%;
-  margin-top: 10px;
-
-  .clearfix {
-    // @media only screen and (max-width: 767px)
-
-    .el-col-xs-8 {
-      width: 12.33333%;
-    }
-    .el-col-xs-4 {
-    width: 74.66667%;
-}
-    p {
-      margin: 0;
-    }
-    .jiayiwz{
-      font-weight: 700;
-      font-size: 14px;
-    }
-    .jiayi_wz{
-      font-size: 12px;
-     padding-top: 4px;
-    }
-    img {
-      width: 34px;
-      height: 34px;
-    }
-  }
-  .card_bottom {
-    text-align: center;
-    background-color: #f9f9f9;
     height: 44px;
-    line-height: 44px;
-    border-top: 1px solid #ccc;
+    background: #14b9c8;
+    z-index: 10;
+    //   text-align: center;
+    img {
+      margin-top: 8px;
+      width: 75px;
+      height: 29px;
+      float: left;
+    }
+    h1 {
+      margin: 0;
+      padding: 0;
+      height: 44px;
+      box-sizing: border-box;
+      float: left;
+      font-size: 18px;
+      color: white;
+      line-height: 44px;
+      margin-left: 44px;
+      text-align: center;
+      position: absolute;
+      top: 0;
+      left: 22%;
+      font-weight: 500;
+    }
+    .icon-liebiao {
+      text-decoration: none;
+      color: white;
+      float: right;
+      font-size: 32px;
+      line-height: 44px;
+    }
+    .el-icon-arrow-left {
+      text-decoration: none;
+      color: white;
+      float: letf;
+      font-size: 32px;
+      line-height: 44px;
+    }
   }
-  .text {
-    padding: 5px 20px;
-    color: #8f8f94;
-    font-size: 14px;
-
-  }
-  .el-card__body {
-    padding: 0;
-  }
-}
-//
-.el-tabs__nav-scroll {
-  overflow: hidden;
-  position: fixed;
-  top: 44px;
-  z-index: 100;
-  background: rgb(245, 247, 250);
-  width: 100%;
-}
-
-// 手游折扣
-.shouyou {
-  .bton {
-    margin-top: 20px;
-  }
-  .el-card.is-always-shadow {
-    margin-top: 10px;
-    box-sizing: border-box;
-  }
-  .el-card {
-    padding: 11px 0 0 11px;
-  }
-  .box-card {
-    .el-col-xs-8 {
-      width: 24%;
+  .el-tabs--border-card {
+    box-shadow: none;
+    .el-collapse {
+      float: left;
+      width: 100%;
+      /* background: #f00; */
+      .ff .el-collapse-item__header {
+        width: 100%;
+        background: #14b9c8;
+      }
     }
 
-    .el-col-xs-4 {
-      width: 60%;
-      font-size: 14px;
+    .el-collapse {
+      border-top: none;
+      border-bottom: none;
+    }
+    .wz {
+      // word-wrap: break-word;
+      height: 100px;
+      // overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+      width: 90%;
+      margin-left: 10px;
+      margin-top: 10px;
 
-      h4 {
-        margin: 0;
-        font-size: 16px;
+      h3 {
+        font-size: 14px;
+        margin: 0px;
       }
       p {
-        margin: 5px;
+        border-bottom: 1px solid #ccc;
+        margin: 0;
+        // height: 28px;
+        // line-height: 28px;
+      }
+      .pwz {
         font-size: 12px;
-        span{
-          clear: #f00;
+        color: #8f8f94;
+        line-height: 24px;
+
+        b {
+          float: right;
         }
-        i{
-          font-style: normal
+      }
+      .pwz1 {
+        background-color: #fafafa;
+        font-size: 12px;
+        color: #8f8f94;
+        b {
+          float: right;
+          color: #f00;
+          font-weight: 700;
         }
       }
     }
-  }
-  .card-bottom {
-    width: 90%;
-
-    border-top: 1px dashed #ccc;
-    margin-top: 10px;
-  }
-  .bottom-wz {
-    margin-left: 15px;
-    width: 85%;
-    motion: 0 auto;
-    border: 1px solid #ccc;
-    text-align: center;
-    height: 33px;
-    line-height: 33px;
-  }
-
-  .shouyou-bottom {
-    width: 80%;
-    background-color: #14b9c8;
-    border: 1px solid #14b9c8;
-    // margin-top: 20px;
-    margin: 10%;
-    // padding: 20px;
-    text-align: center;
-    border-radius: 8px;
-  }
-  
-}
-#sub_nav {
-  .el-col {
-    width: 25%;
-    padding: 6px 12px;
-    // font-size: 14px;
-    .grid-content {
-      color: #fff;
-      background: #4cd964;
-      padding: 6px 12px;
-      text-align: center;
+    .fen {
+      position: relative;
+      left: 25%;
+      margin-top: 10%;
+      .fen_btn {
+        padding: 12px 20px;
+        border-radius: 7px;
+        margin-right: 20px;
+        margin-bottom: 10px;
+      }
     }
   }
-}
-.shuoyuo_foot {
+  #list_main {
+    position: relative;
+    top: 0;
+  }
+  #list_main .el-tabs--border-card {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    border: none;
+  }
+  #list_main .el-tabs--border-card > .el-tabs__content {
+    padding: 10px;
+    padding-top: 45px;
+  }
+
+  // 交易
+  .box-card {
+    border: none;
+    width: 100%;
+    margin-top: 10px;
+
+    .clearfix {
+      // @media only screen and (max-width: 767px)
+
+      .el-col-xs-8 {
+        width: 12.33333%;
+      }
+      .el-col-xs-4 {
+        width: 74.66667%;
+      }
+      p {
+        margin: 0;
+      }
+      .jiayiwz {
+        font-weight: 700;
+        font-size: 14px;
+      }
+      .jiayi_wz {
+        font-size: 12px;
+        padding-top: 4px;
+      }
+      img {
+        width: 34px;
+        height: 34px;
+      }
+    }
+    .card_bottom {
+      text-align: center;
+      background-color: #f9f9f9;
+      height: 44px;
+      line-height: 44px;
+      border-top: 1px solid #ccc;
+    }
+    .text {
+      padding: 5px 20px;
+      color: #8f8f94;
+      font-size: 14px;
+    }
+    .el-card__body {
+      padding: 0;
+    }
+  }
+  //
+  .el-tabs__nav-scroll {
+    overflow: hidden;
+    position: fixed;
+    top: 44px;
+    z-index: 100;
+    background: rgb(245, 247, 250);
+    width: 100%;
+  }
+
+  // 手游折扣
+  .shouyou {
+    .bton {
+      margin-top: 20px;
+    }
+    .el-card.is-always-shadow {
+      margin-top: 10px;
+      box-sizing: border-box;
+    }
+    .el-card {
+      padding: 11px 0 0 11px;
+    }
+    .box-card {
+      .el-col-xs-8 {
+        width: 24%;
+      }
+
+      .el-col-xs-4 {
+        width: 60%;
+        font-size: 14px;
+
+        h4 {
+          margin: 0;
+          font-size: 16px;
+        }
+        p {
+          margin: 5px;
+          font-size: 12px;
+          span {
+            clear: #f00;
+          }
+          i {
+            font-style: normal;
+          }
+        }
+      }
+    }
+    .card-bottom {
+      width: 90%;
+
+      border-top: 1px dashed #ccc;
+      margin-top: 10px;
+    }
+    .bottom-wz {
+      margin-left: 15px;
+      width: 85%;
+      motion: 0 auto;
+      border: 1px solid #ccc;
+      text-align: center;
+      height: 33px;
+      line-height: 33px;
+    }
+
+    .shouyou-bottom {
+      width: 80%;
+      background-color: #14b9c8;
+      border: 1px solid #14b9c8;
+      // margin-top: 20px;
+      margin: 10%;
+      // padding: 20px;
+      text-align: center;
+      border-radius: 8px;
+    }
+  }
+  #sub_nav {
+    .el-col {
+      width: 25%;
+      padding: 6px 12px;
+      font-size: 14px;
+      .grid-content {
+        color: #fff;
+        background: #4cd964;
+        padding: 6px 10px;
+        text-align: center;
+      }
+    }
+  }
+  .shuoyuo_foot {
     padding: 45px 0;
     text-align: center;
   }
-// .el-row{
-//   padding-top: 10px;
-//   padding-bottom: 10px;
-//   .pwz1{
-//     margin-bottom: 10px;
-//   }
-// }
-// 搜索
-.inp-box {
-  .inp {
-    width: 70%;
-  }
-  .btn {
-    margin-left: 10px;
-  }
-  // .el-dropdown-link{
-  //    border:1px solid #c8c7cc!important;
-  //    background-color: #fafafa
+  // .el-row{
+  //   padding-top: 10px;
+  //   padding-bottom: 10px;
+  //   .pwz1{
+  //     margin-bottom: 10px;
+  //   }
   // }
+  // 搜索
+  .inp-box {
+    .inp {
+      width: 70%;
+    }
+    .btn {
+      margin-left: 10px;
+    }
+    // .el-dropdown-link{
+    //    border:1px solid #c8c7cc!important;
+    //    background-color: #fafafa
+    // }
+  }
 }
-}
-
 </style>
