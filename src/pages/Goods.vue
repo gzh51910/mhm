@@ -1,8 +1,8 @@
 <template>
   <main id="goods_main">
-    <section id="goods_body">
+    <section id="goods_body" v-for="item in goods" :key="item._id">
       <article class="goods_title">
-        <strong>挫冰机（机械上将） 娜薇冰雕像钥匙（机械上将） 机械上将冰机 机械冰机 欧皇冰机 1个 一个（会员店铺快速发货）</strong>
+        <strong>{{item.title}}</strong>
       </article>
       <article class="goods_info">
         人气：
@@ -11,17 +11,17 @@
         <span>2</span>
       </article>
       <article class="goods_img">
-        <img src alt />
+        <img :src="item.src" alt />
       </article>
       <article class="goods_message">
         <p>
           商品价格：
           <strong>￥</strong>
-          <strong>2.33</strong>
+          <strong>{{item.price}}</strong>
         </p>
         <p>
           剩余库存：
-          <span>500</span>
+          <span>{{item.inventory}}</span>
         </p>
         <p>
           商品货号：
@@ -30,14 +30,11 @@
         <p class="goods_sort">
           所在分类：
           <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{ path: '/' }">游戏</el-breadcrumb-item>
-            <el-breadcrumb-item>地区</el-breadcrumb-item>
-            <el-breadcrumb-item>服务器</el-breadcrumb-item>
+            <el-breadcrumb-item >{{item.region}}</el-breadcrumb-item>
           </el-breadcrumb>
         </p>
       </article>
       <article class="goods_user">
-
         <p>
           出售者ID：
           <span>40404</span>
@@ -65,14 +62,36 @@
       <el-button type="danger">立即购买这个商品</el-button>
     </footer>
   </main>
-
-  
 </template>
 
 <script>
+import { mainUrl } from "../config.json";
 export default {
-  async created(){
-    window.console.log(this.$router.query);
+  data() {
+    return {
+      goods: {}
+    };
+  },
+  methods: {
+    async renderer() {
+      let { _id } = this.$route.query;
+      // window.console.log(_id);
+      let {
+        data: { data: goods }
+      } = await this.$axios.get(mainUrl + `/goods`, {
+        params: {
+          gather: "ELSWORD_list",
+          condition: "_id",
+          condition_value: _id
+        }
+      });
+      this.goods = goods.map(item => {
+        return item;
+      });
+    }
+  },
+  created() {
+    this.renderer();
   }
 };
 </script>
@@ -88,36 +107,39 @@ export default {
     overflow: auto;
     position: relative;
     margin-bottom: 12%;
-    article{
-        padding: 5px;
-        border-bottom: 1px dashed rgb(224, 224,224);
-        font-size: 14px;
+    article {
+      padding: 5px;
+      border-bottom: 1px dashed rgb(224, 224, 224);
+      font-size: 14px;
     }
-    .goods_info{
-        font-size: 12px;
+    .goods_info {
+      font-size: 12px;
     }
-    .goods_message{
-        p:nth-of-type(1){
-            strong{
-                color: red;
-            }
+    .goods_message {
+      p:nth-of-type(1) {
+        strong {
+          color: red;
         }
+      }
     }
-    .goods_user{
-        color: #8f8f94;
+    .goods_user {
+      color: #8f8f94;
     }
-    .goods_img{
+    .goods_img {
+      width: 100%;
+      height: 50%;
+      padding: 0;
+      img{
         width: 100%;
-        height: 50%;
-        background: red;
-        padding: 0;
+        height: 100%;
+      }
     }
-    p{
-        width: 100%;
+    p {
+      width: 100%;
     }
-    .goods_sort{
-        display: flex;
-        align-items: center;
+    .goods_sort {
+      display: flex;
+      align-items: center;
     }
     .el-tabs__nav {
       display: flex;
