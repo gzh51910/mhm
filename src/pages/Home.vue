@@ -12,7 +12,7 @@
       <nav id="nav_home">
         <el-row :gutter="20" class="el-row-one">
           <el-col :span="6" v-for="item in fn_nav" :key="item.title" style="padding:0 5px" >
-            <div class="grid-content bg-purple" @click="goto()">
+            <div class="grid-content bg-purple" @click="goto(item.theme)">
               <img :src="item.src" alt />
               <p class="fn_title">{{item.title}}</p>
             </div>
@@ -27,7 +27,7 @@
         </h5>
         <el-row :gutter="20">
           <el-col :span="6" v-for="item in Game_nav" :key="item.title" style="padding:0 5px">
-            <div class="grid-content bg-purple" @click="goto()">
+            <div class="grid-content bg-purple" @click="goto(item.theme)">
               <img :src="item.src" alt />
               <p class="Game_title">{{item.title}}</p>
             </div>
@@ -81,8 +81,7 @@ export default {
   },
   methods: {
     goto(link){
-      link?link:link="client";
-      this.$router.push({name:link,params:{}})
+      this.$router.push(`/${link}?value=${link}`)
     }
   },
   async created() {
