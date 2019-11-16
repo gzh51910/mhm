@@ -1,8 +1,8 @@
 <template>
   <main id="goods_main">
-    <section id="goods_body">
+    <section id="goods_body" v-for="item in goods" :key="item._id">
       <article class="goods_title">
-        <strong>挫冰机（机械上将） 娜薇冰雕像钥匙（机械上将） 机械上将冰机 机械冰机 欧皇冰机 1个 一个（会员店铺快速发货）</strong>
+        <strong>{{item.title}}</strong>
       </article>
       <article class="goods_info">
         人气：
@@ -11,17 +11,17 @@
         <span>2</span>
       </article>
       <article class="goods_img">
-        <img src alt />
+        <img :src="item.src" alt />
       </article>
       <article class="goods_message">
         <p>
           商品价格：
           <strong>￥</strong>
-          <strong>2.33</strong>
+          <strong>{{item.price}}</strong>
         </p>
         <p>
           剩余库存：
-          <span>500</span>
+          <span>{{item.inventory}}</span>
         </p>
         <p>
           商品货号：
@@ -30,9 +30,7 @@
         <p class="goods_sort">
           所在分类：
           <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{ path: '/' }">游戏</el-breadcrumb-item>
-            <el-breadcrumb-item>地区</el-breadcrumb-item>
-            <el-breadcrumb-item>服务器</el-breadcrumb-item>
+            <el-breadcrumb-item >{{item.region}}</el-breadcrumb-item>
           </el-breadcrumb>
         </p>
       </article>
@@ -67,13 +65,34 @@
 </template>
 
 <script>
-// import { mainUrl } from "../config.json";
+import { mainUrl } from "../config.json";
 export default {
-  // async created() {
-  //   let { id } = this.$axios.get(mainUrl + "/goods", {
-  //     parem: {}
-  //   });
-  // }
+  data() {
+    return {
+      goods: {}
+    };
+  },
+  methods: {
+    async renderer() {
+      let { _id } = this.$route.query;
+      // window.console.log(_id);
+      let {
+        data: { data: goods }
+      } = await this.$axios.get(mainUrl + `/goods`, {
+        params: {
+          gather: "ELSWORD_list",
+          condition: "_id",
+          condition_value: _id
+        }
+      });
+      this.goods = goods.map(item => {
+        return item;
+      });
+    }
+  },
+  created() {
+    this.renderer();
+  }
 };
 </script>
 <style lang="scss"  scoped>
@@ -109,8 +128,11 @@ export default {
     .goods_img {
       width: 100%;
       height: 50%;
-      background: red;
       padding: 0;
+      img{
+        width: 100%;
+        height: 100%;
+      }
     }
     p {
       width: 100%;

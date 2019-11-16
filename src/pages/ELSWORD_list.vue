@@ -292,8 +292,8 @@ export default {
     }
   },
   methods: {
-    Img(id) {
-      this.$router.push({ name: "goods",query:{id} });
+    Img(_id) {
+      this.$router.push({ name: "goods",query:{_id} });
     }
   },
   async created() {
