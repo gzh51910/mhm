@@ -1,5 +1,5 @@
 <template>
-  <div class="reg">
+  <div class="reg_page">
     <el-form class="demo-input-suffix" ref="regForm" :model="regForm" :rules="rules">
       <el-form-item prop="username">
         <el-input placeholder="会员名称，只支持英文与数字" v-model="regForm.username">
@@ -173,113 +173,104 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-body,
-html {
-  background-color: #f2f2f2;
-  .reg {
-    overflow: hidden;
-    .demo-input-suffix {
-      margin-top: 80px;
-      .el-input {
+<style lang="scss">
+.reg_page {
+  overflow: hidden;
+  .demo-input-suffix {
+    margin-top: 30px;
+    .el-input {
+      width: 320px;
+      display: inline-block;
+      line-height: 50px;
+      margin: 0px 45px;
+      background-color: #f2f2f2;
+      input {
         background-color: #f2f2f2;
-        width: 315px;
-        display: inline-block;
         height: 50px;
-        line-height: 50px;
-        margin: 0px 30px;
-        input {
-          background-color: #f2f2f2;
-          height: 50px;
-          border: 1px solid #a9a9a9;
-        }
-        input::-webkit-input-placeholder {
-          color: rgba(0, 0, 0, 0.397);
-        }
-        input::-moz-input-placeholder {
-          color: rgba(0, 0, 0, 0.466);
-        }
-        input::-ms-input-placeholder {
-          color: rgba(0, 0, 0, 0.459);
-        }
-        .el-icon-s-custom {
-          color: black;
-        }
+        border: 1px solid #a9a9a9;
       }
-      .el-icon-lock {
-        color: black;
+      input::-webkit-input-placeholder {
+        color: rgba(0, 0, 0, 0.397);
       }
-      .el-icon-view {
-        color: black;
+      input::-moz-input-placeholder {
+        color: rgba(0, 0, 0, 0.466);
       }
-      .el-icon-message {
-        color: black;
+      input::-ms-input-placeholder {
+        color: rgba(0, 0, 0, 0.459);
       }
-      .yezi {
+      .el-icon-s-custom {
         color: black;
-        font-size: 22px;
       }
     }
-    .three {
-      margin-left: 30px;
+    .el-icon-lock {
+      color: black;
+    }
+    .el-icon-view {
+      color: black;
+    }
+    .el-icon-message {
+      color: black;
+    }
+    .yezi {
+      color: black;
+      font-size: 22px;
+    }
+  }
+  .three {
+    margin-left: 45px;
+    width: 320px;
+    margin-top: 40px;
+    .QQ {
+      background-color: #14b9c8;
       width: 315px;
-      .QQ {
-        background-color: #14b9c8;
-        width: 315px;
-        display: inline-block;
+      display: inline-block;
+      height: 50px;
+      line-height: 50px;
+      margin-top: 5px;
+      border-radius: 5px;
+      .el-icon-arrow-right {
+        background-color: #158c97;
+        width: 50px;
         height: 50px;
+        text-align: center;
+        float: left;
         line-height: 50px;
-        margin-top: 5px;
-        border-radius: 5px;
-        .el-icon-arrow-right {
-          background-color: #158c97;
-          width: 50px;
-          height: 50px;
-          text-align: center;
-          float: left;
-          line-height: 50px;
-        }
-        span {
-          text-align: center;
-          width: 250px;
-          float: left;
-        }
       }
-      .xinlang {
-        background-color: #2980b9;
-        width: 315px;
-        display: inline-block;
-        height: 50px;
-        line-height: 50px;
-        margin-top: 20px;
-
-        border-radius: 5px;
-        .el-icon-lock {
-          background-color: #115e92;
-          width: 50px;
-          height: 50px;
-          text-align: center;
-          float: left;
-          line-height: 50px;
-        }
-        span {
-          text-align: center;
-          width: 250px;
-          float: left;
-        }
+      span {
+        text-align: center;
+        width: 250px;
+        float: left;
       }
     }
-    .reg_footer {
-      font-size: 13px;
-      text-align: center;
-      margin-top: 70px;
-      color: rgba(0, 0, 0, 0.308);
+    .xinlang {
+      background-color: #2980b9;
+      width: 315px;
+      display: inline-block;
+      height: 50px;
+      line-height: 50px;
+      margin-top: 20px;
+
+      border-radius: 5px;
+      .el-icon-lock {
+        background-color: #115e92;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        float: left;
+        line-height: 50px;
+      }
+      span {
+        text-align: center;
+        width: 250px;
+        float: left;
+      }
     }
   }
   .reg_footer {
     font-size: 13px;
     text-align: center;
-    margin-top: 70px;
+    margin-top: 80px;
+    font-weight: 900;
     color: rgba(0, 0, 0, 0.308);
   }
 }

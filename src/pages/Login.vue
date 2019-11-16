@@ -119,99 +119,107 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 a {
   text-decoration: none;
 }
-body,
-html {
-  background-color: #f2f2f2;
-  .login {
-    overflow: hidden;
-    .login_head {
-      background-color: #14b9c8;
-      color: #fff;
-      position: fixed;
-      z-index: 10;
-      right: 0;
-      left: 0;
-      height: 44px;
-      padding-right: 10px;
-      padding-left: 10px;
-      border-bottom: 0;
-      backface-visibility: hidden;
-      .el-icon-arrow-left {
-        width: 30px;
-        height: 40px;
-        margin-top: 15px;
-      }
-      el-icon-s-home {
-        width: 30px;
-        height: 40px;
-        margin-top: 15px;
-      }
-      span {
-        display: inline-block;
-        width: 300px;
-        text-align: center;
-        font-size: 17px;
-        font-weight: 500;
-        line-height: 44px;
-      }
+.login {
+  overflow: hidden;
+
+  .demo-input-suffix {
+    margin-top: 40px;
+    input {
+      background-color: #f2f2f2;
+      border: 1px solid #a9a9a9;
+      height: 50px;
     }
-    .demo-input-suffix {
-      margin-top: 80px;
-      input {
-        background-color: #f2f2f2;
-        border: 1px solid #a9a9a9;
-        height: 50px;
-      }
-      .el-input {
-        background-color: #f2f2f2;
-        width: 315px;
-        display: inline-block;
-        height: 50px;
-        line-height: 50px;
-        margin: 0px 30px;
-        input::-webkit-input-placeholder {
-          color: rgba(0, 0, 0, 0.397);
-        }
-        input::-moz-input-placeholder {
-          color: rgba(0, 0, 0, 0.466);
-        }
-        input::-ms-input-placeholder {
-          color: rgba(0, 0, 0, 0.459);
-        }
-        .el-icon-s-custom {
-          color: black;
-        }
-      }
-      .el-icon-lock {
-        color: black;
-      }
-      .el-icon-view {
-        color: black;
-      }
-    }
-    .none_id {
-      color: #666;
-    }
-    .login_login {
-      background-color: #14b9c8b4;
-      width: 315px;
+    .el-input {
+      background-color: #f2f2f2;
+      width: 320px;
       display: inline-block;
       height: 50px;
       line-height: 50px;
-      margin: 20px 30px;
-      border-radius: 5px;
+      margin: 0px 45px;
+      input::-webkit-input-placeholder {
+        color: rgba(0, 0, 0, 0.397);
+      }
+      input::-moz-input-placeholder {
+        color: rgba(0, 0, 0, 0.466);
+      }
+      input::-ms-input-placeholder {
+        color: rgba(0, 0, 0, 0.459);
+      }
+      .el-icon-s-custom {
+        color: black;
+      }
+    }
+    .el-icon-lock {
+      color: black;
+    }
+    .el-icon-view {
+      color: black;
+    }
+  }
+  .none_id {
+    color: #666;
+  }
+  .login_login {
+    background-color: #14b9c8b4;
+    width: 320px;
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    margin: 20px 45px;
+    border-radius: 5px;
+    color: white;
+    .el-icon-arrow-right {
+      background-color: #14b9c865;
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      float: left;
+      line-height: 50px;
+    }
+    span {
+      text-align: center;
+      width: 250px;
+      float: left;
+    }
+  }
+  p {
+    margin-left: 45px;
+    font-size: 13px;
+    font-weight: 400;
+    span {
+      float: right;
+      margin-right: 30px;
+    }
+  }
+  .three {
+    margin-left: 45px;
+    border-top: 1px solid rgb(110, 100, 100);
+    width: 320px;
+    a {
+      text-decoration: none;
       color: white;
-      .el-icon-arrow-right {
-        background-color: #14b9c865;
+    }
+    .QQ {
+      background-color: #4099ff;
+      width: 320px;
+      display: inline-block;
+      height: 50px;
+      line-height: 50px;
+      margin-top: 20px;
+      border-radius: 5px;
+      .qq {
+        background-color: #0b70e281;
         width: 50px;
         height: 50px;
         text-align: center;
         float: left;
         line-height: 50px;
+        color: white;
+        font-size: 20px;
       }
       span {
         text-align: center;
@@ -219,78 +227,36 @@ html {
         float: left;
       }
     }
-    p {
-      margin-left: 30px;
-      font-size: 13px;
-      font-weight: 400;
-      span {
-        float: right;
-        margin-right: 30px;
-      }
-    }
-    .three {
-      margin-left: 30px;
-      border-top: 1px solid rgb(110, 100, 100);
+    .xinlang {
+      background-color: #cc230d;
       width: 315px;
-      a {
-        text-decoration: none;
+      display: inline-block;
+      height: 50px;
+      line-height: 50px;
+      margin-top: 20px;
+      border-radius: 5px;
+      .lang {
+        background-color: #941b0b77;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        float: left;
+        line-height: 50px;
         color: white;
+        font-size: 20px;
       }
-      .QQ {
-        background-color: #4099ff;
-        width: 315px;
-        display: inline-block;
-        height: 50px;
-        line-height: 50px;
-        margin-top: 20px;
-        border-radius: 5px;
-        .qq {
-          background-color: #0b70e281;
-          width: 50px;
-          height: 50px;
-          text-align: center;
-          float: left;
-          line-height: 50px;
-          color: white;
-          font-size: 20px;
-        }
-        span {
-          text-align: center;
-          width: 250px;
-          float: left;
-        }
-      }
-      .xinlang {
-        background-color: #cc230d;
-        width: 315px;
-        display: inline-block;
-        height: 50px;
-        line-height: 50px;
-        margin-top: 20px;
-        border-radius: 5px;
-        .lang {
-          background-color: #941b0b77;
-          width: 50px;
-          height: 50px;
-          text-align: center;
-          float: left;
-          line-height: 50px;
-          color: white;
-          font-size: 20px;
-        }
-        span {
-          text-align: center;
-          width: 250px;
-          float: left;
-        }
+      span {
+        text-align: center;
+        width: 250px;
+        float: left;
       }
     }
   }
-  .reg_footer {
-    font-size: 13px;
-    text-align: center;
-    margin-top: 40px;
-    color: rgba(0, 0, 0, 0.308);
-  }
+}
+.reg_footer {
+  font-size: 13px;
+  text-align: center;
+  margin-top: 100px;
+  color: rgba(0, 0, 0, 0.644);
 }
 </style>

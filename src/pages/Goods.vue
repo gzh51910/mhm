@@ -37,7 +37,6 @@
         </p>
       </article>
       <article class="goods_user">
-
         <p>
           出售者ID：
           <span>40404</span>
@@ -65,19 +64,16 @@
       <el-button type="danger">立即购买这个商品</el-button>
     </footer>
   </main>
-
-  
 </template>
 
 <script>
+// import { mainUrl } from "../config.json";
 export default {
-  async created(){
-    let {id} = this.$axios.get(mainUrl + "/goods",{
-      parem:{
-
-      }
-    })
-  }
+  // async created() {
+  //   let { id } = this.$axios.get(mainUrl + "/goods", {
+  //     parem: {}
+  //   });
+  // }
 };
 </script>
 <style lang="scss"  scoped>
@@ -92,36 +88,36 @@ export default {
     overflow: auto;
     position: relative;
     margin-bottom: 12%;
-    article{
-        padding: 5px;
-        border-bottom: 1px dashed rgb(224, 224,224);
-        font-size: 14px;
+    article {
+      padding: 5px;
+      border-bottom: 1px dashed rgb(224, 224, 224);
+      font-size: 14px;
     }
-    .goods_info{
-        font-size: 12px;
+    .goods_info {
+      font-size: 12px;
     }
-    .goods_message{
-        p:nth-of-type(1){
-            strong{
-                color: red;
-            }
+    .goods_message {
+      p:nth-of-type(1) {
+        strong {
+          color: red;
         }
+      }
     }
-    .goods_user{
-        color: #8f8f94;
+    .goods_user {
+      color: #8f8f94;
     }
-    .goods_img{
-        width: 100%;
-        height: 50%;
-        background: red;
-        padding: 0;
+    .goods_img {
+      width: 100%;
+      height: 50%;
+      background: red;
+      padding: 0;
     }
-    p{
-        width: 100%;
+    p {
+      width: 100%;
     }
-    .goods_sort{
-        display: flex;
-        align-items: center;
+    .goods_sort {
+      display: flex;
+      align-items: center;
     }
     .el-tabs__nav {
       display: flex;

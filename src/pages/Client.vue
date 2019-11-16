@@ -39,7 +39,7 @@
   </el-container>
 </template>
 <script>
-
+import { mainUrl } from "../config.json";
 export default {
   data() {
     return {

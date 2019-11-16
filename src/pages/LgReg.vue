@@ -1,14 +1,14 @@
 <template>
   <div class="LgReg">
-    <div class="LgReg_head">
+    <!-- <div class="LgReg_head">
       <i slot="prefix" class="el-icon-arrow-left"></i>
       <span>个人中心</span>
       <i slot="prefix" class="el-icon-s-home"></i>
-    </div>
+    </div>-->
     <div class="information">
       <img src="../assets/yeye.jpg" />
       <div class="information_left">
-        <p></p>
+        <i>hxhxhx</i>
         <p>￥0.00</p>
       </div>
       <i slot="prefx" class="el-icon-arrow-right"></i>
@@ -175,117 +175,90 @@ export default {
 };
 </script>
 <style lang="scss">
-body,
-html {
-  width: 100%;
-  .LgReg {
-    overflow: hidden;
-    background-color: #f2f2f2;
-    .LgReg_head {
-      background-color: #14b9c8;
-      color: #fff;
-      position: fixed;
-      z-index: 10;
-      right: 0;
-      left: 0;
-      height: 44px;
-      padding-right: 10px;
-      padding-left: 10px;
-      border-bottom: 0;
-      backface-visibility: hidden;
-      .el-icon-arrow-left {
-        width: 30px;
-        height: 40px;
-        margin-top: 15px;
+.LgReg {
+  overflow: hidden;
+  background-color: #f2f2f2;
+  .information {
+    width: 100%;
+    height: 62px;
+    margin-top: 40px;
+    background-color: #fff;
+    img {
+      width: 42px;
+      height: 42px;
+      margin: 10px;
+      float: left;
+    }
+    .information_left {
+      width: 295px;
+      float: left;
+      margin: 10px;
+      i {
+        font-size: 14px;
+        color: black;
       }
-      el-icon-s-home {
-        width: 30px;
-        height: 40px;
-        margin-top: 15px;
-      }
-      span {
-        display: inline-block;
-        width: 300px;
-        text-align: center;
-        font-size: 17px;
-        font-weight: 500;
-        line-height: 44px;
+      p {
+        height: 40%;
+        color: red;
+        margin: 0;
+        padding: 0;
       }
     }
-    .information {
+    .el-icon-arrow-right {
+      text-align: center;
+      font-size: 20px;
+      line-height: 62px;
+    }
+  }
+  .nav1 {
+    margin-top: 20px;
+    content: "";
+    overflow: hidden;
+    display: block;
+    .el-col {
       width: 100%;
-      height: 62px;
-      margin-top: 65px;
+      border: 1px solid #f2f2f2;
+    }
+  }
+  .nav2 {
+    margin-top: 20px;
+    .nav2-1 {
       background-color: #fff;
-      img {
-        width: 42px;
-        height: 42px;
-        margin: 10px;
-        float: left;
-      }
-      .information_left {
-        width: 270px;
-        float: left;
-        p {
-          height: 40%;
-          color: red;
-        }
+      border: 1px solid #f2f2f2;
+      height: 60px;
+      span {
+        text-align: center;
+        line-height: 60px;
+        margin-left: 20px;
+        font-size: 14px;
       }
       .el-icon-arrow-right {
-        text-align: center;
-        font-size: 20px;
-        line-height: 62px;
+        margin-left: 290px;
+        font-size: 10px;
       }
     }
-    .nav1 {
-      margin-top: 20px;
-      content: "";
-      overflow: hidden;
-      display: block;
-      .el-col {
-        width: 100%;
-        border: 1px solid #f2f2f2;
-      }
-    }
-    .nav2 {
-      margin-top: 20px;
-      .nav2-1 {
-        background-color: #fff;
-        border: 1px solid #f2f2f2;
-        height: 60px;
-        span {
-          text-align: center;
-          line-height: 60px;
-          margin-left: 20px;
-          font-size: 14px;
-        }
-        .nav2 .el-icon-arrow-right {
-          margin-left: 250px;
-        }
-      }
-      .el-col {
-        width: 100%;
-        border: 1px solid #f2f2f2;
-      }
-    }
-    .nav3 {
+    .el-col {
       width: 100%;
-      background-color: #fff;
-      height: 40px;
-      color: red;
-      text-align: center;
-      margin-top: 130px;
-      line-height: 40px;
+      border: 1px solid #f2f2f2;
     }
-    .nav4 {
-      width: 100%;
-      background-color: #fff;
-      height: 40px;
-      color: black;
-      text-align: center;
-      margin-top: 10px;
-      line-height: 40px;
-    }
+  }
+  .nav3 {
+    width: 100%;
+    background-color: #fff;
+    height: 40px;
+    color: red;
+    text-align: center;
+    margin-top: 130px;
+    line-height: 40px;
+  }
+  .nav4 {
+    width: 100%;
+    background-color: #fff;
+    height: 40px;
+    color: black;
+    text-align: center;
+    margin-top: 10px;
+    line-height: 40px;
   }
 }
 </style>
