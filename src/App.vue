@@ -14,8 +14,9 @@
 
 <script>
 // import {mapMutations} from 'vuex';
-import { mainUrl } from "../config.json";
+import { mainUrl } from "./config.json";
 export default {
+  mainUrl:mainUrl,
   name: "app",
   data() {
     return {};

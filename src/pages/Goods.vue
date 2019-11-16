@@ -72,11 +72,7 @@
 <script>
 export default {
   async created(){
-    let {id} = this.$axios.get(mainUrl + "/goods",{
-      parem:{
-
-      }
-    })
+    window.console.log(this.$router.query);
   }
 };
 </script>
