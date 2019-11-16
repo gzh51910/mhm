@@ -5,7 +5,7 @@
       <el-button type="primary">搜索</el-button>
     </el-header>
     <el-main>
-      <figure id="client_main" v-for="item in Client" :key="item.title" @click="goto">
+      <figure id="client_main" v-for="item in Client" :key="item.title" @click="goto()">
         <aside>
           <img :src="item.src" alt />
         </aside>
@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     goto() {
-      this.$router.push({ name: "ELSWORD_list", params: {} });
+      this.$router.push({ name: "ELSWORD_list", query: {} });
     },
     next() {
       if (this.page < Math.ceil(this.ClientNum / 20)) {
