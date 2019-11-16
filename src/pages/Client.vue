@@ -66,11 +66,14 @@ export default {
       }
     },
     async renderer() {
+      let { value } = this.$route.query;
+      let databaseName =  value.charAt(0).toUpperCase() + value.slice(1)
+
       let {
         data: { data: Client }
       } = await this.$axios.get(mainUrl + "/goods", {
         params: {
-          gather: "Client",
+          gather: databaseName,
           page: this.page,
           size: 20
         }
@@ -84,7 +87,7 @@ export default {
         data: { data: ClientNum }
       } = await this.$axios.get(mainUrl + "/goods/num", {
         params: {
-          count: "Client"
+          count: databaseName
         }
       });
       this.ClientNum = ClientNum;
