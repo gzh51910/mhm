@@ -50,6 +50,7 @@
   </div>
 </template>
 <script>
+import { mainUrl } from "../config.json";
 export default {
   data() {
     return {
@@ -85,7 +86,7 @@ export default {
 
           let { username, password } = this.loginForm;
 
-          let result = await this.$axios.get("http://localhost:1910/login", {
+          let result = await this.$axios.get(mainUrl + "/login", {
             params: {
               username,
               password
@@ -284,6 +285,12 @@ html {
         }
       }
     }
+  }
+  .reg_footer {
+    font-size: 13px;
+    text-align: center;
+    margin-top: 40px;
+    color: rgba(0, 0, 0, 0.308);
   }
 }
 </style>
