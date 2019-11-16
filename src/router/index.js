@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 
 import Home from '../pages/Home.vue'
 import Login from '../pages/Login.vue'
-import Reg from '../pages/Reg.vue' 
+import Reg from '../pages/Reg.vue'
 import Client from '../pages/Client.vue'
 import Phone from '../pages/Phone.vue'
 import ELSWORD_list from '../pages/ELSWORD_list.vue'
@@ -16,6 +16,7 @@ import centre from '../pages/centre'
 import Mine from '../pages/Mine.vue'
 import Balance from '../pages/Balance.vue'
 import LgReg from '../pages/LgReg.vue'
+import Welfare from '../pages/Welfare.vue'
 
 let router = new VueRouter({
     routes: [{
@@ -41,13 +42,17 @@ let router = new VueRouter({
             name: 'client',
             path: '/client',
             component: Client,
-            value:"Client"
+            value: "Client"
         },
         {
             name: 'phone',
             path: '/phone',
             component: Client,
-            value:"phone"
+            value: "phone"
+        }, {
+            name: 'welfare',
+            path: '/welfare',
+            component: Welfare
         },
         {
             name: 'ELSWORD_list',

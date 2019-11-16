@@ -149,10 +149,12 @@
         </el-menu>
       </el-col>
     </div>
-    <div class="nav3" @click="Esc">
+
+    <el-button type="text" @click="open">
       <i class="iconfont icon-gengxin"></i>
       退出登录
-    </div>
+    </el-button>
+
     <div class="nav4">
       <i class="iconfont icon-xiaoxi"></i>
       在线客服
@@ -168,8 +170,25 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     },
-    Esc() {
-      this.$router.push({ name: "login" });
+    open() {
+      this.$confirm("亲亲！确定要离开伦家吗？？？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          this.$message({
+            type: "success",
+            message: "大爷下次记得来玩哟~!"
+          });
+          this.$router.push({ name: "login" });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "妲己继续陪你玩~！"
+          });
+        });
     }
   }
 };
@@ -242,14 +261,15 @@ export default {
       border: 1px solid #f2f2f2;
     }
   }
-  .nav3 {
+  .el-button {
     width: 100%;
     background-color: #fff;
     height: 40px;
     color: red;
     text-align: center;
-    margin-top: 130px;
-    line-height: 40px;
+    margin-top: 40px;
+    line-height: 15px;
+    font-size: 16px;
   }
   .nav4 {
     width: 100%;
