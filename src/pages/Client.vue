@@ -1,11 +1,16 @@
 <template>
   <el-container id="client_body">
+    <header class="app_header">
+      <i href class="iconfont icon-jiantou" @click="goBack"></i>
+      <h1>{{topTitle}}</h1>
+      <b href class="iconfont icon-leb" @click="gotoLogin"></b>
+    </header>
     <el-header>
       <el-input v-model="input" placeholder="输入游戏名称关键词筛选" class="search_input"></el-input>
       <el-button type="primary">搜索</el-button>
     </el-header>
     <el-main>
-      <figure id="client_main" v-for="item in Client" :key="item.title" @click="goto()">
+      <figure id="client_main" v-for="item in Client" :key="item.title" @click="goto(item.theme)">
         <aside>
           <img :src="item.src" alt />
         </aside>
@@ -46,12 +51,19 @@ export default {
       page: 1,
       input: "",
       Client: [],
-      ClientNum: []
+      ClientNum: [],
+      topTitle: ""
     };
   },
   methods: {
-    goto() {
-      this.$router.push({ name: "ELSWORD_list", query: {} });
+    goBack() {
+      this.$router.go(-1);
+    },
+    gotoLogin() {
+      this.$router.push("/centre");
+    },
+    goto(link) {
+      this.$router.push(`/ELSWORD_list?value=${link}&theme=${link}`);
     },
     next() {
       if (this.page < Math.ceil(this.ClientNum / 20)) {
@@ -67,7 +79,7 @@ export default {
     },
     async renderer() {
       let { value } = this.$route.query;
-      let databaseName =  value.charAt(0).toUpperCase() + value.slice(1)
+      let databaseName = value.charAt(0).toUpperCase() + value.slice(1);
 
       let {
         data: { data: Client }
@@ -96,10 +108,64 @@ export default {
 
   created() {
     this.renderer();
+    let { value } = this.$route.query;
+    if (value == "client") {
+      this.topTitle = "端游专区";
+    } else {
+      this.topTitle = "手游专区";
+    }
   }
 };
 </script>
 <style lang="scss" scoped>
+//头部
+.app_header {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 44px;
+  background: #14b9c8;
+  z-index: 999;
+  position: none;
+  //   text-align: center;
+  > img {
+    margin-top: 8px;
+    width: 75px;
+    height: 29px;
+    float: left;
+    margin-left: 10px;
+  }
+  > h1 {
+    margin: 0;
+    padding: 0;
+    height: 44px;
+    box-sizing: border-box;
+    font-size: 18px;
+    color: white;
+    line-height: 44px;
+    text-align: center;
+  }
+  > b {
+    text-decoration: none;
+    color: white;
+    position: absolute;
+    top: 0;
+    right: 5px;
+    font-size: 32px;
+    line-height: 44px;
+  }
+  i{
+    text-decoration: none;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 5px;
+    font-size: 20px;
+    line-height: 44px;
+  }
+}
+
+//身体
 #client_body {
   height: none;
   height: 100%;
@@ -197,6 +263,7 @@ export default {
     color: #333;
     text-align: center;
     padding: 0;
+    overflow: auto;
     * {
       padding: 0;
       margin: 0;

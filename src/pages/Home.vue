@@ -1,71 +1,77 @@
 <template>
-    <section class="box_body">
-      <div class="block">
-        <el-carousel trigger="click" height="150px">
-          <el-carousel-item v-for="item in slideshow" :key="item._id">
-            <h3 class="small">
-              <img :src="item.src" alt />
-            </h3>
-          </el-carousel-item>
-        </el-carousel>
-      </div>
-      <nav id="nav_home">
-        <el-row :gutter="20" class="el-row-one">
-          <el-col :span="6" v-for="item in fn_nav" :key="item.title" style="padding:0 5px" >
-            <div class="grid-content bg-purple" @click="goto(item.theme)">
-              <img :src="item.src" alt />
-              <p class="fn_title">{{item.title}}</p>
-            </div>
-          </el-col>
-        </el-row>
-      </nav>
-      <article id="deal_on">
-        <h5>
-          <span>
-            <i class="iconfont icon-jiantou_you"></i>交易推介
-          </span>
-        </h5>
-        <el-row :gutter="20">
-          <el-col :span="6" v-for="item in Game_nav" :key="item.title" style="padding:0 5px">
-            <div class="grid-content bg-purple" @click="goto(item.theme)">
-              <img :src="item.src" alt />
-              <p class="Game_title">{{item.title}}</p>
-            </div>
-          </el-col>
-        </el-row>
-      </article>
-      <article class="notice">
-        <a href="#" v-for="item in notice" :key="item.title">
-          <p>
-            <span>公告</span>
-            {{item.title}}
-          </p>
-        </a>
-      </article>
-      <article id="deal_end">
-        <h5 class="deal_finish">
-          <i class="iconfont icon-jiantou_you"></i>交易完成
-        </h5>
-        <figure v-for="item in HomeList" :key="item.title" @click="goto('goods')">
-          <img :src="item.src" alt />
-          <figcaption>
-            <h4>{{item.title}}</h4>
-            <div>
-              <span>
-                成交单价：
-                <i class="deal_price">{{item.price}}</i>
-              </span>
-              <span>
-                成交数量：
-                <i>{{item.quantity}}</i>
-              </span>
-              <p>{{item.timer}}</p>
-              <div class="details">详情</div>
-            </div>
-          </figcaption>
-        </figure>
-      </article>
-    </section>
+  <section class="box_body">
+    <header class="app_header">
+      <img src="../img/mhmlogo.png" alt />
+      <h1>MHM游戏交易</h1>
+      <b href class="iconfont icon-leb liebiao" @click="gotoLogin"></b>
+      <a href class="iconfont icon-sousuo"></a>
+    </header>
+    <div class="block">
+      <el-carousel trigger="click" height="150px">
+        <el-carousel-item v-for="item in slideshow" :key="item._id">
+          <h3 class="small">
+            <img :src="item.src" alt />
+          </h3>
+        </el-carousel-item>
+      </el-carousel>
+    </div>
+    <nav id="nav_home">
+      <el-row :gutter="20" class="el-row-one">
+        <el-col :span="6" v-for="item in fn_nav" :key="item.title" style="padding:0 5px">
+          <div class="grid-content bg-purple" @click="goto(item.theme)">
+            <img :src="item.src" alt />
+            <p class="fn_title">{{item.title}}</p>
+          </div>
+        </el-col>
+      </el-row>
+    </nav>
+    <article id="deal_on">
+      <h5>
+        <span>
+          <i class="iconfont icon-jiantou_you"></i>交易推介
+        </span>
+      </h5>
+      <el-row :gutter="20">
+        <el-col :span="6" v-for="item in Game_nav" :key="item.title" style="padding:0 5px">
+          <div class="grid-content bg-purple" @click="gotolist(item.theme)">
+            <img :src="item.src" alt />
+            <p class="Game_title">{{item.title}}</p>
+          </div>
+        </el-col>
+      </el-row>
+    </article>
+    <article class="notice">
+      <a href="#" v-for="item in notice" :key="item.title">
+        <p>
+          <span>公告</span>
+          {{item.title}}
+        </p>
+      </a>
+    </article>
+    <article id="deal_end">
+      <h5 class="deal_finish">
+        <i class="iconfont icon-jiantou_you"></i>交易完成
+      </h5>
+      <figure v-for="item in HomeList" :key="item.title" @click="goto('goods',item._id)">
+        <img :src="item.src" alt />
+        <figcaption>
+          <h4>{{item.title}}</h4>
+          <div>
+            <span>
+              成交单价：
+              <i class="deal_price">{{item.price}}</i>
+            </span>
+            <span>
+              成交数量：
+              <i>{{item.quantity}}</i>
+            </span>
+            <p>{{item.timer}}</p>
+            <div class="details">详情</div>
+          </div>
+        </figcaption>
+      </figure>
+    </article>
+  </section>
 </template>
 <script>
 import { mainUrl } from "../config.json";
@@ -76,12 +82,28 @@ export default {
       fn_nav: [],
       Game_nav: [],
       notice: [],
-      HomeList: [],
+      HomeList: []
     };
   },
   methods: {
-    goto(link){
-      this.$router.push(`/${link}?value=${link}`)
+    gotoLogin() {
+      this.$router.push("/centre");
+    },
+    goto(link,_id) {
+      if (link == "skin") {
+        this.$router.push(`/ELSWORD_list?value=${link}&theme=Skin`);
+      } else if (link == "syzk") {
+        this.$router.push("/syzk");
+      } else if (link == "mine") {
+        this.$router.push("/login");
+      } else if (link == "goods") {
+        this.$router.push({ name: "goods", query: { _id, theme:"HomeList" } });
+      } else {
+        this.$router.push(`/${link}?value=${link}`);
+      }
+    },
+    gotolist(link) {
+      this.$router.push(`/ELSWORD_list?value=${link}&theme=${link}`);
     }
   },
   async created() {
@@ -149,42 +171,52 @@ export default {
 };
 </script>
 <style lang="scss"  scoped>
-.box_body {
-  box-sizing: border-box;
-  overflow: auto;
-}
-.header {
+//头部
+.app_header {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 44px;
   background: #14b9c8;
-  position: absolute;
+  z-index: 999;
+  position: none;
   //   text-align: center;
-  img {
+  > img {
     margin-top: 8px;
     width: 75px;
     height: 29px;
     float: left;
+    margin-left: 10px;
   }
-  h1 {
+  > h1 {
     margin: 0;
     padding: 0;
     height: 44px;
     box-sizing: border-box;
-    float: left;
+    position: absolute;
+    text-align: center;
+    width: 100%;
     font-size: 18px;
     color: white;
     line-height: 44px;
-    margin-left: 44px;
   }
-  a {
+  a,b {
     text-decoration: none;
     color: white;
     float: right;
     font-size: 32px;
     line-height: 44px;
   }
+  a{
+    margin-right: 40px;
+    font-size: 28px;
+  }
+}
+
+//身体
+.box_body {
+  box-sizing: border-box;
+  overflow: auto;
 }
 .el-carousel__item h3 {
   color: #475669;

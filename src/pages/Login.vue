@@ -1,5 +1,11 @@
 <template>
   <div class="login">
+    <header class="app_header">
+      <i href class="iconfont icon-jiantou" @click="goBack"></i>
+      <h1>个人中心</h1>
+      <b href class="iconfont icon-shouye shouye" @click="gotoHome" ></b>
+    </header>
+
     <el-form
       class="demo-input-suffix"
       ref="loginForm"
@@ -78,6 +84,12 @@ export default {
     };
   },
   methods: {
+    goBack() {
+      this.$router.go(-1);
+    },
+    gotoHome(){
+      this.$router.push('/home')
+    },
     submitForm() {
       this.$refs.loginForm.validate(async valid => {
         if (valid) {
@@ -104,7 +116,7 @@ export default {
             user.Authorization = headers.authorization;
             this.$store.commit("login", user);
             // localStorage.setItem("Authorization", Authorization);
-            let redirectUrl = this.$route.query.redirectUrl || "/mine";
+            let redirectUrl = this.$route.query.redirectUrl || "/LgReg";
             this.$router.replace(redirectUrl);
           }
         } else {
@@ -120,6 +132,54 @@ export default {
 };
 </script>
 <style lang="scss">
+//头部
+.app_header {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 44px;
+  background: #14b9c8;
+  z-index: 999;
+  position: none;
+  //   text-align: center;
+  > img {
+    margin-top: 8px;
+    width: 75px;
+    height: 29px;
+    float: left;
+    margin-left: 10px;
+  }
+  > h1 {
+    margin: 0;
+    padding: 0;
+    height: 44px;
+    box-sizing: border-box;
+    font-size: 18px;
+    color: white;
+    line-height: 44px;
+    text-align: center;
+  }
+  > .shouye {
+    text-decoration: none;
+    color: white;
+    position: absolute;
+    top: 0;
+    right: 5px;
+    font-size: 24px;
+    line-height: 44px;
+  }
+  i{
+    text-decoration: none;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 5px;
+    font-size: 20px;
+    line-height: 44px;
+  }
+}
+
+//main部分
 a {
   text-decoration: none;
 }

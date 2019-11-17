@@ -1,5 +1,11 @@
 <template>
   <main id="goods_main">
+    <header class="app_header">
+      <i href class="iconfont icon-jiantou" @click="goBack"></i>
+      <h1>商品详情</h1>
+      <b href class="iconfont icon-leb" @click="gotoLogin"></b>
+    </header>
+
     <section id="goods_body" v-for="item in goods" :key="item._id">
       <article class="goods_title">
         <strong>{{item.title}}</strong>
@@ -73,14 +79,20 @@ export default {
     };
   },
   methods: {
+    goBack() {
+      this.$router.go(-1);
+    },
+    gotoLogin() {
+      this.$router.push("/centre");
+    },
     async renderer() {
-      let { _id } = this.$route.query;
+      let { _id,theme } = this.$route.query;
       // window.console.log(_id);
       let {
         data: { data: goods }
       } = await this.$axios.get(mainUrl + `/goods`, {
         params: {
-          gather: "ELSWORD_list",
+          gather: theme,
           condition: "_id",
           condition_value: _id
         }
@@ -96,6 +108,55 @@ export default {
 };
 </script>
 <style lang="scss"  scoped>
+//头部
+.app_header {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 44px;
+  background: #14b9c8;
+  z-index: 999;
+  position: none;
+  //   text-align: center;
+  > img {
+    margin-top: 8px;
+    width: 75px;
+    height: 29px;
+    float: left;
+    margin-left: 10px;
+  }
+  > h1 {
+    margin: 0;
+    padding: 0;
+    height: 44px;
+    box-sizing: border-box;
+    font-size: 18px;
+    color: white;
+    line-height: 44px;
+    text-align: center;
+  }
+  > b {
+    text-decoration: none;
+    color: white;
+    position: absolute;
+    top: 0;
+    right: 5px;
+    font-size: 32px;
+    line-height: 44px;
+  }
+  i{
+    text-decoration: none;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 5px;
+    font-size: 20px;
+    line-height: 44px;
+  }
+}
+
+
+//main部分
 #goods_main {
   width: 100%;
   height: 100%;
@@ -106,7 +167,6 @@ export default {
     height: 83%;
     overflow: auto;
     position: relative;
-    margin-bottom: 12%;
     article {
       padding: 5px;
       border-bottom: 1px dashed rgb(224, 224, 224);

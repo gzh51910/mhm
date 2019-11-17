@@ -7,5 +7,5 @@
     "mysql_user": "root",
     "mysql_password": "",
     "mysql_database": "mhm",
-    "mainUrl":"http://10.3.136.52:1910"
+    "mainUrl":"http://localhost:1910"
 }

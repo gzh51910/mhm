@@ -1,5 +1,11 @@
 <template>
   <div class="reg_page">
+    <header class="app_header">
+      <i href class="iconfont icon-jiantou" @click="goBack"></i>
+      <h1>账号注册</h1>
+      <b href class="iconfont icon-shouye shouye" @click="gotoHome" ></b>
+    </header>
+
     <el-form class="demo-input-suffix" ref="regForm" :model="regForm" :rules="rules">
       <el-form-item prop="username">
         <el-input placeholder="会员名称，只支持英文与数字" v-model="regForm.username">
@@ -121,6 +127,12 @@ export default {
     };
   },
   methods: {
+    goBack() {
+      this.$router.go(-1);
+    },
+    gotoHome(){
+      this.$router.push('/home')
+    },
     // 注册按钮
     submitForm() {
       // validate方法   校验所有的表单  全过才行
@@ -174,6 +186,54 @@ export default {
 </script>
 
 <style lang="scss">
+//头部
+.app_header {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 44px;
+  background: #14b9c8;
+  z-index: 999;
+  position: none;
+  //   text-align: center;
+  > img {
+    margin-top: 8px;
+    width: 75px;
+    height: 29px;
+    float: left;
+    margin-left: 10px;
+  }
+  > h1 {
+    margin: 0;
+    padding: 0;
+    height: 44px;
+    box-sizing: border-box;
+    font-size: 18px;
+    color: white;
+    line-height: 44px;
+    text-align: center;
+  }
+  > .shouye {
+    text-decoration: none;
+    color: white;
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 24px;
+    line-height: 44px;
+  }
+  i{
+    text-decoration: none;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 5px;
+    font-size: 20px;
+    line-height: 44px;
+  }
+}
+
+//main
 .reg_page {
   overflow: hidden;
   .demo-input-suffix {
