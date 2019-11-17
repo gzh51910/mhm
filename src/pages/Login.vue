@@ -312,11 +312,12 @@ a {
       }
     }
   }
-}
-.reg_footer {
-  font-size: 13px;
-  text-align: center;
-  margin-top: 100px;
-  color: rgba(0, 0, 0, 0.644);
+  .reg_footer {
+    font-size: 13px;
+    text-align: center;
+    margin-top: 100px;
+    color: rgba(0, 0, 0, 0.644);
+  }
 }
 </style>
+

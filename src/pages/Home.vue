@@ -89,7 +89,7 @@ export default {
     gotoLogin() {
       this.$router.push("/centre");
     },
-    goto(link,_id) {
+    goto(link, _id) {
       if (link == "skin") {
         this.$router.push(`/ELSWORD_list?value=${link}&theme=Skin`);
       } else if (link == "syzk") {
@@ -97,7 +97,7 @@ export default {
       } else if (link == "mine") {
         this.$router.push("/login");
       } else if (link == "goods") {
-        this.$router.push({ name: "goods", query: { _id, theme:"HomeList" } });
+        this.$router.push({ name: "goods", query: { _id, theme: "HomeList" } });
       } else {
         this.$router.push(`/${link}?value=${link}`);
       }
@@ -200,14 +200,15 @@ export default {
     color: white;
     line-height: 44px;
   }
-  a,b {
+  a,
+  b {
     text-decoration: none;
     color: white;
     float: right;
     font-size: 32px;
     line-height: 44px;
   }
-  a{
+  a {
     margin-right: 40px;
     font-size: 28px;
   }
