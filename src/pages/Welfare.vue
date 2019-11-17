@@ -1,5 +1,11 @@
 <template>
   <div class="welfare_page">
+    <header class="app_header">
+      <i href class="iconfont icon-jiantou" @click="goBack"></i>
+      <h1>福利社</h1>
+      <b href class="iconfont icon-leb" @click="gotoLogin"></b>
+    </header>
+
     <div class="integral">
       <span>您当前的积分:</span>
       <span>31点</span>
@@ -56,6 +62,12 @@ export default {
   methods: {
     ic() {
       this.$router.push({ name: "IC" });
+    },
+    goBack() {
+      this.$router.go(-1);
+    },
+    gotoLogin() {
+      this.$router.push("/LgReg");
     }
   },
   async created() {
@@ -75,6 +87,54 @@ export default {
 </script>
 
 <style lang="scss">
+//头部
+.app_header {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 44px;
+  background: #14b9c8;
+  z-index: 999;
+  position: none;
+  //   text-align: center;
+  > img {
+    margin-top: 8px;
+    width: 75px;
+    height: 29px;
+    float: left;
+    margin-left: 10px;
+  }
+  > h1 {
+    margin: 0;
+    padding: 0;
+    height: 44px;
+    box-sizing: border-box;
+    font-size: 18px;
+    color: white;
+    line-height: 44px;
+    text-align: center;
+  }
+  > b {
+    text-decoration: none;
+    color: white;
+    position: absolute;
+    top: 0;
+    right: 5px;
+    font-size: 32px;
+    line-height: 44px;
+  }
+  i {
+    text-decoration: none;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 5px;
+    font-size: 20px;
+    line-height: 44px;
+  }
+}
+
+//main
 .welfare_page {
   width: 100%;
   height: 100%;
@@ -95,7 +155,7 @@ export default {
     width: 100%;
     height: 60px;
     .el-input {
-      width: 280px;
+      width: 70%;
       height: 35px;
       float: left;
       margin-left: 5px;
@@ -108,7 +168,7 @@ export default {
       height: 34px;
       background-color: #14b9c8;
       font-size: 14px;
-      width: 110px;
+      width: 26%;
     }
   }
   .el-row {

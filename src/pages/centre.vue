@@ -1,9 +1,8 @@
 <template>
   <div id="centre">
     <div class="app_header">
-      <i href class="iconfont icon-jiantou" @click="goBack"></i>
+      <i href class="iconfont icon-jiantou" @click="gotoHome"></i>
       <h1>个人中心</h1>
-      <b href class="iconfont icon-cross cancel" @click="goBack"></b>
     </div>
 
     <img src="https://www.maihaome.com/xinapp/images/tishi.png" alt />
@@ -19,8 +18,8 @@
 <script scoped>
 export default {
   methods: {
-    goBack() {
-      this.$router.go(-1);
+    gotoHome() {
+      this.$router.push('/home');
     },
     gotoLogin() {
       this.$router.push("/login");

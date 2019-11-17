@@ -299,7 +299,7 @@ export default {
       this.$router.go(-1);
     },
     gotoLogin() {
-      this.$router.push("/centre");
+      this.$router.push("/LgReg");
     },
     Img(_id) {
       let { theme } = this.$route.query;

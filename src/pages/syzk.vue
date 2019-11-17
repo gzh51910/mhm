@@ -172,7 +172,7 @@ export default {
   },
   methods: {
     gotoLogin() {
-      this.$router.push("/centre");
+      this.$router.push("/LgReg");
     },
     Img(_id) {
       this.$router.push({ name: "goods", query: { _id } });

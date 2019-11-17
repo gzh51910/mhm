@@ -94,7 +94,6 @@ export default {
       this.$refs.loginForm.validate(async valid => {
         if (valid) {
           //校验成功，发送ajax请求
-          console.log("success");
 
           let { username, password } = this.loginForm;
 
