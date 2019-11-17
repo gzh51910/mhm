@@ -1,7 +1,7 @@
 <template>
   <div id="list_div">
     <div class="app_header">
-      <i href class="iconfont icon-jiantou"></i>
+      <i href class="iconfont icon-jiantou" @click="goBack"></i>
       <h1>手游折扣</h1>
       <b href class="iconfont icon-leb" @click="gotoLogin"></b>
     </div>
@@ -171,6 +171,9 @@ export default {
     }
   },
   methods: {
+    goBack() {
+      this.$router.go(-1);
+    },
     gotoLogin() {
       this.$router.push("/LgReg");
     },

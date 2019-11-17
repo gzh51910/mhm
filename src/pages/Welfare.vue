@@ -27,7 +27,7 @@
             <p>{{item.title}}</p>
             <p class="number">{{item.me}}</p>
             <p class="need">{{item.jf}}</p>
-            <el-button type="danger" @click="ic">立即兑换</el-button>
+            <el-button type="danger" @click="ic(item._id)">立即兑换</el-button>
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@
       <div class="Welfare_footer_text">
         关于福利社：买号么向所有用户派发真金白银充值的首充号，一般为6元首充号，您只需几个积分就能换个首充号！本频道跟手游折扣频道配合使用更优惠！
         <br />
-        <el-button>点击进入手游折扣频道 > ></el-button>
+        <el-button @click="gotoSyzk">点击进入手游折扣频道 > ></el-button>
       </div>
     </div>
     <div class="Welfare_footer_logo">@maihaome.com</div>
@@ -60,8 +60,11 @@ export default {
     };
   },
   methods: {
-    ic() {
-      this.$router.push({ name: "IC" });
+    gotoSyzk(){
+      this.$router.push("/syzk");
+    },
+    ic(_id) {
+      this.$router.push(`/IC?id=${_id}`);
     },
     goBack() {
       this.$router.go(-1);

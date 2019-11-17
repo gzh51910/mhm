@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import { mainUrl } from '../config'
 export default {
   data() {
     var checkUsername = (rule, value, callback) => {
@@ -144,7 +145,7 @@ export default {
           //检测是否已注册
           let {
             data: { data: jc }
-          } = await this.$axios.get("http://10.3.136.52:1910/goods", {
+          } = await this.$axios.get(mainUrl + "/goods", {
             params: {
               gather: "user",
               condition: "username",
@@ -159,7 +160,7 @@ export default {
             });
           } else {
             let { data: reg } = await this.$axios.post(
-              "http://10.3.136.52:1910/reg",
+              mainUrl + "/reg",
               {
                 username,
                 password,
@@ -168,7 +169,7 @@ export default {
               }
             );
             if (reg.status === 1) {
-              this.$router.replace("/mine");
+              this.$router.replace("/LgReg");
             }
           }
         } else {
