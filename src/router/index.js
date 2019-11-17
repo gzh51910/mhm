@@ -17,6 +17,7 @@ import Balance from '../pages/Balance.vue'
 import LgReg from '../pages/LgReg.vue'
 import Welfare from '../pages/Welfare.vue'
 import syzk from '../pages/syzk.vue'
+import IC from '../pages/IC.vue'
 
 let router = new VueRouter({
     routes: [{
@@ -32,6 +33,11 @@ let router = new VueRouter({
             name: 'login',
             path: '/login',
             component: Login
+        },
+        {
+            name: 'IC',
+            path: '/IC',
+            component: IC
         },
         {
             name: 'reg',
@@ -79,7 +85,7 @@ let router = new VueRouter({
             name: 'LgReg',
             path: '/LgReg',
             component: LgReg
-        },{
+        }, {
             name: 'syzk',
             path: '/syzk',
             component: syzk
