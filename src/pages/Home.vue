@@ -87,7 +87,7 @@ export default {
   },
   methods: {
     gotoLogin() {
-      this.$router.push("/centre");
+      this.$router.push("/LgReg");
     },
     goto(link, _id) {
       if (link == "skin") {
@@ -95,9 +95,11 @@ export default {
       } else if (link == "syzk") {
         this.$router.push("/syzk");
       } else if (link == "mine") {
-        this.$router.push("/login");
+        this.$router.push("/LgReg");
       } else if (link == "goods") {
         this.$router.push({ name: "goods", query: { _id, theme: "HomeList" } });
+      } else if (link == "walfare") {
+        this.$router.push('/welfare');
       } else {
         this.$router.push(`/${link}?value=${link}`);
       }

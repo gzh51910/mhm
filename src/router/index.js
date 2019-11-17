@@ -78,7 +78,8 @@ let router = new VueRouter({
         }, {
             name: 'LgReg',
             path: '/LgReg',
-            component: LgReg
+            component: LgReg,
+            meta: { requiresAuth: true }
         },{
             name: 'syzk',
             path: '/syzk',
@@ -89,6 +90,41 @@ let router = new VueRouter({
             component: Home
         }
     ]
+});
+
+router.beforeEach((to, from, next) => {next()
+    if(to.meta.requiresAuth){
+        // let Authorization = localStorage.getItem('Authorization');
+        let $store = router.app.$store
+        let Authorization = $store.state.common.user.Authorization;
+        if(Authorization){
+            
+            router.app.$axios.get('http://localhost:1910/verify',{
+                headers:{
+                    Authorization
+                }
+            }).then(({data})=>{
+                if(data.status === 0){
+                    $store.commit('logout')
+                    next({
+                        path:'/centre',
+                        query:{
+                            redirectUrl:to.fullPath
+                        }
+                    })
+                }
+            })
+        }else{
+            // router.push('/login')
+            next({
+                path:'/centre',
+                query:{
+                    redirectUrl:to.fullPath
+                }
+            })
+        }
+    }
+    next()
 });
 
 export default router;

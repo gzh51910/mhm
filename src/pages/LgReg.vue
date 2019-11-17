@@ -5,12 +5,6 @@
       <h1>账号中心</h1>
       <b href class="iconfont icon-kefu" @click="gotoLogin"></b>
     </header>
-
-    <header class="app_header">
-      <i href class="iconfont icon-jiantou"></i>
-      <h1>个人中心</h1>
-      <b href class="iconfont icon-leb" @click="gotoLogin" @back="goBack"></b>
-    </header>
     <!-- <div class="LgReg_head">
       <i slot="prefix" class="el-icon-arrow-left"></i>
       <span>个人中心</span>
@@ -19,7 +13,7 @@
     <div class="information">
       <img src="../assets/yeye.jpg" />
       <div class="information_left">
-        <i>hxhxhx</i>
+        <i>用户名</i>
         <p>￥0.00</p>
       </div>
       <i slot="prefx" class="el-icon-arrow-right"></i>
@@ -173,10 +167,19 @@
   </div>
 </template>
 <script>
+// import { mainUrl } from "../config";
 export default {
+  // data() {
+  //   return {
+  //     username: []
+  //   };
+  // },
   methods: {
     goBack() {
       this.$router.go(-1);
+    },
+    gotoLogin() {
+      this.$router.push("/login");
     },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
@@ -185,26 +188,37 @@ export default {
       console.log(key, keyPath);
     },
     open() {
-      this.$confirm("亲亲！确定要离开伦家吗？？？", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
-        .then(() => {
-          this.$message({
-            type: "success",
-            message: "大爷下次记得来玩哟~!"
-          });
-          this.$router.push({ name: "login" });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "妲己继续陪你玩~！"
-          });
+      this.$store.commit("logout");
+      if (this.$route.meta.requiresAuth) {
+        this.$router.push({
+          name: "login",
+          query: {
+            redirectUrl: this.$route.fullPath
+          }
         });
+      }
     }
-  }
+    // open() {
+    //   this.$confirm("亲亲！确定要离开伦家吗？？？", "提示", {
+    //     confirmButtonText: "确定",
+    //     cancelButtonText: "取消",
+    //     type: "warning"
+    //   })
+    //     .then(() => {
+    //       this.$message({
+    //         type: "success",
+    //         message: "大爷下次记得来玩哟~!"
+    //       });
+    //       this.$router.push({ name: "login" });
+    //     })
+    //     .catch(() => {
+    //       this.$message({
+    //         type: "info",
+    //         message: "妲己继续陪你玩~！"
+    //       });
+    //     });
+    // }
+  },
 };
 </script>
 <style lang="scss">
@@ -244,7 +258,7 @@ export default {
     font-size: 32px;
     line-height: 44px;
   }
-  i{
+  i {
     text-decoration: none;
     color: white;
     position: absolute;
@@ -291,7 +305,7 @@ export default {
     font-size: 32px;
     line-height: 44px;
   }
-  i{
+  i {
     text-decoration: none;
     color: white;
     position: absolute;

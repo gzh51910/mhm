@@ -60,7 +60,7 @@ export default {
       this.$router.go(-1);
     },
     gotoLogin() {
-      this.$router.push("/centre");
+      this.$router.push("/LgReg");
     },
     goto(link) {
       this.$router.push(`/ELSWORD_list?value=${link}&theme=${link}`);

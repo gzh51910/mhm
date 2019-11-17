@@ -126,7 +126,7 @@ export default {
       this.$router.go(-1);
     },
     gotoLogin() {
-      this.$router.push("/centre");
+      this.$router.push("/LgReg");
     },
     handleChange() {}
   },

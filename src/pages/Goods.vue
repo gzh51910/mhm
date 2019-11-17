@@ -87,7 +87,7 @@ export default {
       this.$router.go(-1);
     },
     gotoLogin() {
-      this.$router.push("/centre");
+      this.$router.push("/LgReg");
     },
     async renderer() {
       let { _id,theme } = this.$route.query;
