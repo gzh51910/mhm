@@ -21,7 +21,7 @@
             <p>{{item.title}}</p>
             <p class="number">{{item.me}}</p>
             <p class="need">{{item.jf}}</p>
-            <el-button type="danger">立即兑换</el-button>
+            <el-button type="danger" @click="ic">立即兑换</el-button>
           </div>
         </div>
       </div>
@@ -52,6 +52,11 @@ export default {
       input: "",
       Welfare: []
     };
+  },
+  methods: {
+    ic() {
+      this.$router.push({ name: "IC" });
+    }
   },
   async created() {
     let {
