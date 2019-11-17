@@ -65,7 +65,7 @@
       </el-tabs>
     </section>
     <footer id="goods_buy">
-      <el-button type="danger">立即购买这个商品</el-button>
+      <el-button type="danger" @click="gotoCart">立即购买这个商品</el-button>
     </footer>
   </main>
 </template>
@@ -79,6 +79,10 @@ export default {
     };
   },
   methods: {
+    gotoCart(){
+      let {_id,theme} = this.$route.query;
+      this.$router.push(`/balance?theme=${theme}&id=${_id}`);
+    },
     goBack() {
       this.$router.go(-1);
     },

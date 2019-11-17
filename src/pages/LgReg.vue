@@ -1,7 +1,7 @@
 <template>
   <div class="LgReg">
     <header class="app_header">
-      <i href class="iconfont icon-jiantou"></i>
+      <i href class="iconfont icon-jiantou" @click="goBack"></i>
       <h1>账号中心</h1>
       <b href class="iconfont icon-kefu" @click="gotoLogin"></b>
     </header>
@@ -175,6 +175,9 @@
 <script>
 export default {
   methods: {
+    goBack() {
+      this.$router.go(-1);
+    },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },

@@ -1,8 +1,8 @@
 <template>
   <div id="centre">
     <div class="app_header">
-      <i href class="iconfont icon-jiantou"></i>
-      <h1>手游折扣</h1>
+      <i href class="iconfont icon-jiantou" @click="goBack"></i>
+      <h1>个人中心</h1>
       <b href class="iconfont icon-cross cancel" @click="goBack"></b>
     </div>
 
