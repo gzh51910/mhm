@@ -1,71 +1,71 @@
 <template>
-    <section class="box_body">
-      <div class="block">
-        <el-carousel trigger="click" height="150px">
-          <el-carousel-item v-for="item in slideshow" :key="item._id">
-            <h3 class="small">
-              <img :src="item.src" alt />
-            </h3>
-          </el-carousel-item>
-        </el-carousel>
-      </div>
-      <nav id="nav_home">
-        <el-row :gutter="20" class="el-row-one">
-          <el-col :span="6" v-for="item in fn_nav" :key="item.title" style="padding:0 5px" >
-            <div class="grid-content bg-purple" @click="goto(item.theme)">
-              <img :src="item.src" alt />
-              <p class="fn_title">{{item.title}}</p>
-            </div>
-          </el-col>
-        </el-row>
-      </nav>
-      <article id="deal_on">
-        <h5>
-          <span>
-            <i class="iconfont icon-jiantou_you"></i>交易推介
-          </span>
-        </h5>
-        <el-row :gutter="20">
-          <el-col :span="6" v-for="item in Game_nav" :key="item.title" style="padding:0 5px">
-            <div class="grid-content bg-purple" @click="goto(item.theme)">
-              <img :src="item.src" alt />
-              <p class="Game_title">{{item.title}}</p>
-            </div>
-          </el-col>
-        </el-row>
-      </article>
-      <article class="notice">
-        <a href="#" v-for="item in notice" :key="item.title">
-          <p>
-            <span>公告</span>
-            {{item.title}}
-          </p>
-        </a>
-      </article>
-      <article id="deal_end">
-        <h5 class="deal_finish">
-          <i class="iconfont icon-jiantou_you"></i>交易完成
-        </h5>
-        <figure v-for="item in HomeList" :key="item.title" @click="goto('goods')">
-          <img :src="item.src" alt />
-          <figcaption>
-            <h4>{{item.title}}</h4>
-            <div>
-              <span>
-                成交单价：
-                <i class="deal_price">{{item.price}}</i>
-              </span>
-              <span>
-                成交数量：
-                <i>{{item.quantity}}</i>
-              </span>
-              <p>{{item.timer}}</p>
-              <div class="details">详情</div>
-            </div>
-          </figcaption>
-        </figure>
-      </article>
-    </section>
+  <section class="box_body">
+    <div class="block">
+      <el-carousel trigger="click" height="150px">
+        <el-carousel-item v-for="item in slideshow" :key="item._id">
+          <h3 class="small">
+            <img :src="item.src" alt />
+          </h3>
+        </el-carousel-item>
+      </el-carousel>
+    </div>
+    <nav id="nav_home">
+      <el-row :gutter="20" class="el-row-one">
+        <el-col :span="6" v-for="item in fn_nav" :key="item.title" style="padding:0 5px">
+          <div class="grid-content bg-purple" @click="goto(item.theme)">
+            <img :src="item.src" alt />
+            <p class="fn_title">{{item.title}}</p>
+          </div>
+        </el-col>
+      </el-row>
+    </nav>
+    <article id="deal_on">
+      <h5>
+        <span>
+          <i class="iconfont icon-jiantou_you"></i>交易推介
+        </span>
+      </h5>
+      <el-row :gutter="20">
+        <el-col :span="6" v-for="item in Game_nav" :key="item.title" style="padding:0 5px">
+          <div class="grid-content bg-purple" @click="goto(item.theme)">
+            <img :src="item.src" alt />
+            <p class="Game_title">{{item.title}}</p>
+          </div>
+        </el-col>
+      </el-row>
+    </article>
+    <article class="notice">
+      <a href="#" v-for="item in notice" :key="item.title">
+        <p>
+          <span>公告</span>
+          {{item.title}}
+        </p>
+      </a>
+    </article>
+    <article id="deal_end">
+      <h5 class="deal_finish">
+        <i class="iconfont icon-jiantou_you"></i>交易完成
+      </h5>
+      <figure v-for="item in HomeList" :key="item.title" @click="goto('goods')">
+        <img :src="item.src" alt />
+        <figcaption>
+          <h4>{{item.title}}</h4>
+          <div>
+            <span>
+              成交单价：
+              <i class="deal_price">{{item.price}}</i>
+            </span>
+            <span>
+              成交数量：
+              <i>{{item.quantity}}</i>
+            </span>
+            <p>{{item.timer}}</p>
+            <div class="details">详情</div>
+          </div>
+        </figcaption>
+      </figure>
+    </article>
+  </section>
 </template>
 <script>
 import { mainUrl } from "../config.json";
@@ -76,12 +76,12 @@ export default {
       fn_nav: [],
       Game_nav: [],
       notice: [],
-      HomeList: [],
+      HomeList: []
     };
   },
   methods: {
-    goto(link){
-      this.$router.push(`/${link}?value=${link}`)
+    goto(link) {
+      this.$router.push(`/${link}?value=${link}`);
     }
   },
   async created() {

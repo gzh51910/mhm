@@ -14,24 +14,13 @@
       <el-button>我的站内信</el-button>
     </el-row>
     <div class="main">
-      <div class="welfare_list">
+      <div class="welfare_list" :key="item.id" v-for="item in Welfare">
         <div class="center">
-          <img src="../assets/yeye.jpg" alt />
+          <img :src="item.src" alt />
           <div class="text">
-            《梦境-迷失之地》免费首充福利号
-            <p class="number">剩余()个名额</p>
-            <p class="need">需要()积分</p>
-            <el-button type="danger">立即兑换</el-button>
-          </div>
-        </div>
-      </div>
-      <div class="welfare_list">
-        <div class="center">
-          <img src="../assets/yeye.jpg" alt />
-          <div class="text">
-            《梦境-迷失之地》免费首充福利号
-            <p class="number">剩余()个名额</p>
-            <p class="need">需要()积分</p>
+            <p>{{item.title}}</p>
+            <p class="number">{{item.me}}</p>
+            <p class="need">{{item.jf}}</p>
             <el-button type="danger">立即兑换</el-button>
           </div>
         </div>
@@ -51,22 +40,40 @@
         <el-button>点击进入手游折扣频道 > ></el-button>
       </div>
     </div>
+    <div class="Welfare_footer_logo">@maihaome.com</div>
   </div>
 </template>
 
 <script>
+import { mainUrl } from "../config.json";
 export default {
   data() {
     return {
-      input: ""
+      input: "",
+      Welfare: []
     };
+  },
+  async created() {
+    let {
+      data: { data: Welfare }
+    } = await this.$axios.get(mainUrl + "/goods", {
+      params: {
+        gather: "Welfare"
+      }
+    });
+    this.Welfare = Welfare.map(item => {
+      return item;
+    });
+    console.log(this.Welfare);
   }
 };
 </script>
 
 <style lang="scss">
 .welfare_page {
-  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
   .integral {
     width: 100%;
     font-size: 14px;
@@ -191,6 +198,12 @@ export default {
       border: 1px solid #dd524d;
       background-color: #dd524d;
     }
+  }
+  .Welfare_footer_logo {
+    font-size: 13px;
+    text-align: center;
+    margin-top: 50px;
+    color: rgba(0, 0, 0, 0.644);
   }
 }
 </style>
