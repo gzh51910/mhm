@@ -8,7 +8,6 @@ import Home from '../pages/Home.vue'
 import Login from '../pages/Login.vue'
 import Reg from '../pages/Reg.vue'
 import Client from '../pages/Client.vue'
-import Phone from '../pages/Phone.vue'
 import ELSWORD_list from '../pages/ELSWORD_list.vue'
 import Goods from '../pages/Goods.vue'
 import Card from '../pages/Card.vue'
@@ -17,6 +16,7 @@ import Mine from '../pages/Mine.vue'
 import Balance from '../pages/Balance.vue'
 import LgReg from '../pages/LgReg.vue'
 import Welfare from '../pages/Welfare.vue'
+import syzk from '../pages/syzk.vue'
 
 let router = new VueRouter({
     routes: [{
@@ -42,13 +42,11 @@ let router = new VueRouter({
             name: 'client',
             path: '/client',
             component: Client,
-            value: "Client"
         },
         {
             name: 'phone',
             path: '/phone',
             component: Client,
-            value: "phone"
         }, {
             name: 'welfare',
             path: '/welfare',
@@ -58,11 +56,6 @@ let router = new VueRouter({
             name: 'ELSWORD_list',
             path: '/ELSWORD_list',
             component: ELSWORD_list
-        },
-        {
-            name: 'phone',
-            path: '/phone',
-            component: Phone
         },
         {
             name: "goods",
@@ -86,6 +79,10 @@ let router = new VueRouter({
             name: 'LgReg',
             path: '/LgReg',
             component: LgReg
+        },{
+            name: 'syzk',
+            path: '/syzk',
+            component: syzk
         },
         {
             path: '/',

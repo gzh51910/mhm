@@ -1,5 +1,16 @@
 <template>
   <div class="LgReg">
+    <header class="app_header">
+      <i href class="iconfont icon-jiantou"></i>
+      <h1>账号中心</h1>
+      <b href class="iconfont icon-kefu" @click="gotoLogin"></b>
+    </header>
+
+    <header class="app_header">
+      <i href class="iconfont icon-jiantou"></i>
+      <h1>个人中心</h1>
+      <b href class="iconfont icon-leb" @click="gotoLogin" @back="goBack"></b>
+    </header>
     <!-- <div class="LgReg_head">
       <i slot="prefix" class="el-icon-arrow-left"></i>
       <span>个人中心</span>
@@ -194,6 +205,101 @@ export default {
 };
 </script>
 <style lang="scss">
+//头部
+.app_header {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 44px;
+  background: #14b9c8;
+  z-index: 999;
+  position: none;
+  //   text-align: center;
+  > img {
+    margin-top: 8px;
+    width: 75px;
+    height: 29px;
+    float: left;
+    margin-left: 10px;
+  }
+  > h1 {
+    margin: 0;
+    padding: 0;
+    height: 44px;
+    box-sizing: border-box;
+    font-size: 18px;
+    color: white;
+    line-height: 44px;
+    text-align: center;
+  }
+  > b {
+    text-decoration: none;
+    color: white;
+    position: absolute;
+    top: 0;
+    right: 5px;
+    font-size: 32px;
+    line-height: 44px;
+  }
+  i{
+    text-decoration: none;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 5px;
+    font-size: 20px;
+    line-height: 44px;
+  }
+}
+
+//头部
+.app_header {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 44px;
+  background: #14b9c8;
+  z-index: 999;
+  position: none;
+  //   text-align: center;
+  > img {
+    margin-top: 8px;
+    width: 75px;
+    height: 29px;
+    float: left;
+    margin-left: 10px;
+  }
+  > h1 {
+    margin: 0;
+    padding: 0;
+    height: 44px;
+    box-sizing: border-box;
+    font-size: 18px;
+    color: white;
+    line-height: 44px;
+    text-align: center;
+  }
+  > b {
+    text-decoration: none;
+    color: white;
+    position: absolute;
+    top: 0;
+    right: 5px;
+    font-size: 32px;
+    line-height: 44px;
+  }
+  i{
+    text-decoration: none;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 5px;
+    font-size: 20px;
+    line-height: 44px;
+  }
+}
+
+//main
 .LgReg {
   overflow: hidden;
   background-color: #f2f2f2;
@@ -209,7 +315,7 @@ export default {
       float: left;
     }
     .information_left {
-      width: 295px;
+      width: 70%;
       float: left;
       margin: 10px;
       i {

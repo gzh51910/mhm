@@ -1,125 +1,19 @@
 <template>
   <div id="list_div">
-    <header class="app_header">
-      <i href class="iconfont icon-jiantou" @click="goBack"></i>
-      <h1>{{topTitle}}</h1>
-      <a href class="iconfont icon-leb" @click="gotoLogin"></a>
+    <div class="app_header">
+      <i href class="iconfont icon-jiantou"></i>
+      <h1>手游折扣</h1>
+      <b href class="iconfont icon-leb" @click="gotoLogin"></b>
+    </div>
+    <header class="header1">
+      <a href class="el-icon-arrow-left"></a>
+      <h1>艾尔之光</h1>
+      <a href class="iconfont icon-liebiao"></a>
     </header>
-
     <main id="list_body">
       <section id="list_main">
         <el-tabs type="border-card" class="xiala">
-          <el-tab-pane label="商品列表" class="shenping">
-            <el-row class="inp-box">
-              <el-input v-model="input" placeholder="请输入内容" class="inp"></el-input>
-              <el-button type="primary" class="btn">搜索</el-button>
-            </el-row>
-            <!-- 下拉菜单 -->
-            <div v-for="item in datalist" :key="item.id">
-              <el-col :span="12" style=" margin-top: 10px;width: 60%;margin-bottom: 10px;">
-                <!-- <span class="demonstration">click 激活</span> -->
-                <el-dropdown trigger="click" split-button>
-                  <span class="el-dropdown-link" style=" background-color: #fafafa">{{item.name}}</span>
-                  <el-dropdown-menu slot="dropdown" style=" background-color: #fafafa">
-                    <el-dropdown-item v-for="(type,idx) in item.type" :key="idx">{{type}}</el-dropdown-item>
-                    <!-- <el-dropdown-item>担保交易</el-dropdown-item> -->
-                  </el-dropdown-menu>
-                </el-dropdown>
-              </el-col>
-            </div>
-
-            <el-collapse v-model="activeName" accordion id="ff">
-              <el-collapse-item title=" 艾尔之光商品区服筛选" name="1" class="aaaa">
-                <div v-for="item in datalist" :key="item.id">
-                  <el-col :span="12" style=" margin-top: 10px;width: 60%;">
-                    <!-- <span class="demonstration">click 激活</span> -->
-                    <el-dropdown trigger="click" split-button>
-                      <span
-                        class="el-dropdown-link"
-                        style=" background-color: #fafafa"
-                      >{{item.name}}</span>
-                      <el-dropdown-menu slot="dropdown" style=" background-color: #fafafa">
-                        <el-dropdown-item v-for="(type,idx) in item.type" :key="idx">{{type}}</el-dropdown-item>
-                        <!-- <el-dropdown-item>担保交易</el-dropdown-item> -->
-                      </el-dropdown-menu>
-                    </el-dropdown>
-                  </el-col>
-                </div>
-              </el-collapse-item>
-            </el-collapse>
-            <!-- 列表 -->
-            <el-row
-              :gutter="20"
-              style=" margin-top: 10px;display:flex;margin-top: 20px; width:100%;"
-              v-for="item in ELSWORD_list"
-              :key="item.id"
-              @click.native="Img(item._id)"
-            >
-              <el-col :span="6" style="width: 100px;height: 100px;">
-                <img :src="item.src" alt style="width: 100px;height:100px;margin:2px" />
-              </el-col>
-              <el-col :span="6" class="wz">
-                <h3>{{item.title}}</h3>
-                <p class="pwz">
-                  {{item.region}}
-                  <b>
-                    <img :src="item.smSrc1" alt />
-                    <img :src="item.smSrc2" alt />
-                  </b>
-                </p>
-                <p class="pwz1">
-                  剩余库存：{{item.inventory}}
-                  <b>{{item.price}}</b>
-                </p>
-              </el-col>
-            </el-row>
-
-            <!-- 分页 -->
-            <el-button-group class="fen">
-              <el-button type="primary" class="fen_btn" @click="page_return" v-model="page">上一页</el-button>
-              <el-button type="primary" class="fen_btn" @click="next" v-model="page">下一页 {{page}}</el-button>
-              <p>
-                首页
-                <span>{{page}}</span>条/
-                <span>{{Math.ceil(Yeshu_num/20)}}</span>页
-                尾页
-              </p>
-            </el-button-group>
-          </el-tab-pane>
-
-          <el-tab-pane label="交易完成" class="jiaoyi">
-            <!-- 卡片 -->
-            <el-card class="box-card" v-for="item in ELSWORD_list_jywc" :key="item.id">
-              <div slot="header" class="clearfix">
-                <el-row :gutter="10">
-                  <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1">
-                    <img :src="item.src" alt style=" width:30px;hegiht:30px" />
-                  </el-col>
-                  <el-col :xs="4" :sm="6" :md="8" :lg="9" :xl="11" id="list_wz">
-                    <p class="jiayiwz">{{item.title}}</p>
-                    <p class="jiayi_wz">{{item.time}}</p>
-                  </el-col>
-                </el-row>
-              </div>
-              <div class="text item">
-                成交单价:
-                <span style="color:#f00">￥{{item.pirce}}</span>
-              </div>
-              <div class="text item">
-                成交数量：
-                <span>{{item.count}}</span>
-              </div>
-              <div class="text item">
-                商品总价：
-                <span>{{item.all_price}}</span>
-              </div>
-              <div class="card_bottom">
-                <i class="el-icon-s-promotion"></i>
-                我也要购买这个商品
-              </div>
-            </el-card>
-          </el-tab-pane>
-          <el-tab-pane label="手游折扣" class="shouyou">
+          <div label="手游折扣" class="shouyou">
             <!-- 搜索 -->
             <el-row class="inp-box">
               <el-input v-model="input" placeholder="请输入内容" class="inp"></el-input>
@@ -245,7 +139,7 @@
               </el-col>
             </el-row>
             <!-- <footer class="shuoyuo_foot">@maihaome.com</footer> -->
-          </el-tab-pane>
+          </div>
           <footer class="shuoyuo_foot">@maihaome.com</footer>
         </el-tabs>
       </section>
@@ -258,25 +152,7 @@ import { mainUrl } from "../config.json";
 export default {
   data() {
     return {
-      topTitle: "",
       page: 1,
-      datalist: [
-        {
-          id: 1,
-          name: "全部交易类型",
-          type: ["寄售交易1", "担保交易"]
-        },
-        {
-          id: 2,
-          name: "全部店铺类型",
-          type: ["寄售交易2", "担保交易"]
-        },
-        {
-          id: 3,
-          name: "全部店铺类型",
-          type: ["寄售交易3", "担保交易"]
-        }
-      ],
       ELSWORD_list: [],
       Yeshu_num: [],
       ELSWORD_list_jywc: [],
@@ -295,15 +171,11 @@ export default {
     }
   },
   methods: {
-    goBack() {
-      this.$router.go(-1);
-    },
     gotoLogin() {
       this.$router.push("/centre");
     },
     Img(_id) {
-      let { theme } = this.$route.query;
-      this.$router.push({ name: "goods", query: { _id, theme } });
+      this.$router.push({ name: "goods", query: { _id } });
     },
     next() {
       if (this.page < Math.ceil(this.Yeshu_num / 20)) {
@@ -318,42 +190,6 @@ export default {
       }
     },
     async renderer() {
-      let { value } = this.$route.query;
-      let databaseName = value.charAt(0).toUpperCase() + value.slice(1);
-      let {
-        data: { data: ELSWORD_list }
-      } = await this.$axios.get(mainUrl + "/goods", {
-        params: {
-          gather: databaseName,
-          page: this.page,
-          size: 20
-        }
-      });
-
-      this.ELSWORD_list = ELSWORD_list.map(item => {
-        return item;
-      });
-      // 页数
-      let {
-        data: { data: Yeshu_num }
-      } = await this.$axios.get(mainUrl + "/goods/num", {
-        params: {
-          count: databaseName
-        }
-      });
-      this.Yeshu_num = Yeshu_num;
-      // 交易完成
-      let {
-        data: { data: ELSWORD_list_jywc }
-      } = await this.$axios.get(mainUrl + "/goods", {
-        params: {
-          gather: `${databaseName}_jywc`
-        }
-      });
-
-      this.ELSWORD_list_jywc = ELSWORD_list_jywc.map(item => {
-        return item;
-      });
       // 手游折扣
       let {
         data: { data: ELSWORD_list_syzk }
@@ -369,29 +205,12 @@ export default {
     }
   },
   async created() {
-    this.renderer();
-    let { value } = this.$route.query;
-    if (value == "ELSWORD_list") {
-      this.topTitle = "艾尔之光";
-    } else if (value == "HearthStone") {
-      this.topTitle = "炉石传说";
-    } else if (value == "FateGrandOrder") {
-      this.topTitle = "Fate/Grand Order";
-    } else if (value == "Honor" || value == "skin") {
-      this.topTitle = "王者荣耀";
-    } else if (value == "MMOARPG") {
-      this.topTitle = "流放之路";
-    } else if (value == "Molder3rd") {
-      this.topTitle = "崩坏3rd";
-    } else if (value == "CLX") {
-      this.topTitle = "楚留香";
-    } else if (value == "EatChicken") {
-      this.topTitle = "绝地求生：刺激战场";
-    }
+    this.renderer()
   }
 };
 </script>
 <style lang="scss" scoped>
+
 //头部
 .app_header {
   margin: 0;
@@ -419,7 +238,7 @@ export default {
     line-height: 44px;
     text-align: center;
   }
-  > a {
+  > b {
     text-decoration: none;
     color: white;
     position: absolute;
@@ -428,7 +247,7 @@ export default {
     font-size: 32px;
     line-height: 44px;
   }
-  i {
+  i{
     text-decoration: none;
     color: white;
     position: absolute;
@@ -439,7 +258,7 @@ export default {
   }
 }
 
-//main部分
+//main
 #list_div {
   #list_body {
     width: 100%;
