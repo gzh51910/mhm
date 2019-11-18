@@ -21,7 +21,7 @@ npm run lint
 ```
 
 ### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+![image](https://github.com/gzh51910/mhm/blob/new/src/img/mhm_card.png).
 
 
 
