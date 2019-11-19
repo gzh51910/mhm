@@ -25,18 +25,18 @@
           <img :src="item.src" alt />
           <div class="text">
             <p>{{item.title}}</p>
-            <p class="number">{{item.me}}</p>
-            <p class="need">{{item.jf}}</p>
+            <p class="number">剩余 {{item.me}} 个名额</p>
+            <p class="need">需要 {{item.jf}} 点积分</p>
             <el-button type="danger" @click="ic(item._id)">立即兑换</el-button>
           </div>
         </div>
       </div>
     </div>
     <el-button-group>
-      <el-button icon="el-icon-d-arrow-left">上一页</el-button>
+      <el-button icon="el-icon-d-arrow-left welfare_btn" >上一页</el-button>
       <el-button>
         下一页
-        <i class="el-icon-d-arrow-right el-icon-d-arrow-right"></i>
+        <i class="el-icon-d-arrow-right el-icon-d-arrow-right welfare_btn" ></i>
       </el-button>
     </el-button-group>
     <div class="Welfare_footer">
@@ -237,13 +237,13 @@ export default {
     }
   }
   .el-button-group {
-    margin-left: 10px;
+    width: 100%;
     height: 33px;
     margin-top: 10px;
     .el-button {
-      width: 166px;
+      width: 40%;
       height: 33px;
-      margin-left: 20px;
+      margin-left: 10%;
       padding: 5px 14px;
       border: 1px solid #ddd;
       border-radius: 6px;

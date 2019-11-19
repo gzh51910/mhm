@@ -76,8 +76,10 @@
 
             <!-- 分页 -->
             <el-button-group class="fen">
-              <el-button type="primary" class="fen_btn" @click="page_return" v-model="page">上一页</el-button>
-              <el-button type="primary" class="fen_btn" @click="next" v-model="page">下一页 {{page}}</el-button>
+              <div class="fen_btn_all">
+                <el-button type="primary" class="fen_btn" @click="page_return" v-model="page">上一页</el-button>
+                <el-button type="primary" class="fen_btn" @click="next" v-model="page">下一页</el-button>
+              </div>
               <p>
                 首页
                 <span>{{page}}</span>条/
@@ -554,13 +556,25 @@ export default {
       }
       .fen {
         position: relative;
-        left: 25%;
+        width: 100%;
         margin-top: 10%;
-        .fen_btn {
-          padding: 12px 20px;
-          border-radius: 7px;
-          margin-right: 20px;
-          margin-bottom: 10px;
+        .fen_btn_all {
+          position: absolute;
+          left: 50%;
+          margin-left: -99px;
+          .fen_btn {
+            padding: 12px 20px;
+            border-radius: 7px;
+            margin-right: 20px;
+            margin-bottom: 10px;
+            &:nth-of-type(2){
+              margin-right: 0;
+            }
+          }
+        }
+        p{
+          margin-top: 70px;
+          text-align: center;
         }
       }
     }
@@ -726,10 +740,12 @@ export default {
     // 搜索
     .inp-box {
       .inp {
-        width: 70%;
+        width: 78%;
       }
       .btn {
-        margin-left: 10px;
+        float: right;
+        width: 18%;
+        text-align: center;
       }
       // .el-dropdown-link{
       //    border:1px solid #c8c7cc!important;

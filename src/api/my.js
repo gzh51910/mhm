@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 // 创建axios实例
+import { mainUrl } from '../config'
 const my = axios.create({
-    baseURL: 'http://localhost:1910'
+    baseURL: mainUrl
 });
 
 function get(path,params,config={}){

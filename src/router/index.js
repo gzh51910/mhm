@@ -2,6 +2,8 @@ import Vue from 'vue';
 
 import VueRouter from 'vue-router'
 
+import { mainUrl } from '../config'
+
 Vue.use(VueRouter);
 
 import Home from '../pages/Home.vue'
@@ -20,6 +22,7 @@ import syzk from '../pages/syzk.vue'
 import IC from '../pages/IC.vue'
 
 let router = new VueRouter({
+    mode:'history',
     routes: [{
             name: 'home',
             path: '/home',
@@ -105,7 +108,7 @@ router.beforeEach((to, from, next) => {next()
         let Authorization = $store.state.common.user.Authorization;
         if(Authorization){
             
-            router.app.$axios.get('http://localhost:1910/verify',{
+            router.app.$axios.get(mainUrl+'/verify',{
                 headers:{
                     Authorization
                 }
