@@ -3,7 +3,7 @@
     <header class="app_header">
       <i href class="iconfont icon-jiantou" @click="goBack"></i>
       <h1>账号注册</h1>
-      <b href class="iconfont icon-shouye shouye" @click="gotoHome" ></b>
+      <b href class="iconfont icon-shouye shouye" @click="gotoHome"></b>
     </header>
 
     <el-form class="demo-input-suffix" ref="regForm" :model="regForm" :rules="rules">
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { mainUrl } from '../config'
+import { mainUrl } from "../config";
 export default {
   data() {
     var checkUsername = (rule, value, callback) => {
@@ -131,8 +131,8 @@ export default {
     goBack() {
       this.$router.go(-1);
     },
-    gotoHome(){
-      this.$router.push('/home')
+    gotoHome() {
+      this.$router.push("/home");
     },
     // 注册按钮
     submitForm() {
@@ -159,15 +159,12 @@ export default {
               type: "warning"
             });
           } else {
-            let { data: reg } = await this.$axios.post(
-              mainUrl + "/reg",
-              {
-                username,
-                password,
-                email,
-                relname
-              }
-            );
+            let { data: reg } = await this.$axios.post(mainUrl + "/reg", {
+              username,
+              password,
+              email,
+              relname
+            });
             if (reg.status === 1) {
               this.$router.replace("/LgReg");
             }
@@ -223,7 +220,7 @@ export default {
     font-size: 24px;
     line-height: 44px;
   }
-  i{
+  i {
     text-decoration: none;
     color: white;
     position: absolute;
@@ -240,10 +237,10 @@ export default {
   .demo-input-suffix {
     margin-top: 30px;
     .el-input {
-      width: 320px;
+      width: 80%;
       display: inline-block;
       line-height: 50px;
-      margin: 0px 45px;
+      margin: 0px 10%;
       background-color: #f2f2f2;
       input {
         background-color: #f2f2f2;
@@ -278,17 +275,18 @@ export default {
     }
   }
   .three {
-    margin-left: 45px;
-    width: 320px;
+    margin-left: 10%;
+    width: 80%;
     margin-top: 40px;
     .QQ {
       background-color: #14b9c8;
-      width: 315px;
+      width: 100%;
       display: inline-block;
       height: 50px;
       line-height: 50px;
       margin-top: 5px;
       border-radius: 5px;
+      position: relative;
       .el-icon-arrow-right {
         background-color: #158c97;
         width: 50px;
@@ -296,22 +294,25 @@ export default {
         text-align: center;
         float: left;
         line-height: 50px;
+        position: absolute;
+        top: 0;
+        left: 0;
       }
       span {
         text-align: center;
-        width: 250px;
+        width: 100%;
         float: left;
       }
     }
     .xinlang {
       background-color: #2980b9;
-      width: 315px;
+      width: 100%;
       display: inline-block;
       height: 50px;
       line-height: 50px;
       margin-top: 20px;
-
       border-radius: 5px;
+      position: relative;
       .el-icon-lock {
         background-color: #115e92;
         width: 50px;
@@ -319,10 +320,13 @@ export default {
         text-align: center;
         float: left;
         line-height: 50px;
+        position: absolute;
+        top: 0;
+        left: 0;
       }
       span {
         text-align: center;
-        width: 250px;
+        width: 100%;
         float: left;
       }
     }

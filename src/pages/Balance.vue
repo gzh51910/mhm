@@ -144,7 +144,7 @@ export default {
     this.Cart = Cart.map(item => {
       return item;
     });
-    this.totalPrice = Cart[0].price
+    this.totalPrice = parseInt(Cart[0].price)
   }
 };
 </script>

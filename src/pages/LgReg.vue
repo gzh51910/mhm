@@ -318,7 +318,8 @@ export default {
 
 //main
 .LgReg {
-  overflow: hidden;
+  overflow: auto;
+  height: 100%;
   background-color: #f2f2f2;
   .information {
     width: 100%;
@@ -347,7 +348,8 @@ export default {
       }
     }
     .el-icon-arrow-right {
-      text-align: center;
+      position: absolute;
+      right: 4%;
       font-size: 20px;
       line-height: 62px;
     }
