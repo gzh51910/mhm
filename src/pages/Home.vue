@@ -6,71 +6,73 @@
       <b href class="iconfont icon-leb liebiao" @click="gotoLogin"></b>
       <a href class="iconfont icon-sousuo"></a>
     </header>
-    <div class="block">
-      <el-carousel trigger="click" height="150px">
-        <el-carousel-item v-for="item in slideshow" :key="item._id">
-          <h3 class="small">
-            <img :src="item.src" alt />
-          </h3>
-        </el-carousel-item>
-      </el-carousel>
-    </div>
-    <nav id="nav_home">
-      <el-row :gutter="20" class="el-row-one">
-        <el-col :span="6" v-for="item in fn_nav" :key="item.title" style="padding:0 5px">
-          <div class="grid-content bg-purple" @click="goto(item.theme)">
-            <img :src="item.src" alt />
-            <p class="fn_title">{{item.title}}</p>
-          </div>
-        </el-col>
-      </el-row>
-    </nav>
-    <article id="deal_on">
-      <h5>
-        <span>
-          <i class="iconfont icon-jiantou_you"></i>交易推介
-        </span>
-      </h5>
-      <el-row :gutter="20">
-        <el-col :span="6" v-for="item in Game_nav" :key="item.title" style="padding:0 5px">
-          <div class="grid-content bg-purple" @click="gotolist(item.theme)">
-            <img :src="item.src" alt />
-            <p class="Game_title">{{item.title}}</p>
-          </div>
-        </el-col>
-      </el-row>
-    </article>
-    <article class="notice">
-      <a href="#" v-for="item in notice" :key="item.title">
-        <p>
-          <span>公告</span>
-          {{item.title}}
-        </p>
-      </a>
-    </article>
-    <article id="deal_end">
-      <h5 class="deal_finish">
-        <i class="iconfont icon-jiantou_you"></i>交易完成
-      </h5>
-      <figure v-for="item in HomeList" :key="item.title" @click="goto('goods',item._id)">
-        <img :src="item.src" alt />
-        <figcaption>
-          <h4>{{item.title}}</h4>
-          <div>
-            <span>
-              成交单价：
-              <i class="deal_price">{{item.price}}</i>
-            </span>
-            <span>
-              成交数量：
-              <i>{{item.quantity}}</i>
-            </span>
-            <p>{{item.timer}}</p>
-            <div class="details">详情</div>
-          </div>
-        </figcaption>
-      </figure>
-    </article>
+    <section id="Home_body">
+      <div class="block">
+        <el-carousel trigger="click" height="150px">
+          <el-carousel-item v-for="item in slideshow" :key="item._id">
+            <h3 class="small">
+              <img :src="item.src" alt />
+            </h3>
+          </el-carousel-item>
+        </el-carousel>
+      </div>
+      <nav id="nav_home">
+        <el-row :gutter="20" class="el-row-one">
+          <el-col :span="6" v-for="item in fn_nav" :key="item.title" style="padding:0 5px">
+            <div class="grid-content bg-purple" @click="goto(item.theme)">
+              <img :src="item.src" alt />
+              <p class="fn_title">{{item.title}}</p>
+            </div>
+          </el-col>
+        </el-row>
+      </nav>
+      <article id="deal_on">
+        <h5>
+          <span>
+            <i class="iconfont icon-jiantou_you"></i>交易推介
+          </span>
+        </h5>
+        <el-row :gutter="20">
+          <el-col :span="6" v-for="item in Game_nav" :key="item.title" style="padding:0 5px">
+            <div class="grid-content bg-purple" @click="gotolist(item.theme)">
+              <img :src="item.src" alt />
+              <p class="Game_title">{{item.title}}</p>
+            </div>
+          </el-col>
+        </el-row>
+      </article>
+      <article class="notice">
+        <a href="#" v-for="item in notice" :key="item.title">
+          <p>
+            <span>公告</span>
+            {{item.title}}
+          </p>
+        </a>
+      </article>
+      <article id="deal_end">
+        <h5 class="deal_finish">
+          <i class="iconfont icon-jiantou_you"></i>交易完成
+        </h5>
+        <figure v-for="item in HomeList" :key="item.title" @click="goto('goods',item._id)">
+          <img :src="item.src" alt />
+          <figcaption>
+            <h4>{{item.title}}</h4>
+            <div>
+              <span>
+                成交单价：
+                <i class="deal_price">{{item.price}}</i>
+              </span>
+              <span>
+                成交数量：
+                <i>{{item.quantity}}</i>
+              </span>
+              <p>{{item.timer}}</p>
+              <div class="details">详情</div>
+            </div>
+          </figcaption>
+        </figure>
+      </article>
+    </section>
   </section>
 </template>
 <script>
@@ -99,7 +101,7 @@ export default {
       } else if (link == "goods") {
         this.$router.push({ name: "goods", query: { _id, theme: "HomeList" } });
       } else if (link == "walfare") {
-        this.$router.push('/welfare');
+        this.$router.push("/welfare");
       } else {
         this.$router.push(`/${link}?value=${link}`);
       }
@@ -108,66 +110,83 @@ export default {
       this.$router.push(`/ELSWORD_list?value=${link}&theme=${link}`);
     }
   },
-  async created() {
+  async mounted() {
     //slideshow
-    let {
-      data: { data: slideshow }
-    } = await this.$axios.get(mainUrl + "/goods", {
+    // let {
+    //   data: { data: slideshow }
+    // } 
+
+    // // console.log(this.slideshow);
+    // console.log(1);
+
+    // //fn_nav
+    // let {
+    //   data: { data: fn_nav }
+    // }
+
+    // console.log(2);
+
+    // //Game_nav
+    // let {
+    //   data: { data: game_nav }
+    // } = ;
+
+    // // console.log(3);
+
+    // //notice
+    // let {
+    //   data: { data: notice }
+    // } = ;
+
+    // // console.log(4);
+
+    // //HomeList
+    // let {
+    //   data: { data: HomeList }
+    // }
+
+    Promise.all([
+      this.$axios.get(mainUrl + "/goods", {
       params: {
         gather: "slideshow"
       }
-    });
-    this.slideshow = slideshow.map(item => {
-      return item;
-    });
-    // console.log(this.slideshow);
-
-    //fn_nav
-    let {
-      data: { data }
-    } = await this.$axios.get(mainUrl + "/goods", {
+    }),
+    this.$axios.get(mainUrl + "/goods", {
       params: {
         gather: "fn_nav"
       }
-    });
-    this.fn_nav = data.map(item => {
-      return item;
-    });
-
-    //Game_nav
-    let {
-      data: { data: game_nav }
-    } = await this.$axios.get(mainUrl + "/goods", {
+    }), 
+     this.$axios.get(mainUrl + "/goods", {
       params: {
         gather: "Game_nav"
       }
-    });
-    this.Game_nav = game_nav.map(item => {
-      return item;
-    });
-
-    //notice
-    let {
-      data: { data: notice }
-    } = await this.$axios.get(mainUrl + "/goods", {
+    }), 
+     this.$axios.get(mainUrl + "/goods", {
       params: {
         gather: "notice"
       }
-    });
-    this.notice = notice.map(item => {
-      return item;
-    });
-
-    //HomeList
-    let {
-      data: { data: HomeList }
-    } = await this.$axios.get(mainUrl + "/goods", {
+    }), this.$axios.get(mainUrl + "/goods", {
       params: {
         gather: "HomeList"
       }
-    });
-    this.HomeList = HomeList.map(item => {
-      return item;
+    })]).then(values=> {
+      console.log(values);
+      
+      this.slideshow =values[0].data.data.map(item => {
+        return item;
+      });
+      this.fn_nav =values[1].data.data.map(item => {
+        return item;
+      });
+      this.Game_nav =values[2].data.data.map(item => {
+        return item;
+      });
+      this.notice = values[3].data.data.map(item => {
+        return item;
+      });
+      this.HomeList = values[4].data.data.map(item => {
+        return item;
+      });
     });
   }
 };
@@ -182,6 +201,7 @@ export default {
   background: #14b9c8;
   z-index: 999;
   position: none;
+  position: fixed;
   //   text-align: center;
   > img {
     margin-top: 8px;
@@ -217,6 +237,10 @@ export default {
 }
 
 //身体
+#Home_body {
+  position: relative;
+  top: 44px;
+}
 .box_body {
   box-sizing: border-box;
   overflow: auto;
