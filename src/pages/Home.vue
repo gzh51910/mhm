@@ -111,46 +111,13 @@ export default {
     }
   },
   async mounted() {
-    //slideshow
-    // let {
-    //   data: { data: slideshow }
-    // } 
-
-    // // console.log(this.slideshow);
-    // console.log(1);
-
-    // //fn_nav
-    // let {
-    //   data: { data: fn_nav }
-    // }
-
-    // console.log(2);
-
-    // //Game_nav
-    // let {
-    //   data: { data: game_nav }
-    // } = ;
-
-    // // console.log(3);
-
-    // //notice
-    // let {
-    //   data: { data: notice }
-    // } = ;
-
-    // // console.log(4);
-
-    // //HomeList
-    // let {
-    //   data: { data: HomeList }
-    // }
-
+    
     Promise.all([
       this.$axios.get(mainUrl + "/goods", {
       params: {
         gather: "slideshow"
       }
-    }),
+     }),
     this.$axios.get(mainUrl + "/goods", {
       params: {
         gather: "fn_nav"
