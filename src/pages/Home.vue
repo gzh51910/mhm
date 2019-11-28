@@ -137,8 +137,6 @@ export default {
         gather: "HomeList"
       }
     })]).then(values=> {
-      console.log(values);
-      
       this.slideshow =values[0].data.data.map(item => {
         return item;
       });
